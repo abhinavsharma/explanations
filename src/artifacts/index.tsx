@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const ArtifactsIndex = () => {
   const artifacts = [
     { name: 'Entropy Explorer', path: '/entropy', description: 'Interactive visualization of information entropy components' },
+    { name: 'Galton Board', path: '/normal', description: 'Interactive simulation of a Galton board demonstrating the binomial distribution leading to the normal.' },
   ];
 
   return (

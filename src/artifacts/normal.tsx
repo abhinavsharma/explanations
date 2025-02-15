@@ -226,6 +226,50 @@ const COLORS = [
               the result tends toward a normal distribution.
             </p>
             
+            <details className="bg-slate-50 rounded-lg p-4">
+              <summary className="font-medium text-slate-800 cursor-pointer">
+                Outline of Central Limit Theorem Proof
+              </summary>
+              <div className="mt-4 space-y-3 text-sm">
+                <p>
+                  The proof follows these key steps, using characteristic functions (Fourier transforms of probability distributions):
+                </p>
+                <ol className="list-decimal pl-5 space-y-2">
+                  <li>
+                    First, we express our random variables (left/right choices) in standardized form:
+                    <div className="font-mono bg-slate-100 p-2 mt-1 rounded">
+                      Xᵢ = (Choice - μ)/σ
+                    </div>
+                  </li>
+                  <li>
+                    The characteristic function of the sum is the product of individual characteristic functions:
+                    <div className="font-mono bg-slate-100 p-2 mt-1 rounded">
+                      φₙ(t) = [φ(t/√n)]ⁿ
+                    </div>
+                  </li>
+                  <li>
+                    Taylor expand log[φ(t/√n)] around t = 0:
+                    <div className="font-mono bg-slate-100 p-2 mt-1 rounded">
+                      log[φ(t/√n)] = -t²/2n + o(1/n)
+                    </div>
+                  </li>
+                  <li>
+                    Therefore:
+                    <div className="font-mono bg-slate-100 p-2 mt-1 rounded">
+                      φₙ(t) → exp(-t²/2) as n → ∞
+                    </div>
+                  </li>
+                  <li>
+                    This is the characteristic function of the standard normal distribution, proving convergence in distribution.
+                  </li>
+                </ol>
+                <p className="italic mt-2">
+                  Note: This is a high-level overview. The complete proof requires careful handling of 
+                  convergence conditions and error terms.
+                </p>
+              </div>
+            </details>
+            
             <h4 className="font-medium text-slate-800">6. The Final Shape</h4>
             <p>
               The resulting normal distribution is centered at n/2 (half of the total levels) with a spread determined by 

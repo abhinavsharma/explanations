@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Play, Pause, RotateCcw } from 'lucide-react';
 
 const GaltonTable = () => {
-  const LEVELS = 8;  // Number of decision levels
-  const MAX_STACK = 10;  // Maximum height of ball stacks
+  const LEVELS = 12;  // Number of decision levels
+  const MAX_STACK = 20;  // Maximum height of ball stacks
   const [balls, setBalls] = useState([]);
   const [isRunning, setIsRunning] = useState(false);
   const [ballCount, setBallCount] = useState(0);
@@ -97,7 +97,7 @@ const COLORS = [
   };
   
   return (
-    <Card className="w-full max-w-2xl mx-auto">
+    <Card className="w-full max-w-5xl mx-auto">
       <CardHeader>
         <CardTitle>The Normal Distribution Emerges</CardTitle>
         <div className="mt-4 space-y-4 text-slate-600">
@@ -183,21 +183,59 @@ const COLORS = [
         </div>
         
         <div className="mt-8 space-y-4 text-slate-600 border-t pt-4">
-          <h3 className="font-semibold text-slate-900">Mathematical Explanation</h3>
-          <p>
-            This process follows the binomial distribution with n trials (levels) and p = 0.5 probability. 
-            For a ball reaching position k after n levels:
-          </p>
-          <div className="p-4 bg-slate-50 rounded-lg font-mono text-sm">
-            P(k) = C(n,k) × (0.5)ⁿ
-          </div>
-          <p>
-            Where C(n,k) is the number of ways to choose k right moves out of n levels. 
-            As n increases, this binomial distribution approaches a normal distribution according to the Central Limit Theorem:
-          </p>
-          <div className="p-4 bg-slate-50 rounded-lg font-mono text-sm">
-            μ = np = n/2 (center position)<br />
-            σ = √(np(1-p)) = √(n/4) (spread)
+          <h3 className="font-semibold text-slate-900">Understanding the Mathematics</h3>
+          
+          <div className="space-y-4">
+            <h4 className="font-medium text-slate-800">1. Single Ball Path</h4>
+            <p>
+              Each ball makes 12 decisions (left or right). Since each choice is equally likely, 
+              this is like flipping a coin 12 times and counting the number of heads.
+            </p>
+
+            <h4 className="font-medium text-slate-800">2. Possible Paths</h4>
+            <p>
+              To reach any final position, a ball needs a specific combination of left and right moves. 
+              For example, to reach the center, a ball needs an equal number of lefts and rights (6 each).
+            </p>
+
+            <h4 className="font-medium text-slate-800">3. Why the Middle is Most Common</h4>
+            <p>
+              There's only one way to get all lefts (LLLLLLLLLLLL) or all rights (RRRRRRRRRRRR), 
+              but there are many ways to get 6 of each (like LLLLLLRRRRRR, LRLRLRLRLRLR, etc.). 
+              In fact, there are 924 different ways to arrange 6 lefts and 6 rights!
+            </p>
+
+            <h4 className="font-medium text-slate-800">4. The Binomial Formula</h4>
+            <p>
+              For any position k steps to the right of center after n levels:
+            </p>
+            <div className="p-4 bg-slate-50 rounded-lg space-y-2">
+              <p className="font-mono text-sm">
+                P(k) = C(n,k) × (1/2)ⁿ
+              </p>
+              <p>
+                Where C(n,k) counts the number of ways to choose k right moves out of n total moves.
+                The (1/2)ⁿ term represents the probability of any specific sequence occurring.
+              </p>
+            </div>
+
+            <h4 className="font-medium text-slate-800">5. Connection to Normal Distribution</h4>
+            <p>
+              As we drop more balls, this discrete binomial distribution starts looking like a smooth normal distribution. 
+              This is because of the Central Limit Theorem - when you add up many random events (like our left/right choices), 
+              the result tends toward a normal distribution.
+            </p>
+            
+            <h4 className="font-medium text-slate-800">6. The Final Shape</h4>
+            <p>
+              The resulting normal distribution is centered at n/2 (half of the total levels) with a spread determined by 
+              √(n/4). This means:
+            </p>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>Most balls end up near the middle</li>
+              <li>The spread increases with more levels (but more slowly due to the square root)</li>
+              <li>The shape becomes more symmetric and smooth with more balls</li>
+            </ul>
           </div>
         </div>
       </CardContent>

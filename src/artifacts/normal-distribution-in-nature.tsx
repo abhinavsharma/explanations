@@ -100,7 +100,7 @@ const COLORS = [
     <Card className="w-full max-w-5xl mx-auto">
       <CardHeader>
         <CardTitle>The Normal Distribution Emerges</CardTitle>
-        <div className="mt-4 space-y-4 text-slate-600">
+        <div className="mt-4 space-y-4 text-muted-foreground">
           <p>
             Watch how a normal distribution naturally emerges from simple random choices. Each ball has an equal (50/50) chance 
             of going left or right at each level. This is similar to flipping a coin multiple times - the more flips, the more 
@@ -163,7 +163,7 @@ const COLORS = [
                   {Array.from({ length: LEVELS * 2 + 1 }).map((_, col) => (
                     <td key={col} className="w-10 h-10 border-x border-slate-200">
                       {bins[col]?.length > (MAX_STACK - 1 - stackRow) && 
-                        <div className={`w-3 h-3 rounded-full ${COLORS[bins[col].length % COLORS.length]} mx-auto`} />
+                        <div className="w-3 h-3 rounded-full bg-slate-400 mx-auto" />
                       }
                     </td>
                   ))}
@@ -182,34 +182,34 @@ const COLORS = [
           </table>
         </div>
         
-        <div className="mt-8 space-y-4 text-slate-600 border-t pt-4">
-          <h3 className="font-semibold text-slate-900">Understanding the Mathematics</h3>
+        <div className="mt-8 space-y-4 text-muted-foreground border-t pt-4">
+          <h3 className="font-semibold text-foreground">Understanding the Mathematics</h3>
           
           <div className="space-y-4">
-            <h4 className="font-medium text-slate-800">1. Single Ball Path</h4>
+            <h4 className="font-medium text-foreground">1. Single Ball Path</h4>
             <p>
               Each ball makes 12 decisions (left or right). Since each choice is equally likely, 
               this is like flipping a coin 12 times and counting the number of heads.
             </p>
 
-            <h4 className="font-medium text-slate-800">2. Possible Paths</h4>
+            <h4 className="font-medium text-foreground">2. Possible Paths</h4>
             <p>
               To reach any final position, a ball needs a specific combination of left and right moves. 
               For example, to reach the center, a ball needs an equal number of lefts and rights (6 each).
             </p>
 
-            <h4 className="font-medium text-slate-800">3. Why the Middle is Most Common</h4>
+            <h4 className="font-medium text-foreground">3. Why the Middle is Most Common</h4>
             <p>
               There's only one way to get all lefts (LLLLLLLLLLLL) or all rights (RRRRRRRRRRRR), 
               but there are many ways to get 6 of each (like LLLLLLRRRRRR, LRLRLRLRLRLR, etc.). 
               In fact, there are 924 different ways to arrange 6 lefts and 6 rights!
             </p>
 
-            <h4 className="font-medium text-slate-800">4. The Binomial Formula</h4>
+            <h4 className="font-medium text-foreground">4. The Binomial Formula</h4>
             <p>
               For any position k steps to the right of center after n levels:
             </p>
-            <div className="p-4 bg-slate-50 rounded-lg space-y-2">
+            <div className="p-4 bg-muted rounded-lg space-y-2">
               <p className="font-mono text-sm">
                 P(k) = C(n,k) × (1/2)ⁿ
               </p>
@@ -219,15 +219,15 @@ const COLORS = [
               </p>
             </div>
 
-            <h4 className="font-medium text-slate-800">5. Connection to Normal Distribution</h4>
+            <h4 className="font-medium text-foreground">5. Connection to Normal Distribution</h4>
             <p>
               As we drop more balls, this discrete binomial distribution starts looking like a smooth normal distribution. 
               This is because of the Central Limit Theorem - when you add up many random events (like our left/right choices), 
               the result tends toward a normal distribution.
             </p>
             
-            <details className="bg-slate-50 rounded-lg p-4">
-              <summary className="font-medium text-slate-800 cursor-pointer">
+            <details className="bg-muted rounded-lg p-4">
+              <summary className="font-medium text-foreground cursor-pointer">
                 Outline of Central Limit Theorem Proof
               </summary>
               <div className="mt-4 space-y-3 text-sm">
@@ -237,25 +237,25 @@ const COLORS = [
                 <ol className="list-decimal pl-5 space-y-2">
                   <li>
                     First, we express our random variables (left/right choices) in standardized form:
-                    <div className="font-mono bg-slate-100 p-2 mt-1 rounded">
+                    <div className="font-mono bg-muted/50 p-2 mt-1 rounded">
                       Xᵢ = (Choice - μ)/σ
                     </div>
                   </li>
                   <li>
                     The characteristic function of the sum is the product of individual characteristic functions:
-                    <div className="font-mono bg-slate-100 p-2 mt-1 rounded">
+                    <div className="font-mono bg-muted/50 p-2 mt-1 rounded">
                       φₙ(t) = [φ(t/√n)]ⁿ
                     </div>
                   </li>
                   <li>
                     Taylor expand log[φ(t/√n)] around t = 0:
-                    <div className="font-mono bg-slate-100 p-2 mt-1 rounded">
+                    <div className="font-mono bg-muted/50 p-2 mt-1 rounded">
                       log[φ(t/√n)] = -t²/2n + o(1/n)
                     </div>
                   </li>
                   <li>
                     Therefore:
-                    <div className="font-mono bg-slate-100 p-2 mt-1 rounded">
+                    <div className="font-mono bg-muted/50 p-2 mt-1 rounded">
                       φₙ(t) → exp(-t²/2) as n → ∞
                     </div>
                   </li>
@@ -270,7 +270,7 @@ const COLORS = [
               </div>
             </details>
             
-            <h4 className="font-medium text-slate-800">6. The Final Shape</h4>
+            <h4 className="font-medium text-foreground">6. The Final Shape</h4>
             <p>
               The resulting normal distribution is centered at n/2 (half of the total levels) with a spread determined by 
               √(n/4). This means:

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Square, ChevronDown, ChevronUp, Lock } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useTheme } from '../components/theme-provider';
 
 const MontyHallGame = () => {
   // Game state
@@ -176,63 +177,63 @@ const MontyHallGame = () => {
     return (
         <div className="grid grid-cols-2 gap-8">
           <div className="space-y-4">
-            <h4 className="font-medium">If You Always Switch</h4>
+            <h4 className="font-medium text-slate-800 dark:text-slate-100">If You Always Switch</h4>
             <div className="space-y-4">
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <p className="font-medium mb-2">Case 1: Initially Pick Car (1/3 chance)</p>
+              <div className="bg-blue-50 dark:bg-blue-950/40 p-4 rounded-lg">
+                <p className="font-medium mb-2 text-slate-800 dark:text-slate-100">Case 1: Initially Pick Car (1/3 chance)</p>
                 <div className="grid grid-cols-3 gap-2 mb-2">
-                  <div className="bg-blue-100 p-2 rounded text-center">Car 🚗<br/><span className="text-sm">(Your Pick)</span></div>
-                  <div className="bg-red-100 p-2 rounded text-center">Goat 🐐<br/><span className="text-sm">(Revealed)</span></div>
-                  <div className="bg-green-100 p-2 rounded text-center">Goat 🐐<br/><span className="text-sm">(Switch Here)</span></div>
+                  <div className="bg-blue-100 dark:bg-blue-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Car 🚗<br/><span className="text-sm">(Your Pick)</span></div>
+                  <div className="bg-red-100 dark:bg-red-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="text-sm">(Revealed)</span></div>
+                  <div className="bg-green-100 dark:bg-green-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="text-sm">(Switch Here)</span></div>
                 </div>
-                <p className="text-sm text-slate-600">Result: You LOSE by switching away from car</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Result: You LOSE by switching away from car</p>
               </div>
               
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <p className="font-medium mb-2">Case 2: Initially Pick Goat (2/3 chance)</p>
+              <div className="bg-blue-50 dark:bg-blue-950/40 p-4 rounded-lg">
+                <p className="font-medium mb-2 text-slate-800 dark:text-slate-100">Case 2: Initially Pick Goat (2/3 chance)</p>
                 <div className="grid grid-cols-3 gap-2 mb-2">
-                  <div className="bg-blue-100 p-2 rounded text-center">Goat 🐐<br/><span className="text-sm">(Your Pick)</span></div>
-                  <div className="bg-red-100 p-2 rounded text-center">Goat 🐐<br/><span className="text-sm">(Revealed)</span></div>
-                  <div className="bg-green-100 p-2 rounded text-center">Car 🚗<br/><span className="text-sm">(Switch Here)</span></div>
+                  <div className="bg-blue-100 dark:bg-blue-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="text-sm">(Your Pick)</span></div>
+                  <div className="bg-red-100 dark:bg-red-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="text-sm">(Revealed)</span></div>
+                  <div className="bg-green-100 dark:bg-green-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Car 🚗<br/><span className="text-sm">(Switch Here)</span></div>
                 </div>
-                <p className="text-sm text-slate-600">Result: You WIN by switching to car</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Result: You WIN by switching to car</p>
               </div>
               
-              <div className="text-sm font-medium text-slate-700">
+              <div className="text-sm font-medium text-slate-700 dark:text-slate-300">
                 Switching Strategy Wins: 2/3 of the time
                 <br/>
-                <span className="text-slate-600">(You win whenever you start with a goat)</span>
+                <span className="text-slate-600 dark:text-slate-400">(You win whenever you start with a goat)</span>
               </div>
             </div>
           </div>
 
           <div className="space-y-4">
-            <h4 className="font-medium">If You Always Stay</h4>
+            <h4 className="font-medium text-slate-800 dark:text-slate-100">If You Always Stay</h4>
             <div className="space-y-4">
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <p className="font-medium mb-2">Case 1: Initially Pick Car (1/3 chance)</p>
+              <div className="bg-blue-50 dark:bg-blue-950/40 p-4 rounded-lg">
+                <p className="font-medium mb-2 text-slate-800 dark:text-slate-100">Case 1: Initially Pick Car (1/3 chance)</p>
                 <div className="grid grid-cols-3 gap-2 mb-2">
-                  <div className="bg-blue-100 p-2 rounded text-center">Car 🚗<br/><span className="text-sm">(Stay Here)</span></div>
-                  <div className="bg-red-100 p-2 rounded text-center">Goat 🐐<br/><span className="text-sm">(Revealed)</span></div>
-                  <div className="bg-gray-100 p-2 rounded text-center">Goat 🐐</div>
+                  <div className="bg-blue-100 dark:bg-blue-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Car 🚗<br/><span className="text-sm">(Stay Here)</span></div>
+                  <div className="bg-red-100 dark:bg-red-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="text-sm">(Revealed)</span></div>
+                  <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐</div>
                 </div>
-                <p className="text-sm text-slate-600">Result: You WIN by staying with car</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Result: You WIN by staying with car</p>
               </div>
               
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <p className="font-medium mb-2">Case 2: Initially Pick Goat (2/3 chance)</p>
+              <div className="bg-blue-50 dark:bg-blue-950/40 p-4 rounded-lg">
+                <p className="font-medium mb-2 text-slate-800 dark:text-slate-100">Case 2: Initially Pick Goat (2/3 chance)</p>
                 <div className="grid grid-cols-3 gap-2 mb-2">
-                  <div className="bg-blue-100 p-2 rounded text-center">Goat 🐐<br/><span className="text-sm">(Stay Here)</span></div>
-                  <div className="bg-red-100 p-2 rounded text-center">Goat 🐐<br/><span className="text-sm">(Revealed)</span></div>
-                  <div className="bg-gray-100 p-2 rounded text-center">Car 🚗</div>
+                  <div className="bg-blue-100 dark:bg-blue-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="text-sm">(Stay Here)</span></div>
+                  <div className="bg-red-100 dark:bg-red-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="text-sm">(Revealed)</span></div>
+                  <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded text-center text-slate-800 dark:text-slate-100">Car 🚗</div>
                 </div>
-                <p className="text-sm text-slate-600">Result: You LOSE by staying with goat</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Result: You LOSE by staying with goat</p>
               </div>
               
-              <div className="text-sm font-medium text-slate-700">
+              <div className="text-sm font-medium text-slate-700 dark:text-slate-300">
                 Staying Strategy Wins: 1/3 of the time
                 <br/>
-                <span className="text-slate-600">(You win only when you start with the car)</span>
+                <span className="text-slate-600 dark:text-slate-400">(You win only when you start with the car)</span>
               </div>
             </div>
           </div>
@@ -241,7 +242,7 @@ const MontyHallGame = () => {
   };
 
   const WinRateChart = ({ data, expectedRate, label }) => {
-    // Add expected rate to each data point
+    const { theme } = useTheme();
     const chartData = data.map(d => ({
       ...d,
       expectedRate
@@ -251,17 +252,45 @@ const MontyHallGame = () => {
       <div className="h-[250px] w-full">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData} margin={{ top: 5, right: 5, bottom: 35, left: 15 }}>
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid 
+              strokeDasharray="3 3" 
+              stroke={theme === 'dark' ? '#374151' : '#e5e7eb'}
+            />
             <XAxis 
               dataKey="turn"
-              label={{ value: 'Number of Attempts', position: 'bottom', offset: -5 }}
+              label={{ 
+                value: 'Number of Attempts', 
+                position: 'bottom', 
+                offset: -5,
+                style: { fill: theme === 'dark' ? '#9ca3af' : '#4b5563' }
+              }}
+              stroke={theme === 'dark' ? '#9ca3af' : '#4b5563'}
             />
             <YAxis 
               domain={[0, 100]}
-              label={{ value: 'Win Rate (%)', angle: -90, position: 'insideLeft', offset: 5, dy: 50 }}
+              label={{ 
+                value: 'Win Rate (%)', 
+                angle: -90, 
+                position: 'insideLeft', 
+                offset: 5, 
+                dy: 50,
+                style: { fill: theme === 'dark' ? '#9ca3af' : '#4b5563' }
+              }}
+              stroke={theme === 'dark' ? '#9ca3af' : '#4b5563'}
             />
-            <Tooltip />
-            <Legend verticalAlign="bottom" height={36} wrapperStyle={{ marginTop: "10px" }} />
+            <Tooltip 
+              contentStyle={{ 
+                backgroundColor: theme === 'dark' ? '#1f2937' : '#ffffff',
+                borderColor: theme === 'dark' ? '#374151' : '#e5e7eb',
+                color: theme === 'dark' ? '#ffffff' : '#000000'
+              }}
+            />
+            <Legend 
+              verticalAlign="bottom" 
+              height={36} 
+              wrapperStyle={{ marginTop: "10px" }}
+              style={{ color: theme === 'dark' ? '#ffffff' : '#000000' }}
+            />
             <Line
               name="Your Win Rate"
               type="monotone"
@@ -274,7 +303,7 @@ const MontyHallGame = () => {
               name="Expected Rate"
               type="monotone"
               dataKey="expectedRate"
-              stroke="#9ca3af"
+              stroke={theme === 'dark' ? '#6b7280' : '#9ca3af'}
               strokeWidth={2}
               strokeDasharray="5 5"
               dot={false}
@@ -289,7 +318,7 @@ const MontyHallGame = () => {
     <Card className="w-full max-w-4xl mx-auto">
       <CardHeader>
         <CardTitle>The Monty Hall Game</CardTitle>
-        <div className="mt-4 text-slate-600">
+        <div className="mt-4 text-slate-600 dark:text-slate-400">
           <p>
             Behind these doors: one 🚗 and two 🐐🐐. Pick a door, then decide to switch or stay after I reveal a goat!
           </p>
@@ -300,7 +329,7 @@ const MontyHallGame = () => {
           {/* Game Area */}
           <div className="flex flex-col items-center">
             <div className="h-20 w-full flex items-center">
-              <h2 className="text-2xl font-bold text-slate-800">
+              <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
                 {getHostMessage()}
               </h2>
               {gameState === 'final' && (
@@ -330,8 +359,8 @@ const MontyHallGame = () => {
           {/* Overall Statistics */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="font-semibold text-lg">Overall Win Rate</h3>
-              <span className="text-lg">
+              <h3 className="font-semibold text-lg text-slate-800 dark:text-slate-100">Overall Win Rate</h3>
+              <span className="text-lg text-slate-800 dark:text-slate-100">
                 {Math.round(((stats.switched.wins + stats.stayed.wins) / totalGames) * 100 || 0)}%
               </span>
             </div>
@@ -339,7 +368,7 @@ const MontyHallGame = () => {
               value={((stats.switched.wins + stats.stayed.wins) / totalGames) * 100 || 0}
               className="h-2"
             />
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-slate-500 dark:text-slate-400">
               {stats.switched.wins + stats.stayed.wins} wins out of {totalGames} games played
               {!canShowExplanation && (
                 <span className="ml-2">
@@ -351,17 +380,17 @@ const MontyHallGame = () => {
 
           {/* Strategy Statistics */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-slate-50 p-4 rounded-lg">
+            <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg">
               <div className="mb-4">
                 <div className="flex justify-between mb-2">
-                  <span className="font-medium">Switching Strategy</span>
+                  <span className="font-medium text-slate-800 dark:text-slate-100">Switching Strategy</span>
                   <div className="text-right">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 text-slate-800 dark:text-slate-100">
                       {Math.round((stats.switched.wins / stats.switched.total) * 100 || 0)}% Win Rate
                       {!canShowExplanation && <Lock className="w-3 h-3" />}
                     </div>
                     {canShowExplanation && (
-                      <div className="text-sm text-slate-500">(Expected: 67%)</div>
+                      <div className="text-sm text-slate-500 dark:text-slate-400">(Expected: 67%)</div>
                     )}
                   </div>
                 </div>
@@ -372,17 +401,17 @@ const MontyHallGame = () => {
                 />
               </div>
             </div>
-            <div className="bg-slate-50 p-4 rounded-lg">
+            <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg">
               <div className="mb-4">
                 <div className="flex justify-between mb-2">
-                  <span className="font-medium">Staying Strategy</span>
+                  <span className="font-medium text-slate-800 dark:text-slate-100">Staying Strategy</span>
                   <div className="text-right">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 text-slate-800 dark:text-slate-100">
                       {Math.round((stats.stayed.wins / stats.stayed.total) * 100 || 0)}% Win Rate
                       {!canShowExplanation && <Lock className="w-3 h-3" />}
                     </div>
                     {canShowExplanation && (
-                      <div className="text-sm text-slate-500">(Expected: 33%)</div>
+                      <div className="text-sm text-slate-500 dark:text-slate-400">(Expected: 33%)</div>
                     )}
                   </div>
                 </div>
@@ -395,7 +424,7 @@ const MontyHallGame = () => {
             </div>
           </div>
 
-          <p className="text-sm text-slate-600 italic">
+          <p className="text-sm text-slate-600 dark:text-slate-400 italic">
             {canShowExplanation 
               ? "Watch how your win rates converge to the expected probabilities as you play more games!"
               : `Play ${10 - totalGames} more ${10 - totalGames === 1 ? 'game' : 'games'} to reveal the expected win rates.`
@@ -403,7 +432,7 @@ const MontyHallGame = () => {
           </p>
 
           {/* Collapsible Explanation */}
-          <div className="border-t pt-4">
+          <div className="border-t border-slate-200 dark:border-slate-700 pt-4">
             <button
               onClick={() => canShowExplanation && setShowExplanation(!showExplanation)}
               className={`w-full flex items-center justify-between
@@ -411,11 +440,11 @@ const MontyHallGame = () => {
               disabled={!canShowExplanation}
             >
               <div className="flex items-center gap-2">
-                <h2 className="text-2xl font-bold">Understanding the Probability</h2>
+                <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">Understanding the Probability</h2>
                 {!canShowExplanation ? (
                   <>
                     <Lock className="w-4 h-4" />
-                    <span className="text-sm text-slate-500 ml-2">
+                    <span className="text-sm text-slate-500 dark:text-slate-400 ml-2">
                       Play {10 - totalGames} more {10 - totalGames === 1 ? 'game' : 'games'} to unlock
                     </span>
                   </>

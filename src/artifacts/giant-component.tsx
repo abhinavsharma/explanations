@@ -12,7 +12,7 @@ const VillageNetwork = () => {
     'Mia', 'James', 'Charlotte', 'Benjamin', 'Amelia'
   ];
 
-  const [numVillagers, setNumVillagers] = useState(5);
+  const [numVillagers, setNumVillagers] = useState(12);
   const [probability, setProbability] = useState(0.5);
   const [nodes, setNodes] = useState([]);
   const [edges, setEdges] = useState([]);
@@ -22,6 +22,7 @@ const VillageNetwork = () => {
   const [components, setComponents] = useState([]);
   const [largestComponentSize, setLargestComponentSize] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
+  const [totalSteps, setTotalSteps] = useState(0);
   
   const stopSimulationRef = useRef(false);
   const simulationPromiseRef = useRef(null);
@@ -137,16 +138,21 @@ const VillageNetwork = () => {
   };
 
   const runSimulation = async () => {
-    // Reset state only when starting a new simulation
     setRunning(true);
     setNodes([]);
     setEdges([]);
     setComponents([]);
     setCurrentStep(0);
+    
+    // Calculate total steps (nodes + potential edges)
+    const totalPotentialSteps = numVillagers + (numVillagers * (numVillagers - 1)) / 2;
+    setTotalSteps(totalPotentialSteps);
+    
     stopSimulationRef.current = false;
 
     try {
       for (let i = 0; i < numVillagers && !stopSimulationRef.current; i++) {
+        setCurrentStep(prev => prev + 1);
         const newNode = {
           id: i,
           name: villagerNames[i],
@@ -158,6 +164,7 @@ const VillageNetwork = () => {
         await sleep(1000);
 
         for (let j = 0; j < i && !stopSimulationRef.current; j++) {
+          setCurrentStep(prev => prev + 1);
           setMessage(`Testing friendship between ${villagerNames[i]} and ${villagerNames[j]}`);
           setTempEdge({ source: i, target: j });
           await sleep(1000);
@@ -241,14 +248,23 @@ const VillageNetwork = () => {
               </Button>
             </div>
           </div>
-        </CardContent>
-      </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Network Simulation</CardTitle>
-        </CardHeader>
-        <CardContent>
+          {running && (
+            <div className="space-y-2 mt-4">
+              <hr className="my-4" />
+              <div className="h-2 bg-muted rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-primary transition-all duration-200"
+                  style={{ width: `${(currentStep / totalSteps) * 100}%` }}
+                />
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Progress: {Math.round((currentStep / totalSteps) * 100)}%
+              </p>
+            </div>
+          )}
+
+          <h2 className="text-lg font-medium mt-12">Network Simulation</h2>
           <div className="flex space-x-6">
             <div className="relative w-96 h-96 border rounded-lg overflow-hidden">
               <svg width="400" height="400">
@@ -321,46 +337,48 @@ const VillageNetwork = () => {
             </div>
 
             <div className="flex-1 space-y-4">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-base">Network Statistics</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    <p>Villagers: {nodes.length} / {numVillagers}</p>
-                    <p>Connected Components: {components.length}</p>
-                    <p>Largest Component Size: {largestComponentSize}</p>
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="p-4 space-y-2 bg-muted rounded-lg">
+                <h3 className="font-medium">Network Statistics</h3>
+                <div className="space-y-2">
+                  <p>Villagers: {nodes.length} / {numVillagers}</p>
+                  <p>Connected Components: {components.length}</p>
+                  <p>Largest Component Size: {largestComponentSize}</p>
+                </div>
+              </div>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-base">Activity Log</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p>{message}</p>
-                </CardContent>
-              </Card>
+              <div className="p-4 space-y-2 bg-muted rounded-lg">
+                <h3 className="font-medium">Activity Log</h3>
+                <p>{message}</p>
+              </div>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-base">Connected Components</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    {components.map((component, i) => (
-                      <div key={`component-${i}`}>
-                        <span 
-                          className="inline-block w-3 h-3 rounded-full mr-2"
-                          style={{ backgroundColor: componentColors[i % componentColors.length] }}
-                        />
-                        Component {i + 1}: {component.map(nodeId => nodes.find(n => n.id === nodeId)?.name).join(', ')}
-                      </div>
-                    ))}
+              <div className="p-4 space-y-2 bg-muted rounded-lg">
+                <h3 className="font-medium">Connected Components</h3>
+                <div className="space-y-2">
+                  {components.map((component, i) => (
+                    <div key={`component-${i}`}>
+                      <span 
+                        className="inline-block w-3 h-3 rounded-full mr-2"
+                        style={{ backgroundColor: componentColors[i % componentColors.length] }}
+                      />
+                      Component {i + 1}: {component.map(nodeId => nodes.find(n => n.id === nodeId)?.name).join(', ')}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {running && (
+                <div className="space-y-2">
+                  <div className="h-2 bg-muted rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-primary transition-all duration-200"
+                      style={{ width: `${(currentStep / totalSteps) * 100}%` }}
+                    />
                   </div>
-                </CardContent>
-              </Card>
+                  <p className="text-sm text-muted-foreground">
+                    Progress: {Math.round((currentStep / totalSteps) * 100)}%
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </CardContent>

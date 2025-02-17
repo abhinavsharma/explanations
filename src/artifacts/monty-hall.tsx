@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Square, ChevronDown, ChevronUp, Lock } from 'lucide-react';
+import { Square, ChevronDown, ChevronUp, Lock, Play } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useTheme } from '../components/theme-provider';
@@ -18,6 +18,9 @@ const MontyHallGame = () => {
   });
   const [lastChoice, setLastChoice] = useState(null);
   const [showExplanation, setShowExplanation] = useState(false);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const [autoPlayStrategy, setAutoPlayStrategy] = useState('switch');
+  const [autoPlayRounds, setAutoPlayRounds] = useState(100);
   const totalGames = stats.switched.total + stats.stayed.total;
   const canShowExplanation = totalGames >= 10;
 
@@ -314,8 +317,51 @@ const MontyHallGame = () => {
     );
   };
 
+  // Add autoplay functionality
+  useEffect(() => {
+    let autoPlayInterval;
+    
+    if (isAutoPlaying) {
+      let roundsPlayed = 0;
+      
+      autoPlayInterval = setInterval(() => {
+        if (roundsPlayed >= autoPlayRounds) {
+          setIsAutoPlaying(false);
+          return;
+        }
+        
+        // Initialize new game if needed
+        if (gameState === 'final') {
+          initializeGame();
+        }
+        
+        // Make first selection
+        if (gameState === 'initial') {
+          const randomDoor = Math.floor(Math.random() * 3);
+          handleDoorSelect(randomDoor);
+        }
+        
+        // Make final selection based on strategy
+        if (gameState === 'selected') {
+          const availableDoors = [0, 1, 2].filter(id => id !== revealedDoor);
+          const finalDoor = autoPlayStrategy === 'switch' 
+            ? availableDoors.find(id => id !== selectedDoor)
+            : selectedDoor;
+          handleDoorSelect(finalDoor);
+          roundsPlayed++;
+        }
+      }, 100);
+    }
+    
+    return () => {
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+      }
+    };
+  }, [isAutoPlaying, gameState, autoPlayStrategy, autoPlayRounds, selectedDoor, revealedDoor]);
+
   return (
-    <Card className="w-full max-w-4xl mx-auto">
+    <>
       <CardHeader>
         <CardTitle>The Monty Hall Game</CardTitle>
         <div className="mt-4 text-slate-600 dark:text-slate-400">
@@ -354,6 +400,35 @@ const MontyHallGame = () => {
                 ))}
               </div>
             </div>
+          </div>
+
+          {/* AutoPlay Section */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="font-semibold text-lg text-slate-800 dark:text-slate-100">AutoPlay</h3>
+              <div className="flex items-center gap-4">
+                <select 
+                  value={autoPlayStrategy}
+                  onChange={(e) => setAutoPlayStrategy(e.target.value)}
+                  className="px-3 py-1 rounded-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800"
+                  disabled={isAutoPlaying}
+                >
+                  <option value="switch">Always Switch</option>
+                  <option value="stay">Always Stay</option>
+                </select>
+                <Button 
+                  onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+                  variant="ghost"
+                  size="icon"
+                  className={isAutoPlaying ? "text-red-500 hover:text-red-600" : "text-blue-500 hover:text-blue-600"}
+                >
+                  {isAutoPlaying ? <Square className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+                </Button>
+              </div>
+            </div>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              Watch the probabilities converge by automatically playing multiple rounds with a consistent strategy.
+            </p>
           </div>
 
           {/* Overall Statistics */}
@@ -463,7 +538,7 @@ const MontyHallGame = () => {
           </div>
         </div>
       </CardContent>
-    </Card>
+    </>
   );
 };
 

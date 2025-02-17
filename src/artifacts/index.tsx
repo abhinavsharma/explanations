@@ -14,31 +14,26 @@ const ArtifactsIndex = () => {
     });
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
-      <Card className="w-full max-w-2xl bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center text-gray-900 dark:text-white">Interactive Explanations</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4">
-            {artifacts.map((artifact) => (
-              <Link 
-                key={artifact.path}
-                to={artifact.path}
-                className="block p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors text-gray-900 dark:text-gray-100"
-              >
-                <h2 className="text-lg font-semibold">
-                  {artifact.path
-                    .replace('/', '')
-                    .split('-')
-                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(' ')}
-                </h2>
-              </Link>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300 px-8 py-12">
+      <h1 className="text-3xl mb-8 text-gray-900 dark:text-white">
+        Interactive Explanations
+      </h1>
+      <ul className="max-w-2xl  space-y-3">
+        {artifacts.map((artifact) => (
+          <li key={artifact.path}>
+            <Link 
+              to={artifact.path}
+              className="block font-['Computer_Modern'] text-lg text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
+            >
+              {artifact.path
+                .replace('/', '')
+                .split('-')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ')}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

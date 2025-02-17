@@ -10,7 +10,7 @@ export default function ArtifactWrapper({ children }: { children: React.ReactNod
   const childrenArray = React.Children.toArray(children);
   const hasCard = childrenArray.some(child => 
     React.isValidElement(child) && 
-    child.type === Card
+    (child.type === Card || (child.type as any)?.displayName === 'Card')
   );
 
   return (
@@ -19,7 +19,7 @@ export default function ArtifactWrapper({ children }: { children: React.ReactNod
         <Link to="/" className="absolute -top-12 left-0">
           <Button variant="ghost" size="sm" className="gap-2">
             <Home className="w-4 h-4" />
-            Home
+            <span className="font-cmr">Home</span>
           </Button>
         </Link>
         {hasCard ? children : (

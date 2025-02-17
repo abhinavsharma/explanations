@@ -44,7 +44,7 @@ const EntropyComponentsExplorer = () => {
   const totalEntropy = entropyData.reduce((sum, d) => sum + d.contribution, 0);
 
   return (
-    <>
+    <Card>
       <CardHeader>
         <CardTitle>Understanding Entropy Components</CardTitle>
       </CardHeader>
@@ -216,7 +216,7 @@ const EntropyComponentsExplorer = () => {
           </div>
         </div>
       </CardContent>
-    </>
+    </Card>
   );
 };
 

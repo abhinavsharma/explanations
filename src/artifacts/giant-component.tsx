@@ -113,7 +113,7 @@ const VillageNetwork = () => {
     updateComponents();
   }, [edges, updateComponents]);
 
-  const sleep = (ms) => new Promise(resolve => {
+  const sleep = (ms) => new Promise<void>(resolve => {
     const timeout = setTimeout(() => {
       if (!stopSimulationRef.current) {
         resolve();

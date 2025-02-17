@@ -13,7 +13,7 @@ const VillageNetwork = () => {
   ];
 
   const [numVillagers, setNumVillagers] = useState(12);
-  const [probability, setProbability] = useState(0.5);
+  const [probability, setProbability] = useState(1/12);
   const [nodes, setNodes] = useState([]);
   const [edges, setEdges] = useState([]);
   const [tempEdge, setTempEdge] = useState(null);
@@ -192,6 +192,12 @@ const VillageNetwork = () => {
     }
   };
 
+  const handleVillagersChange = (value) => {
+    const newNumVillagers = value[0];
+    setNumVillagers(newNumVillagers);
+    setProbability(1/newNumVillagers);
+  };
+
   const allNodes = getAllNodePositions();
 
   return (
@@ -200,9 +206,11 @@ const VillageNetwork = () => {
         <CardHeader>
           <CardTitle>Giant Component Emergence</CardTitle>
           <p className="text-sm text-muted-foreground">
-            Watch how small, isolated groups merge into one large connected component as more villagers join. 
-            This demonstrates a key phenomenon in network theory where, at a critical threshold of connections, 
-            a "giant component" suddenly emerges containing a significant fraction of all nodes.
+            Watch how random friendships create a village network. When the average number 
+            of friends per villager exceeds 1, something fascinating happens - a "giant component" 
+            suddenly emerges, connecting a large portion of the village into one social group. 
+            This is a key discovery of Erdős and Rényi: in random networks, this transition from 
+            isolated groups to one large community happens quite abruptly.
           </p>
         </CardHeader>
         <CardContent>
@@ -214,7 +222,7 @@ const VillageNetwork = () => {
                 </label>
                 <Slider
                   value={[numVillagers]}
-                  onValueChange={(value) => setNumVillagers(value[0])}
+                  onValueChange={handleVillagersChange}
                   min={2}
                   max={15}
                   step={1}
@@ -224,16 +232,8 @@ const VillageNetwork = () => {
               
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  Probability two people become friends: {probability.toFixed(2)}
+                  Probability two people become friends: 1/{numVillagers} ≈ {(1/numVillagers).toFixed(3)}
                 </label>
-                <Slider
-                  value={[probability]}
-                  onValueChange={(value) => setProbability(value[0])}
-                  min={0}
-                  max={1}
-                  step={0.05}
-                  className="w-full"
-                />
               </div>
             </div>
 

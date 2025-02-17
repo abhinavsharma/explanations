@@ -206,11 +206,15 @@ const VillageNetwork = () => {
         <CardHeader>
           <CardTitle>Giant Component Emergence</CardTitle>
           <p className="text-sm text-muted-foreground">
-            Watch how random friendships create a village network. When the average number 
-            of friends per villager exceeds 1, something fascinating happens - a "giant component" 
-            suddenly emerges, connecting a large portion of the village into one social group. 
-            This is a key discovery of Erdős and Rényi: in random networks, this transition from 
-            isolated groups to one large community happens quite abruptly.
+            Watch how random friendships create a village network. As more connections form, 
+            small isolated groups start joining together through new friendships. At a certain 
+            point, these mergers cascade - one more friendship can suddenly connect many 
+            previously separate groups, causing a "giant component" to emerge that contains 
+            a significant portion of the village. This abrupt transition from fragmented groups 
+            to one large community was a key discovery of Erdős and Rényi. We use a friendship 
+            probability of 1/n (where n is the village size) because in real social networks, 
+            people tend to maintain a relatively constant number of close relationships regardless 
+            of community size.
           </p>
         </CardHeader>
         <CardContent>
@@ -365,21 +369,35 @@ const VillageNetwork = () => {
                   ))}
                 </div>
               </div>
-
-              {running && (
-                <div className="space-y-2">
-                  <div className="h-2 bg-muted rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-primary transition-all duration-200"
-                      style={{ width: `${(currentStep / totalSteps) * 100}%` }}
-                    />
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    Progress: {Math.round((currentStep / totalSteps) * 100)}%
-                  </p>
-                </div>
-              )}
             </div>
+          </div>
+
+          <div className="mt-6">
+            <details className="space-y-2">
+              <summary className="text-lg font-medium cursor-pointer hover:text-primary">
+                Mathematical Intuition Behind Giant Components
+              </summary>
+              <div className="p-4 space-y-4 bg-muted rounded-lg mt-2">
+                <p>
+                  When the probability of connection is p = c/n (where c &gt; 1), a giant component emerges. 
+                  Here's why:
+                </p>
+                <ol className="list-decimal list-inside space-y-2">
+                  <li>Consider following a path from any node. Each node has on average c connections.</li>
+                  <li>At each step, we discover approximately c-1 new nodes (excluding the one we came from).</li>
+                  <li>After k steps, we expect to reach (c-1)ᵏ new nodes.</li>
+                  <li>When c &gt; 1, this grows exponentially until we hit a significant fraction of the network.</li>
+                </ol>
+                <p className="mt-2">
+                  For the remaining small components:
+                </p>
+                <ol className="list-decimal list-inside space-y-2">
+                  <li>The probability of a component of size k is roughly p^(k-1)(1-p)^(k(n-k))</li>
+                  <li>When p = c/n, components larger than O(log n) become exponentially unlikely</li>
+                  <li>This creates the characteristic structure: one giant component and several small ones</li>
+                </ol>
+              </div>
+            </details>
           </div>
         </CardContent>
       </Card>

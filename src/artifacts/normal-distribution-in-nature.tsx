@@ -97,6 +97,7 @@ const COLORS = [
   };
   
   return (
+    <div className="h-[1200px] w-full">
     <Card>
       <CardHeader>
         <CardTitle>The Normal Distribution Emerges</CardTitle>
@@ -284,6 +285,7 @@ const COLORS = [
         </div>
       </CardContent>
     </Card>
+    </div>
   );
 };
 

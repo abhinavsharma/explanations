@@ -7,9 +7,15 @@ import { Play, Square } from "lucide-react";
 
 const VillageNetwork = () => {
   const villagerNames = [
-    'Emma', 'Liam', 'Olivia', 'Noah', 'Ava', 
-    'Ethan', 'Sophia', 'Mason', 'Isabella', 'William',
-    'Mia', 'James', 'Charlotte', 'Benjamin', 'Amelia'
+    'Aisha', 'Liam', 'Ming', 'Noah', 'Priya', 
+    'Juan', 'Sofia', 'Kai', 'Isabella', 'Wei',
+    'Fatima', 'James', 'Yuki', 'Ahmed', 'Amara',
+    'Diego', 'Zara', 'Hiroshi', 'Elena', 'Miguel',
+    'Rania', 'Alexandru', 'Ji-eun', 'Sebastian', 'Leila',
+    'David', 'Aria', 'Giuseppe', 'Indira', 'Chen',
+    'Grace', 'Mateo', 'Valentina', 'Sanjay', 'Lily',
+    'Andrei', 'Chiara', 'Johan', 'Esra', 'Raja',
+    'Maria', 'Jamal', 'Chitra', 'Boris', 'Amira'
   ];
 
   const [numVillagers, setNumVillagers] = useState(12);
@@ -227,8 +233,8 @@ const VillageNetwork = () => {
                 <Slider
                   value={[numVillagers]}
                   onValueChange={handleVillagersChange}
-                  min={2}
-                  max={15}
+                  min={5}
+                  max={30}
                   step={1}
                   className="w-full"
                 />

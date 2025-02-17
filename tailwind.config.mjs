@@ -20,6 +20,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Computer Modern', 'serif'],
+        serif: ['Computer Modern', 'serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

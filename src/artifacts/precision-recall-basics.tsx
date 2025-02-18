@@ -135,25 +135,25 @@ const SpamClassifierDemo = () => {
           </div>
             
           {/* Emails visualization */}
-          <div className="overflow-hidden rounded-lg border">
+          <div className="overflow-hidden rounded-lg border border-border">
             <table className="w-full border-collapse text-sm">
-              <thead className="bg-gray-50">
+              <thead className="bg-muted">
                 <tr>
-                  <th className="p-3 text-left font-medium">Email Content</th>
-                  <th className="p-3 text-center font-medium w-[80px]">Actual</th>
-                  <th className="p-3 text-center font-medium w-[80px]">Marked</th>
-                  <th className="p-3 text-right font-medium w-[80px]">Score</th>
+                  <th className="p-3 text-left font-medium text-muted-foreground">Email Content</th>
+                  <th className="p-3 text-center font-medium text-muted-foreground w-[80px]">Actual</th>
+                  <th className="p-3 text-center font-medium text-muted-foreground w-[80px]">Marked</th>
+                  <th className="p-3 text-right font-medium text-muted-foreground w-[80px]">Score</th>
                 </tr>
               </thead>
-              <tbody className="divide-y">
+              <tbody className="divide-y divide-border">
                 {classifiedEmails.map(email => (
                   <tr 
                     key={email.id}
                     className={`
-                      ${email.category === 'TP' ? 'bg-green-50' : ''}
-                      ${email.category === 'FP' ? 'bg-red-50' : ''}
-                      ${email.category === 'FN' ? 'bg-yellow-50' : ''}
-                      ${email.category === 'TN' ? 'bg-gray-50' : ''}
+                      ${email.category === 'TP' ? 'bg-green-500/10 dark:bg-green-500/20' : ''}
+                      ${email.category === 'FP' ? 'bg-red-500/10 dark:bg-red-500/20' : ''}
+                      ${email.category === 'FN' ? 'bg-yellow-500/10 dark:bg-yellow-500/20' : ''}
+                      ${email.category === 'TN' ? 'bg-muted/50' : ''}
                     `}
                   >
                     <td className="p-3">{email.content}</td>
@@ -173,6 +173,8 @@ const SpamClassifierDemo = () => {
           </div>
 
           {/* Threshold Control */}
+          <hr></hr>
+          <h3 className="my-4">Slide Me!</h3>
           <div className="space-y-2">
             <div className="flex justify-between items-end">
               <div>
@@ -214,11 +216,11 @@ const SpamClassifierDemo = () => {
                 {/* First data row */}
                 <div className="font-medium self-center">Actually Spam</div>
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="bg-green-200 p-2 rounded text-center">
+                  <div className="bg-green-500/20 dark:bg-green-500/30 p-2 rounded text-center">
                     <div className="font-bold">{tp}</div>
                     <div className="text-sm">True Positive</div>
                   </div>
-                  <div className="bg-yellow-200 p-2 rounded text-center">
+                  <div className="bg-yellow-500/20 dark:bg-yellow-500/30 p-2 rounded text-center">
                     <div className="font-bold">{fn}</div>
                     <div className="text-sm">False Negative</div>
                   </div>
@@ -226,11 +228,11 @@ const SpamClassifierDemo = () => {
                 {/* Second data row */}
                 <div className="font-medium self-center">Actually Not Spam</div>
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="bg-red-200 p-2 rounded text-center">
+                  <div className="bg-red-500/20 dark:bg-red-500/30 p-2 rounded text-center">
                     <div className="font-bold">{fp}</div>
                     <div className="text-sm">False Positive</div>
                   </div>
-                  <div className="bg-gray-200 p-2 rounded text-center">
+                  <div className="bg-gray-500/20 dark:bg-gray-500/30 p-2 rounded text-center">
                     <div className="font-bold">{tn}</div>
                     <div className="text-sm">True Negative</div>
                   </div>
@@ -286,72 +288,74 @@ const SpamClassifierDemo = () => {
                 <div className="space-y-4 flex-1">
                   <div className="font-medium">Understanding Different Metrics:</div>
                   <div className="space-y-3">
-                    <div className="p-2 rounded hover:bg-gray-50">
+                    <div className="p-2 rounded hover:bg-gray-50 dark:hover:bg-gray-800">
                       <div className="font-medium">Precision: {(precision * 100).toFixed(1)}%</div>
-                      <div className="text-sm text-gray-600">Measures accuracy of spam predictions - higher means fewer false alarms.</div>
-                      <div className="text-sm text-gray-500">Formula: {tp} / ({tp} + {fp}) emails</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-300">Measures accuracy of spam predictions - higher means fewer false alarms.</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">Formula: {tp} / ({tp} + {fp}) emails</div>
                     </div>
-                    <div className="p-2 rounded hover:bg-gray-50">
+                    <div className="p-2 rounded hover:bg-gray-50 dark:hover:bg-gray-800">
                       <div className="font-medium">Recall: {(recall * 100).toFixed(1)}%</div>
-                      <div className="text-sm text-gray-600">Measures completeness of spam detection - higher means fewer missed spam.</div>
-                      <div className="text-sm text-gray-500">Formula: {tp} / ({tp} + {fn}) emails</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-300">Measures completeness of spam detection - higher means fewer missed spam.</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">Formula: {tp} / ({tp} + {fn}) emails</div>
                     </div>
-                    <div className="p-2 rounded hover:bg-gray-50">
+                    <div className="p-2 rounded hover:bg-gray-50 dark:hover:bg-gray-800">
                       <div className="font-medium">F1 Score: {(f1 * 100).toFixed(1)}%</div>
-                      <div className="text-sm text-gray-600">Balances precision and recall - best when you need both metrics to be high.</div>
-                      <div className="text-sm text-gray-500">Formula: 2 * (P * R) / (P + R)</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-300">Balances precision and recall - best when you need both metrics to be high.</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">Formula: 2 * (P * R) / (P + R)</div>
                     </div>
-                    <div className="p-2 rounded hover:bg-gray-50">
+                    <div className="p-2 rounded hover:bg-gray-50 dark:hover:bg-gray-800">
                       <div className="font-medium">Arithmetic Mean: {(am * 100).toFixed(1)}%</div>
-                      <div className="text-sm text-gray-600">Most lenient - treats both metrics equally. Best when both are equally important.</div>
-                      <div className="text-sm text-gray-500">Formula: (P + R) / 2</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-300">Most lenient - treats both metrics equally. Best when both are equally important.</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">Formula: (P + R) / 2</div>
                     </div>
-                    <div className="p-2 rounded hover:bg-gray-50">
+                    <div className="p-2 rounded hover:bg-gray-50 dark:hover:bg-gray-800">
                       <div className="font-medium">Geometric Mean: {(gm * 100).toFixed(1)}%</div>
-                      <div className="text-sm text-gray-600">Moderate - somewhat penalizes large differences between precision and recall.</div>
-                      <div className="text-sm text-gray-500">Formula: √(P * R)</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-300">Moderate - somewhat penalizes large differences between precision and recall.</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">Formula: √(P * R)</div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <h2 className="mt-12">Some theory</h2>
-
-            <div className="text-sm space-y-2 p-4 rounded-lg">
-              <div className="font-medium">Understanding Different Metrics:</div>
-              <p>Different metrics are useful in different scenarios:</p>
-              <ul className="list-disc ml-6 space-y-1">
-                <li><strong>Precision</strong>: Measures accuracy of spam predictions - higher means fewer false alarms.</li>
-                <li><strong>Recall</strong>: Measures completeness of spam detection - higher means fewer missed spam.</li>
-                <li><strong>F1 Score</strong>: Balances precision and recall - best when you need both metrics to be high.</li>
-                <li><strong>Arithmetic Mean (AM)</strong>: Most lenient - treats both metrics equally. Best when both are equally important.</li>
-                <li><strong>Geometric Mean (GM)</strong>: Moderate - somewhat penalizes large differences between precision and recall.</li>
-              </ul>
-            </div>
-
-            {/* Original Trade-off Explanation */}
-            <div className="text-sm space-y-2 p-4 rounded-lg">
-              <div className="font-medium">The Precision-Recall Trade-off:</div>
-              <p>Notice how changing the threshold creates a trade-off:</p>
-              <ul className="list-disc ml-6 space-y-1">
-                <li><strong>Lower threshold</strong> (more lenient): Catches more spam (high recall) but makes more mistakes (lower precision)</li>
-                <li><strong>Higher threshold</strong> (stricter): Makes fewer mistakes (high precision) but misses more spam (lower recall)</li>
-                <li>The best threshold depends on what's more important for your specific case:
-                  <ul className="ml-4 mt-1">
-                    <li>Email service: Might prefer high precision to avoid blocking important emails</li>
-                    <li>Security system: Might prefer high recall to catch all potential threats</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
+            
 
             
           </div>
         </div>
 
+        {/* Metrics Over Threshold Plot */}
+        <div className="p-4 rounded-lg">
+            <h3 className="mb-4">Metrics vs Threshold</h3>
+            <ChartContainer className="h-[400px]" config={{}}>
+              <RechartsPrimitive.LineChart data={thresholdPoints} margin={{ top: 20, right: 20, bottom: 60, left: 60 }}>
+                <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />
+                <RechartsPrimitive.XAxis 
+                  dataKey="threshold"
+                  domain={[0, 1]}
+                  tickFormatter={(value) => `${(value * 100).toFixed(0)}%`}
+                  label={{ value: "Threshold", position: "bottom", offset: 40 }}
+                />
+                <RechartsPrimitive.YAxis 
+                  domain={[0, 1]}
+                  tickFormatter={(value) => `${(value * 100).toFixed(0)}%`}
+                  label={{ value: "Score", angle: -90, position: "left", offset: 40 }}
+                />
+                <RechartsPrimitive.Tooltip 
+                  formatter={(value) => `${(Number(value) * 100).toFixed(1)}%`}
+                />
+                <RechartsPrimitive.Legend />
+                <RechartsPrimitive.Line type="monotone" dataKey="precision" stroke="#4f46e5" strokeWidth={2} name="Precision" />
+                <RechartsPrimitive.Line type="monotone" dataKey="recall" stroke="#22c55e" strokeWidth={2} name="Recall" />
+                <RechartsPrimitive.Line type="monotone" dataKey="f1" stroke="#f97316" strokeWidth={2} name="F1 Score" />
+                <RechartsPrimitive.Line type="monotone" dataKey="am" stroke="#ec4899" strokeWidth={2} name="AM" />
+                <RechartsPrimitive.Line type="monotone" dataKey="gm" stroke="#eab308" strokeWidth={2} name="GM" />
+                <RechartsPrimitive.ReferenceLine x={threshold} stroke="red" strokeDasharray="3 3" />
+              </RechartsPrimitive.LineChart>
+            </ChartContainer>
+          </div>
+
         {/* Charts stacked vertically */}
-        <h2 className="mt-12">Considering all thresholds</h2>
         <div className="space-y-4">
           {/* Precision-Recall Scatter Plot */}
           <div className="p-4 rounded-lg">
@@ -399,56 +403,12 @@ const SpamClassifierDemo = () => {
             </ChartContainer>
           </div>
 
-          {/* Metrics Over Threshold Plot */}
-          <div className="p-4 rounded-lg">
-            <h3 className="mb-4">Metrics vs Threshold</h3>
-            <ChartContainer className="h-[400px]" config={{}}>
-              <RechartsPrimitive.LineChart data={thresholdPoints} margin={{ top: 20, right: 20, bottom: 60, left: 60 }}>
-                <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />
-                <RechartsPrimitive.XAxis 
-                  dataKey="threshold"
-                  domain={[0, 1]}
-                  tickFormatter={(value) => `${(value * 100).toFixed(0)}%`}
-                  label={{ value: "Threshold", position: "bottom", offset: 40 }}
-                />
-                <RechartsPrimitive.YAxis 
-                  domain={[0, 1]}
-                  tickFormatter={(value) => `${(value * 100).toFixed(0)}%`}
-                  label={{ value: "Score", angle: -90, position: "left", offset: 40 }}
-                />
-                <RechartsPrimitive.Tooltip 
-                  formatter={(value) => `${(Number(value) * 100).toFixed(1)}%`}
-                />
-                <RechartsPrimitive.Legend />
-                <RechartsPrimitive.Line type="monotone" dataKey="precision" stroke="#4f46e5" strokeWidth={2} name="Precision" />
-                <RechartsPrimitive.Line type="monotone" dataKey="recall" stroke="#22c55e" strokeWidth={2} name="Recall" />
-                <RechartsPrimitive.Line type="monotone" dataKey="f1" stroke="#f97316" strokeWidth={2} name="F1 Score" />
-                <RechartsPrimitive.Line type="monotone" dataKey="am" stroke="#ec4899" strokeWidth={2} name="AM" />
-                <RechartsPrimitive.Line type="monotone" dataKey="gm" stroke="#eab308" strokeWidth={2} name="GM" />
-                <RechartsPrimitive.ReferenceLine x={threshold} stroke="red" strokeDasharray="3 3" />
-              </RechartsPrimitive.LineChart>
-            </ChartContainer>
-          </div>
+          
 
           {/* ROC Curve Plot */}
           <div className="p-4 rounded-lg">
             <h3 className="mb-4">ROC Curve</h3>
-            <div className="text-sm space-y-2 p-4 rounded-lg mb-4">
-              <div className="font-medium">Understanding the ROC Curve:</div>
-              <p>The ROC curve shows the relationship between:</p>
-              <ul className="list-disc ml-6 space-y-1">
-                <li><strong>True Positive Rate (TPR)</strong> or Sensitivity: Same as Recall - how many actual spam emails we catch</li>
-                <li><strong>False Positive Rate (FPR)</strong> or 1-Specificity: How many legitimate emails we incorrectly mark as spam</li>
-                <li>The diagonal line represents random guessing</li>
-                <li>Better performance is shown by curves closer to the top-left corner</li>
-                <li>The area under the curve (AUC) measures overall classifier performance:
-                  <ul className="ml-4 mt-1">
-                    <li>AUC = 1.0: Perfect classification</li>
-                    <li>AUC = 0.5: No better than random guessing</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
+            
             <ChartContainer className="h-[400px]" config={{}}>
               <RechartsPrimitive.ScatterChart margin={{ top: 20, right: 20, bottom: 60, left: 60 }}>
                 <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />
@@ -508,6 +468,22 @@ const SpamClassifierDemo = () => {
                 />
               </RechartsPrimitive.ScatterChart>
             </ChartContainer>
+            <div className="text-sm space-y-2 p-4 rounded-lg mb-4">
+              <div className="font-medium">Understanding the ROC Curve:</div>
+              <p>The ROC curve shows the relationship between:</p>
+              <ul className="list-disc ml-6 space-y-1">
+                <li><strong>True Positive Rate (TPR)</strong> or Sensitivity: Same as Recall - how many actual spam emails we catch</li>
+                <li><strong>False Positive Rate (FPR)</strong> or 1-Specificity: How many legitimate emails we incorrectly mark as spam</li>
+                <li>The diagonal line represents random guessing</li>
+                <li>Better performance is shown by curves closer to the top-left corner</li>
+                <li>The area under the curve (AUC) measures overall classifier performance:
+                  <ul className="ml-4 mt-1">
+                    <li>AUC = 1.0: Perfect classification</li>
+                    <li>AUC = 0.5: No better than random guessing</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </CardContent>

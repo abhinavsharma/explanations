@@ -326,7 +326,7 @@ const SpamClassifierDemo = () => {
 
         {/* Metrics Over Threshold Plot */}
         <div className="p-4 rounded-lg">
-            <h3 className="mb-4">Metrics vs Threshold</h3>
+            <h3 className="mb-4">Considering all thresholds</h3>
             <ChartContainer className="h-[400px]" config={{}}>
               <RechartsPrimitive.LineChart data={thresholdPoints} margin={{ top: 20, right: 20, bottom: 60, left: 60 }}>
                 <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />

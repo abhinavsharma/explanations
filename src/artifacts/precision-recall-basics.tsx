@@ -113,12 +113,12 @@ const SpamClassifierDemo = () => {
   return (
     <Card className="w-full max-w-4xl">
       <CardHeader>
-        <CardTitle>Basics of Precision & Recall</CardTitle>
+        <CardTitle>Precision, Recall and tradeoffs like F1 and ROC</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
           {/* Introduction */}
-          <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg space-y-2">
+          <div className="p-4 rounded-lg space-y-2">
             <p className="font-medium">Imagine you're building a spam filter for email:</p>
             <ul className="list-disc ml-6 space-y-1">
               <li>Each email gets a "spam score" from 0% to 100%</li>
@@ -127,17 +127,17 @@ const SpamClassifierDemo = () => {
             </ul>
             <p className="mt-2">Below are 15 sample emails. Try moving the threshold to see how it affects the classification:</p>
             <ul className="list-disc ml-6 space-y-1">
-              <li><span className="text-green-600 dark:text-green-400 font-medium">True Positive</span>: Correctly caught actual spam</li>
-              <li><span className="text-red-600 dark:text-red-400 font-medium">False Positive</span>: Mistakenly marked real email as spam</li>
-              <li><span className="text-yellow-600 dark:text-yellow-400 font-medium">False Negative</span>: Missed catching actual spam</li>
-              <li><span className="text-gray-600 dark:text-gray-400 font-medium">True Negative</span>: Correctly let through real email</li>
+              <li><span className="text-green-600 font-medium">True Positive</span>: Correctly caught actual spam</li>
+              <li><span className="text-red-600 font-medium">False Positive</span>: Mistakenly marked real email as spam</li>
+              <li><span className="text-yellow-600 font-medium">False Negative</span>: Missed catching actual spam</li>
+              <li><span className="text-gray-600 font-medium">True Negative</span>: Correctly let through real email</li>
             </ul>
           </div>
             
           {/* Emails visualization */}
-          <div className="overflow-hidden rounded-lg border dark:border-gray-800">
+          <div className="overflow-hidden rounded-lg border">
             <table className="w-full border-collapse text-sm">
-              <thead className="bg-gray-50 dark:bg-gray-900">
+              <thead className="bg-gray-50">
                 <tr>
                   <th className="p-3 text-left font-medium">Email Content</th>
                   <th className="p-3 text-center font-medium w-[80px]">Actual</th>
@@ -145,15 +145,15 @@ const SpamClassifierDemo = () => {
                   <th className="p-3 text-right font-medium w-[80px]">Score</th>
                 </tr>
               </thead>
-              <tbody className="divide-y dark:divide-gray-800">
+              <tbody className="divide-y">
                 {classifiedEmails.map(email => (
                   <tr 
                     key={email.id}
                     className={`
-                      ${email.category === 'TP' ? 'bg-green-50 dark:bg-green-900/20' : ''}
-                      ${email.category === 'FP' ? 'bg-red-50 dark:bg-red-900/20' : ''}
-                      ${email.category === 'FN' ? 'bg-yellow-50 dark:bg-yellow-900/20' : ''}
-                      ${email.category === 'TN' ? 'bg-gray-50 dark:bg-gray-900/20' : ''}
+                      ${email.category === 'TP' ? 'bg-green-50' : ''}
+                      ${email.category === 'FP' ? 'bg-red-50' : ''}
+                      ${email.category === 'FN' ? 'bg-yellow-50' : ''}
+                      ${email.category === 'TN' ? 'bg-gray-50' : ''}
                     `}
                   >
                     <td className="p-3">{email.content}</td>
@@ -177,7 +177,7 @@ const SpamClassifierDemo = () => {
             <div className="flex justify-between items-end">
               <div>
                 <div className="text-lg font-medium">Spam Detection Threshold: {threshold.toFixed(1)}</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-sm text-gray-600">
                   {threshold < 0.3 ? "Very lenient: Lets most emails through" :
                    threshold < 0.5 ? "Lenient: Might miss some spam but won't block real emails" :
                    threshold < 0.7 ? "Moderate: Balanced between catching spam and avoiding mistakes" :
@@ -185,7 +185,7 @@ const SpamClassifierDemo = () => {
                    "Very strict: Blocks almost everything suspicious"}
                 </div>
               </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="text-sm text-gray-600">
                 ← More emails marked as spam | More emails let through →
               </div>
             </div>
@@ -202,7 +202,7 @@ const SpamClassifierDemo = () => {
           {/* Additional Metrics */}
           <div className="space-y-4">
             {/* Confusion Matrix */}
-            <div className="bg-purple-100 dark:bg-purple-900 p-4 rounded-lg">
+            <div className="p-4 rounded-lg">
               <div className="text-lg font-medium mb-2">Confusion Matrix</div>
               <div className="grid grid-cols-[auto_1fr] gap-2">
                 {/* Header row */}
@@ -214,11 +214,11 @@ const SpamClassifierDemo = () => {
                 {/* First data row */}
                 <div className="font-medium self-center">Actually Spam</div>
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="bg-green-200 dark:bg-green-900 p-2 rounded text-center">
+                  <div className="bg-green-200 p-2 rounded text-center">
                     <div className="font-bold">{tp}</div>
                     <div className="text-sm">True Positive</div>
                   </div>
-                  <div className="bg-yellow-200 dark:bg-yellow-900 p-2 rounded text-center">
+                  <div className="bg-yellow-200 p-2 rounded text-center">
                     <div className="font-bold">{fn}</div>
                     <div className="text-sm">False Negative</div>
                   </div>
@@ -226,11 +226,11 @@ const SpamClassifierDemo = () => {
                 {/* Second data row */}
                 <div className="font-medium self-center">Actually Not Spam</div>
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="bg-red-200 dark:bg-red-900 p-2 rounded text-center">
+                  <div className="bg-red-200 p-2 rounded text-center">
                     <div className="font-bold">{fp}</div>
                     <div className="text-sm">False Positive</div>
                   </div>
-                  <div className="bg-gray-200 dark:bg-gray-800 p-2 rounded text-center">
+                  <div className="bg-gray-200 p-2 rounded text-center">
                     <div className="font-bold">{tn}</div>
                     <div className="text-sm">True Negative</div>
                   </div>
@@ -238,7 +238,7 @@ const SpamClassifierDemo = () => {
               </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+            <div className="p-4 rounded-lg">
               <div className="text-lg font-medium mb-4">Current Metrics</div>
               <div className="flex gap-6">
                 <ChartContainer className="h-[600px] w-[400px]" config={{}}>
@@ -318,7 +318,7 @@ const SpamClassifierDemo = () => {
 
             <h2 className="mt-12">Some theory</h2>
 
-            <div className="text-sm space-y-2 bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
+            <div className="text-sm space-y-2 p-4 rounded-lg">
               <div className="font-medium">Understanding Different Metrics:</div>
               <p>Different metrics are useful in different scenarios:</p>
               <ul className="list-disc ml-6 space-y-1">
@@ -331,7 +331,7 @@ const SpamClassifierDemo = () => {
             </div>
 
             {/* Original Trade-off Explanation */}
-            <div className="text-sm space-y-2 bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
+            <div className="text-sm space-y-2 p-4 rounded-lg">
               <div className="font-medium">The Precision-Recall Trade-off:</div>
               <p>Notice how changing the threshold creates a trade-off:</p>
               <ul className="list-disc ml-6 space-y-1">
@@ -354,7 +354,7 @@ const SpamClassifierDemo = () => {
         <h2 className="mt-12">Considering all thresholds</h2>
         <div className="space-y-4">
           {/* Precision-Recall Scatter Plot */}
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+          <div className="p-4 rounded-lg">
             <h3 className="mb-4">Precision vs Recall Trade-off</h3>
             <ChartContainer className="h-[400px]" config={{}}>
               <RechartsPrimitive.ScatterChart margin={{ top: 20, right: 20, bottom: 60, left: 60 }}>
@@ -400,7 +400,7 @@ const SpamClassifierDemo = () => {
           </div>
 
           {/* Metrics Over Threshold Plot */}
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+          <div className="p-4 rounded-lg">
             <h3 className="mb-4">Metrics vs Threshold</h3>
             <ChartContainer className="h-[400px]" config={{}}>
               <RechartsPrimitive.LineChart data={thresholdPoints} margin={{ top: 20, right: 20, bottom: 60, left: 60 }}>
@@ -431,9 +431,9 @@ const SpamClassifierDemo = () => {
           </div>
 
           {/* ROC Curve Plot */}
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+          <div className="p-4 rounded-lg">
             <h3 className="mb-4">ROC Curve</h3>
-            <div className="text-sm space-y-2 bg-gray-50 dark:bg-gray-900 p-4 rounded-lg mb-4">
+            <div className="text-sm space-y-2 p-4 rounded-lg mb-4">
               <div className="font-medium">Understanding the ROC Curve:</div>
               <p>The ROC curve shows the relationship between:</p>
               <ul className="list-disc ml-6 space-y-1">

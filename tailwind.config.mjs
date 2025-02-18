@@ -20,8 +20,11 @@ export default {
       },
     },
     extend: {
+      fontSize: {
+        base: '2rem', // 18px
+      },
       fontFamily: {
-        sans: ['Computer Modern', 'serif'],
+        sans: ['Whizband', 'sans'],
         serif: ['Computer Modern', 'serif'],
       },
       colors: {

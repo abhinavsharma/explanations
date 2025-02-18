@@ -144,11 +144,16 @@ const VillageNetwork = () => {
   };
 
   const runSimulation = async () => {
+    if (running) return;
+    
+    // Reset everything only when starting a new simulation
     setRunning(true);
     setNodes([]);
     setEdges([]);
     setComponents([]);
+    setMessage('');
     setCurrentStep(0);
+    setLargestComponentSize(0);
     
     // Calculate total steps (nodes + potential edges)
     const totalPotentialSteps = numVillagers + (numVillagers * (numVillagers - 1)) / 2;
@@ -189,6 +194,7 @@ const VillageNetwork = () => {
       }
 
       if (!stopSimulationRef.current) {
+        updateComponents();
         setMessage('Simulation complete! Start a new simulation to try different parameters.');
       }
     } finally {
@@ -202,6 +208,7 @@ const VillageNetwork = () => {
     const newNumVillagers = value[0];
     setNumVillagers(newNumVillagers);
     setProbability(1/newNumVillagers);
+    // Remove any automatic resets here - let user explicitly start new simulation
   };
 
   const allNodes = getAllNodePositions();
@@ -211,17 +218,14 @@ const VillageNetwork = () => {
       <Card>
         <CardHeader>
           <CardTitle>Why everyone knows everyone in a village</CardTitle>
-          <p className="text-sm text-muted-foreground">
-            Watch how random friendships create a village network. As more connections form, 
-            small isolated groups start joining together through new friendships. At a certain 
-            point, these mergers cascade - one more friendship can suddenly connect many 
-            previously separate groups, causing a "giant component" to emerge that contains 
-            a significant portion of the village. This abrupt transition from fragmented groups 
-            to one large community was a key discovery of Erdős and Rényi. We use a friendship 
-            probability of 1/n (where n is the village size) because in real social networks, 
-            people tend to maintain a relatively constant number of close relationships regardless 
-            of community size.
+          <p>
+            As more connections form, 
+            small isolated groups start joining together through new friendships, eventually 
+            causing a "giant component" to emerge. This abrupt transition from fragmented groups 
+            to one large community was a key discovery of Erdős and Rényi. 
           </p>
+          <p>In real social networks, people tend to maintain a relatively constant number of close 
+            relationships hence a friendship probability of 1/n.</p>
         </CardHeader>
         <CardContent>
           <div className="flex items-end space-x-6">

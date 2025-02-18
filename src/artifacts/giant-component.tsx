@@ -210,7 +210,7 @@ const VillageNetwork = () => {
     <div className="w-full max-w-6xl space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Giant Component Emergence</CardTitle>
+          <CardTitle>Why everyone knows everyone in a village</CardTitle>
           <p className="text-sm text-muted-foreground">
             Watch how random friendships create a village network. As more connections form, 
             small isolated groups start joining together through new friendships. At a certain 

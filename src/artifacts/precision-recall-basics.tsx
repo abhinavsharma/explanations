@@ -56,13 +56,19 @@ const SpamClassifierDemo = () => {
       const tp = classified.filter(i => i.category === 'TP').length;
       const fp = classified.filter(i => i.category === 'FP').length;
       const fn = classified.filter(i => i.category === 'FN').length;
+      const tn = classified.filter(i => i.category === 'TN').length;
 
-      const precision = tp / (tp + fp) || 0;
-      const recall = tp / (tp + fn) || 0;
-      const f1 = 2 * (precision * recall) / (precision + recall) || 0;
+      // Handle edge cases better for precision and recall
+      const precision = tp === 0 && fp === 0 ? 1 : tp / (tp + fp);
+      const recall = tp === 0 && fn === 0 ? 1 : tp / (tp + fn);
+      const f1 = precision === 0 && recall === 0 ? 0 : 2 * (precision * recall) / (precision + recall);
       const am = (precision + recall) / 2;
       const gm = Math.sqrt(precision * recall);
       const hm = f1 / 2;
+
+      // Calculate ROC metrics with better edge case handling
+      const tpr = recall;
+      const fpr = tn === 0 && fp === 0 ? 0 : fp / (fp + tn);
 
       points.push({
         threshold: t,
@@ -71,7 +77,9 @@ const SpamClassifierDemo = () => {
         f1,
         am,
         gm,
-        hm
+        hm,
+        tpr,
+        fpr
       });
     }
     return points;
@@ -92,9 +100,10 @@ const SpamClassifierDemo = () => {
   const fn = classifiedEmails.filter(i => i.category === 'FN').length;
   const tn = classifiedEmails.filter(i => i.category === 'TN').length;
 
-  const precision = tp / (tp + fp) || 0;
-  const recall = tp / (tp + fn) || 0;
-  const f1 = 2 * (precision * recall) / (precision + recall) || 0;
+  // Calculate metrics with edge case handling
+  const precision = tp === 0 && fp === 0 ? 1 : tp / (tp + fp);
+  const recall = tp === 0 && fn === 0 ? 1 : tp / (tp + fn);
+  const f1 = precision === 0 && recall === 0 ? 0 : 2 * (precision * recall) / (precision + recall);
   
   // Calculate additional metrics
   const am = (precision + recall) / 2;
@@ -346,7 +355,7 @@ const SpamClassifierDemo = () => {
         <div className="space-y-4">
           {/* Precision-Recall Scatter Plot */}
           <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
-            <div className="text-lg font-medium mb-4">Precision vs Recall Trade-off</div>
+            <h3 className="mb-4">Precision vs Recall Trade-off</h3>
             <ChartContainer className="h-[400px]" config={{}}>
               <RechartsPrimitive.ScatterChart margin={{ top: 20, right: 20, bottom: 60, left: 60 }}>
                 <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />
@@ -373,7 +382,14 @@ const SpamClassifierDemo = () => {
                 <RechartsPrimitive.Scatter
                   data={thresholdPoints}
                   fill="#8884d8"
-                />
+                >
+                  <RechartsPrimitive.LabelList
+                    dataKey="threshold"
+                    position="right"
+                    formatter={(value) => value.toFixed(1)}
+                    style={{ fontSize: '11px' }}
+                  />
+                </RechartsPrimitive.Scatter>
                 <RechartsPrimitive.Scatter
                   data={[thresholdPoints.find(p => p.threshold === threshold)]}
                   fill="#ff0000"
@@ -385,7 +401,7 @@ const SpamClassifierDemo = () => {
 
           {/* Metrics Over Threshold Plot */}
           <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
-            <div className="text-lg font-medium mb-4">Metrics vs Threshold</div>
+            <h3 className="mb-4">Metrics vs Threshold</h3>
             <ChartContainer className="h-[400px]" config={{}}>
               <RechartsPrimitive.LineChart data={thresholdPoints} margin={{ top: 20, right: 20, bottom: 60, left: 60 }}>
                 <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />
@@ -411,6 +427,86 @@ const SpamClassifierDemo = () => {
                 <RechartsPrimitive.Line type="monotone" dataKey="gm" stroke="#eab308" strokeWidth={2} name="GM" />
                 <RechartsPrimitive.ReferenceLine x={threshold} stroke="red" strokeDasharray="3 3" />
               </RechartsPrimitive.LineChart>
+            </ChartContainer>
+          </div>
+
+          {/* ROC Curve Plot */}
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+            <h3 className="mb-4">ROC Curve</h3>
+            <div className="text-sm space-y-2 bg-gray-50 dark:bg-gray-900 p-4 rounded-lg mb-4">
+              <div className="font-medium">Understanding the ROC Curve:</div>
+              <p>The ROC curve shows the relationship between:</p>
+              <ul className="list-disc ml-6 space-y-1">
+                <li><strong>True Positive Rate (TPR)</strong> or Sensitivity: Same as Recall - how many actual spam emails we catch</li>
+                <li><strong>False Positive Rate (FPR)</strong> or 1-Specificity: How many legitimate emails we incorrectly mark as spam</li>
+                <li>The diagonal line represents random guessing</li>
+                <li>Better performance is shown by curves closer to the top-left corner</li>
+                <li>The area under the curve (AUC) measures overall classifier performance:
+                  <ul className="ml-4 mt-1">
+                    <li>AUC = 1.0: Perfect classification</li>
+                    <li>AUC = 0.5: No better than random guessing</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <ChartContainer className="h-[400px]" config={{}}>
+              <RechartsPrimitive.ScatterChart margin={{ top: 20, right: 20, bottom: 60, left: 60 }}>
+                <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />
+                <RechartsPrimitive.XAxis 
+                  type="number" 
+                  dataKey="fpr" 
+                  name="False Positive Rate" 
+                  domain={[0, 1]}
+                  tickFormatter={(value) => `${(value * 100).toFixed(0)}%`}
+                  label={{ value: "False Positive Rate", position: "bottom", offset: 40 }}
+                />
+                <RechartsPrimitive.YAxis 
+                  type="number" 
+                  dataKey="tpr" 
+                  name="True Positive Rate" 
+                  domain={[0, 1]}
+                  tickFormatter={(value) => `${(value * 100).toFixed(0)}%`}
+                  label={{ value: "True Positive Rate", angle: -90, position: "left", offset: 40 }}
+                />
+                <RechartsPrimitive.Tooltip 
+                  formatter={(value) => `${(Number(value) * 100).toFixed(1)}%`}
+                  labelFormatter={(_, payload) => `Threshold: ${payload[0]?.payload.threshold.toFixed(1)}`}
+                />
+                {/* Random guess line */}
+                <RechartsPrimitive.Line
+                  data={[{ fpr: 0, tpr: 0 }, { fpr: 1, tpr: 1 }]}
+                  dataKey="tpr"
+                  stroke="#666666"
+                  strokeDasharray="3 3"
+                  type="linear"
+                  dot={false}
+                />
+                {/* Add a line to connect ROC points */}
+                <RechartsPrimitive.Line
+                  data={thresholdPoints.sort((a, b) => a.fpr - b.fpr)}
+                  type="monotone"
+                  dataKey="tpr"
+                  stroke="#8884d8"
+                  strokeWidth={2}
+                  dot={false}
+                />
+                <RechartsPrimitive.Scatter
+                  data={thresholdPoints}
+                  fill="#8884d8"
+                >
+                  <RechartsPrimitive.LabelList
+                    dataKey="threshold"
+                    position="right"
+                    formatter={(value) => value.toFixed(1)}
+                    style={{ fontSize: '11px' }}
+                  />
+                </RechartsPrimitive.Scatter>
+                <RechartsPrimitive.Scatter
+                  data={[thresholdPoints.find(p => p.threshold === threshold)]}
+                  fill="#ff0000"
+                  r={8}
+                />
+              </RechartsPrimitive.ScatterChart>
             </ChartContainer>
           </div>
         </div>

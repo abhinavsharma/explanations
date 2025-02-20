@@ -44,31 +44,35 @@ const EntropyComponentsExplorer = () => {
   const totalEntropy = entropyData.reduce((sum, d) => sum + d.contribution, 0);
 
   return (
-    <div className="h-[1200px] w-full">
+        <div className="h-[1200px] w-full">
+            <div className="w-full bg-yellow-50 border-y border-yellow-200 px-4 py-2 text-yellow-800 text-sm">
+            🚧 Work in Progress
+            </div>
         <Card>
         <CardHeader>
             <CardTitle>Understanding Entropy Components</CardTitle>
         </CardHeader>
         <CardContent>
             <div className="space-y-6">
-            <div className="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-lg">
+            <div className="">
                 <p className="text-sm mb-4 text-slate-800 dark:text-slate-200">
                 Entropy H(P) = -Σ P(x) * log₂(P(x)) is built up from two components:
-                1. The probability P(x) of each outcome
-                2. The negative logarithm -log₂(P(x)), which measures "surprise"
-                
-                The total entropy is the sum of their products for each outcome.
-                High surprise (low probability) events contribute more per occurrence,
-                but happen less often. Low surprise (high probability) events contribute
-                less per occurrence, but happen more often.
                 </p>
+                <ul className="list-disc pl-8 mb-4 text-slate-800 dark:text-slate-200">
+                    <li>The probability P(x) of each outcome</li>
+                    <li>The negative logarithm -log₂(P(x)), which measures "surprise"</li>
+                </ul>
             </div>
 
             <div>
                 <h3 className="font-semibold mb-4 text-slate-800 dark:text-slate-100">The Negative Log Function</h3>
-                <p className="text-sm mb-2 text-slate-700 dark:text-slate-300">
-                This shows how -log₂(p) approaches infinity as p→0 and equals 0 when p=1. The product p * -log₂(p) creates a curve that peaks at p = 1/e ≈ 0.368, demonstrating why spreading probability across multiple outcomes maximizes entropy.
-                This captures the intuition that rare events are more "surprising".
+                <p>
+                -log₂(p) approaches infinity as p→0 and equals 0 when p=1. 
+                
+                </p>
+                <p className="">
+                    The product p * -log₂(p) creates a curve that peaks at p = 1/e ≈ 0.368, demonstrating why spreading probability across multiple outcomes maximizes entropy.
+                    This captures the intuition that rare events are more "surprising".
                 </p>
                 <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">

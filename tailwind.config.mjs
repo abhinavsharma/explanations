@@ -21,7 +21,7 @@ export default {
     },
     extend: {
       fontSize: {
-        base: '2rem', // 18px
+        base: '1.125rem', // 18px
       },
       fontFamily: {
         sans: ['Whizband', 'sans'],

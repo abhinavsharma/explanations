@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, ReferenceLine, Label } from 'recharts';
+import { ArtifactStatus } from '@/components/artifact-wrapper';
+
+export const artifactStatus = ArtifactStatus.UNPUBLISHED;
 
 const EntropyComponentsExplorer = () => {
   const [distribution, setDistribution] = useState([0.2, 0.2, 0.2, 0.2, 0.2]);
@@ -44,10 +47,7 @@ const EntropyComponentsExplorer = () => {
   const totalEntropy = entropyData.reduce((sum, d) => sum + d.contribution, 0);
 
   return (
-        <div className="h-[1200px] w-full">
-            <div className="w-full bg-yellow-50 border-y border-yellow-200 px-4 py-2 text-yellow-800 text-sm">
-            🚧 Work in Progress
-            </div>
+    <div className="h-[1200px] w-full">
         <Card>
         <CardHeader>
             <CardTitle>Understanding Entropy Components</CardTitle>

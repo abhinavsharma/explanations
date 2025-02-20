@@ -5,6 +5,9 @@ import { Square, ChevronDown, ChevronUp, Lock, Play } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useTheme } from '../components/theme-provider';
+import { ArtifactStatus } from '@/components/artifact-wrapper';
+
+export const artifactStatus = ArtifactStatus.PUBLISHED;
 
 const MontyHallGame = () => {
   // Game state

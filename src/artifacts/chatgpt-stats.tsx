@@ -5,6 +5,9 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { cn } from '@/lib/utils';
 import CountMetricTimeSeries from '@/components/count-metric-time-series';
 import ConversationsGroupedTable from '@/components/conversations-grouped-table';
+import { ArtifactStatus } from '@/components/artifact-wrapper';
+
+export const artifactStatus = ArtifactStatus.UNPUBLISHED;
 
 interface ChatGPTMessage {
   id: string;
@@ -338,9 +341,6 @@ const ChatgptStats = () => {
 
   return (
     <div className="w-full max-w-6xl space-y-6">
-      <div className="w-full bg-yellow-50 border-y border-yellow-200 px-4 py-2 text-yellow-800 text-sm">
-        🚧 Work in Progress
-      </div>
       <Card className="border-0 shadow-none">
         <CardHeader>
           <CardTitle>Analyze your ChatGPT usage, 100% locally</CardTitle>

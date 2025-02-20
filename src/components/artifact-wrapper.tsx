@@ -4,7 +4,18 @@ import { Button } from '@/components/ui/button';
 import { Home } from 'lucide-react';
 import React from 'react';
 
-export default function ArtifactWrapper({ children }: { children: React.ReactNode }) {
+export enum ArtifactStatus {
+  UNLISTED = 'unlisted',
+  UNPUBLISHED = 'unpublished',
+  PUBLISHED = 'published'
+}
+
+interface ArtifactWrapperProps {
+  children: React.ReactNode;
+  status?: ArtifactStatus;
+}
+
+export default function ArtifactWrapper({ children, status = ArtifactStatus.UNLISTED }: ArtifactWrapperProps) {
   // If the child is already a Card component, we just need to wrap it with our container
   // Otherwise, we need to wrap it with a Card
   const childrenArray = React.Children.toArray(children);
@@ -12,6 +23,8 @@ export default function ArtifactWrapper({ children }: { children: React.ReactNod
     React.isValidElement(child) && 
     child.type === Card
   );
+
+  const showBanner = status === ArtifactStatus.UNPUBLISHED;
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300 p-4">
@@ -22,8 +35,22 @@ export default function ArtifactWrapper({ children }: { children: React.ReactNod
             <span className="font-['Whizbang']" style={{ marginTop: '12px' }}>Home</span>
           </Button>
         </Link>
-        {hasCard ? children : (
+        {hasCard ? (
+          <>
+            {showBanner && (
+              <div className="w-full bg-yellow-50 border-y border-yellow-200 px-4 py-2 text-yellow-800 text-sm mb-4">
+                🚧 Work in Progress
+              </div>
+            )}
+            {children}
+          </>
+        ) : (
           <Card>
+            {showBanner && (
+              <div className="w-full bg-yellow-50 border-y border-yellow-200 px-4 py-2 text-yellow-800 text-sm">
+                🚧 Work in Progress
+              </div>
+            )}
             {children}
           </Card>
         )}

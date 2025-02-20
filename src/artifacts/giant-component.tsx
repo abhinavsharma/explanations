@@ -4,6 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import _ from 'lodash';
 import { Play, Square } from "lucide-react";
+import { ArtifactStatus } from '@/components/artifact-wrapper';
+
+export const artifactStatus = ArtifactStatus.PUBLISHED;
 
 const VillageNetwork = () => {
   const villagerNames = [

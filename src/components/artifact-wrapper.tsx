@@ -24,7 +24,7 @@ export default function ArtifactWrapper({ children, status = ArtifactStatus.UNLI
     child.type === Card
   );
 
-  const showBanner = status === ArtifactStatus.UNPUBLISHED;
+  const showBanner = status !== ArtifactStatus.PUBLISHED;
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300 p-4">
@@ -39,7 +39,7 @@ export default function ArtifactWrapper({ children, status = ArtifactStatus.UNLI
           <>
             {showBanner && (
               <div className="w-full bg-yellow-50 border-y border-yellow-200 px-4 py-2 text-yellow-800 text-sm mb-4">
-                🚧 Work in Progress
+                🚧 Work in Progress {status === ArtifactStatus.UNLISTED && '(Unlisted)'}
               </div>
             )}
             {children}
@@ -48,7 +48,7 @@ export default function ArtifactWrapper({ children, status = ArtifactStatus.UNLI
           <Card>
             {showBanner && (
               <div className="w-full bg-yellow-50 border-y border-yellow-200 px-4 py-2 text-yellow-800 text-sm">
-                🚧 Work in Progress
+                🚧 Work in Progress {status === ArtifactStatus.UNLISTED && '(Unlisted)'}
               </div>
             )}
             {children}

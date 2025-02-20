@@ -24,7 +24,7 @@ const ArtifactsIndex = () => {
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300 px-8 py-12">
       <h1 className="text-3xl mb-8 text-gray-900 dark:text-white">
-        Interactive Explanations
+        Interactive Stuff
       </h1>
       <ul className="max-w-2xl space-y-3">
         {artifacts.map((artifact) => (

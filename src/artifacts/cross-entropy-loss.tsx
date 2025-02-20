@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, ReferenceLine, Label } from 'recharts';
+import { ArtifactStatus } from '@/components/artifact-wrapper';
 
+export const artifactStatus = ArtifactStatus.UNPUBLISHED;
 const CrossEntropyExplorer = () => {
   // True distribution (one-hot by default)
   const [trueDistribution, setTrueDistribution] = useState([1, 0, 0]);

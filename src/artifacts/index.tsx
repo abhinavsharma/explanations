@@ -38,9 +38,6 @@ const ArtifactsIndex = () => {
                 .split('-')
                 .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                 .join(' ')}
-              {artifact.status === ArtifactStatus.UNPUBLISHED && (
-                <span className="ml-2 text-yellow-600 dark:text-yellow-500 text-sm">🚧</span>
-              )}
             </Link>
           </li>
         ))}

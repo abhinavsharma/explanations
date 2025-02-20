@@ -4,6 +4,9 @@ import { ThemeProvider } from './theme-provider';
 import { ThemeToggle } from './theme-toggle';
 import ArtifactWrapper, { ArtifactStatus } from './artifact-wrapper';
 
+// Import all artifact modules
+const artifactModules = import.meta.glob('../artifacts/*.tsx', { eager: true });
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const isArtifactRoute = location.pathname !== '/';
@@ -13,13 +16,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     if (!isArtifactRoute) return ArtifactStatus.UNLISTED;
     
     const path = location.pathname.slice(1); // Remove leading slash
-    try {
-      // Dynamic import the module to get its status
-      const mod = require(`../artifacts/${path}.tsx`);
-      return mod.artifactStatus || ArtifactStatus.UNLISTED;
-    } catch {
-      return ArtifactStatus.UNLISTED;
-    }
+    const module = artifactModules[`../artifacts/${path}.tsx`] as any;
+    return module?.artifactStatus || ArtifactStatus.UNLISTED;
   };
 
   return (

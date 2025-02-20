@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Play, Pause, RotateCcw } from 'lucide-react';
 import { ArtifactStatus } from '@/components/artifact-wrapper';
 
-export const artifactStatus = ArtifactStatus.UNPUBLISHED;
+export const artifactStatus = ArtifactStatus.PUBLISHED;
 
 const GaltonTable = () => {
   const LEVELS = 12;  // Number of decision levels
@@ -104,15 +104,9 @@ const COLORS = [
     <Card>
       <CardHeader>
         <CardTitle>The Normal Distribution Emerges</CardTitle>
-        <div className="mt-4 space-y-4 text-muted-foreground">
+        <div className="mt-4 space-y-4">
           <p>
-            Watch how a normal distribution naturally emerges from simple random choices. Each ball has an equal (50/50) chance 
-            of going left or right at each level. This is similar to flipping a coin multiple times - the more flips, the more 
-            likely you are to get close to an equal number of heads and tails.
-          </p>
-          <p>
-            The middle path represents getting an equal number of left/right choices, which is most likely. 
-            Extreme paths (all left or all right) are much less likely, creating the characteristic bell curve shape.
+            Each ball has an equal (50/50) chance of going left or right at each level.
           </p>
         </div>
         <div className="flex gap-4 mt-4">

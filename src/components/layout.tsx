@@ -4,8 +4,8 @@ import { ThemeProvider } from './theme-provider';
 import { ThemeToggle } from './theme-toggle';
 import ArtifactWrapper, { ArtifactStatus } from './artifact-wrapper';
 
-// Import all artifact modules
-const artifactModules = import.meta.glob('../artifacts/*.tsx', { eager: true });
+// Import all artifact modules - use relative path from this file to artifacts
+const artifactModules = import.meta.glob('/src/artifacts/*.tsx', { eager: true });
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -18,7 +18,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     // Find the module by matching the URL path to the file name
     const path = location.pathname.slice(1); // Remove leading slash
     const moduleEntry = Object.entries(artifactModules).find(([modulePath]) => {
-      const fileName = modulePath.split('/').pop()?.replace('.tsx', '');
+      // Use absolute path matching from /src/artifacts/
+      const fileName = modulePath.match(/\/src\/artifacts\/(.+)\.tsx$/)?.[1];
       return fileName === path;
     });
     

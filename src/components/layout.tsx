@@ -15,9 +15,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const getArtifactStatus = () => {
     if (!isArtifactRoute) return ArtifactStatus.UNLISTED;
     
+    // Find the module by matching the URL path to the file name
     const path = location.pathname.slice(1); // Remove leading slash
-    const module = artifactModules[`../artifacts/${path}.tsx`] as any;
-    return module?.artifactStatus || ArtifactStatus.UNLISTED;
+    const moduleEntry = Object.entries(artifactModules).find(([modulePath]) => {
+      const fileName = modulePath.split('/').pop()?.replace('.tsx', '');
+      return fileName === path;
+    });
+    
+    return moduleEntry ? (moduleEntry[1] as any).artifactStatus || ArtifactStatus.UNLISTED : ArtifactStatus.UNLISTED;
   };
 
   return (

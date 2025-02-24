@@ -38,7 +38,7 @@ export default function ArtifactWrapper({ children, status = ArtifactStatus.UNLI
         {hasCard ? (
           <>
             {showBanner && (
-              <div className="w-full bg-yellow-50 dark:bg-yellow-900/30 border-y border-yellow-200 dark:border-yellow-900/50 px-4 py-2 text-yellow-800 dark:text-yellow-200 text-sm mb-4">
+              <div className="w-full bg-yellow-50 dark:bg-yellow-900/30 border-y border-yellow-200 dark:border-yellow-900/50 px-4 py-2 text-yellow-800 dark:text-yellow-200 mb-4">
                 🚧 Work in Progress {status === ArtifactStatus.UNLISTED && '(Unlisted)'}
               </div>
             )}

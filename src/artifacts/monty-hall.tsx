@@ -188,24 +188,24 @@ const MontyHallGame = () => {
               <div className="bg-blue-50 dark:bg-blue-950/40 p-4 rounded-lg">
                 <p className="font-medium mb-2 text-slate-800 dark:text-slate-100">Case 1: Initially Pick Car (1/3 chance)</p>
                 <div className="grid grid-cols-3 gap-2 mb-2">
-                  <div className="bg-blue-100 dark:bg-blue-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Car 🚗<br/><span className="text-sm">(Your Pick)</span></div>
-                  <div className="bg-red-100 dark:bg-red-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="text-sm">(Revealed)</span></div>
-                  <div className="bg-green-100 dark:bg-green-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="text-sm">(Switch Here)</span></div>
+                  <div className="bg-blue-100 dark:bg-blue-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Car 🚗<br/><span className="">(Your Pick)</span></div>
+                  <div className="bg-red-100 dark:bg-red-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="">(Revealed)</span></div>
+                  <div className="bg-green-100 dark:bg-green-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="">(Switch Here)</span></div>
                 </div>
-                <p className="text-sm text-slate-600 dark:text-slate-400">Result: You LOSE by switching away from car</p>
+                <p className="text-slate-600 dark:text-slate-400">Result: You LOSE by switching away from car</p>
               </div>
               
               <div className="bg-blue-50 dark:bg-blue-950/40 p-4 rounded-lg">
                 <p className="font-medium mb-2 text-slate-800 dark:text-slate-100">Case 2: Initially Pick Goat (2/3 chance)</p>
                 <div className="grid grid-cols-3 gap-2 mb-2">
-                  <div className="bg-blue-100 dark:bg-blue-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="text-sm">(Your Pick)</span></div>
-                  <div className="bg-red-100 dark:bg-red-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="text-sm">(Revealed)</span></div>
-                  <div className="bg-green-100 dark:bg-green-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Car 🚗<br/><span className="text-sm">(Switch Here)</span></div>
+                  <div className="bg-blue-100 dark:bg-blue-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="">(Your Pick)</span></div>
+                  <div className="bg-red-100 dark:bg-red-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="">(Revealed)</span></div>
+                  <div className="bg-green-100 dark:bg-green-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Car 🚗<br/><span className="">(Switch Here)</span></div>
                 </div>
-                <p className="text-sm text-slate-600 dark:text-slate-400">Result: You WIN by switching to car</p>
+                <p className="text-slate-600 dark:text-slate-400">Result: You WIN by switching to car</p>
               </div>
               
-              <div className="text-sm font-medium text-slate-700 dark:text-slate-300">
+              <div className="font-medium text-slate-700 dark:text-slate-300">
                 Switching Strategy Wins: 2/3 of the time
                 <br/>
                 <span className="text-slate-600 dark:text-slate-400">(You win whenever you start with a goat)</span>
@@ -219,24 +219,24 @@ const MontyHallGame = () => {
               <div className="bg-blue-50 dark:bg-blue-950/40 p-4 rounded-lg">
                 <p className="font-medium mb-2 text-slate-800 dark:text-slate-100">Case 1: Initially Pick Car (1/3 chance)</p>
                 <div className="grid grid-cols-3 gap-2 mb-2">
-                  <div className="bg-blue-100 dark:bg-blue-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Car 🚗<br/><span className="text-sm">(Stay Here)</span></div>
-                  <div className="bg-red-100 dark:bg-red-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="text-sm">(Revealed)</span></div>
+                  <div className="bg-blue-100 dark:bg-blue-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Car 🚗<br/><span className="">(Stay Here)</span></div>
+                  <div className="bg-red-100 dark:bg-red-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="">(Revealed)</span></div>
                   <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐</div>
                 </div>
-                <p className="text-sm text-slate-600 dark:text-slate-400">Result: You WIN by staying with car</p>
+                <p className="text-slate-600 dark:text-slate-400">Result: You WIN by staying with car</p>
               </div>
               
               <div className="bg-blue-50 dark:bg-blue-950/40 p-4 rounded-lg">
                 <p className="font-medium mb-2 text-slate-800 dark:text-slate-100">Case 2: Initially Pick Goat (2/3 chance)</p>
                 <div className="grid grid-cols-3 gap-2 mb-2">
-                  <div className="bg-blue-100 dark:bg-blue-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="text-sm">(Stay Here)</span></div>
-                  <div className="bg-red-100 dark:bg-red-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="text-sm">(Revealed)</span></div>
+                  <div className="bg-blue-100 dark:bg-blue-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="">(Stay Here)</span></div>
+                  <div className="bg-red-100 dark:bg-red-900/50 p-2 rounded text-center text-slate-800 dark:text-slate-100">Goat 🐐<br/><span className="">(Revealed)</span></div>
                   <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded text-center text-slate-800 dark:text-slate-100">Car 🚗</div>
                 </div>
-                <p className="text-sm text-slate-600 dark:text-slate-400">Result: You LOSE by staying with goat</p>
+                <p className="text-slate-600 dark:text-slate-400">Result: You LOSE by staying with goat</p>
               </div>
               
-              <div className="text-sm font-medium text-slate-700 dark:text-slate-300">
+              <div className="font-medium text-slate-700 dark:text-slate-300">
                 Staying Strategy Wins: 1/3 of the time
                 <br/>
                 <span className="text-slate-600 dark:text-slate-400">(You win only when you start with the car)</span>
@@ -429,7 +429,7 @@ const MontyHallGame = () => {
                 </Button>
               </div>
             </div>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
+            <p className="text-slate-500 dark:text-slate-400">
               Watch the probabilities converge by automatically playing multiple rounds with a consistent strategy.
             </p>
           </div>
@@ -446,7 +446,7 @@ const MontyHallGame = () => {
               value={((stats.switched.wins + stats.stayed.wins) / totalGames) * 100 || 0}
               className="h-2"
             />
-            <p className="text-sm text-slate-500 dark:text-slate-400">
+            <p className="text-slate-500 dark:text-slate-400">
               {stats.switched.wins + stats.stayed.wins} wins out of {totalGames} games played
               {!canShowExplanation && (
                 <span className="ml-2">
@@ -468,7 +468,7 @@ const MontyHallGame = () => {
                       {!canShowExplanation && <Lock className="w-3 h-3" />}
                     </div>
                     {canShowExplanation && (
-                      <div className="text-sm text-slate-500 dark:text-slate-400">(Expected: 67%)</div>
+                      <div className="text-slate-500 dark:text-slate-400">(Expected: 67%)</div>
                     )}
                   </div>
                 </div>
@@ -489,7 +489,7 @@ const MontyHallGame = () => {
                       {!canShowExplanation && <Lock className="w-3 h-3" />}
                     </div>
                     {canShowExplanation && (
-                      <div className="text-sm text-slate-500 dark:text-slate-400">(Expected: 33%)</div>
+                      <div className="text-slate-500 dark:text-slate-400">(Expected: 33%)</div>
                     )}
                   </div>
                 </div>
@@ -502,7 +502,7 @@ const MontyHallGame = () => {
             </div>
           </div>
 
-          <p className="text-sm text-slate-600 dark:text-slate-400 italic">
+          <p className="text-slate-600 dark:text-slate-400 italic">
             {canShowExplanation 
               ? "Watch how your win rates converge to the expected probabilities as you play more games!"
               : `Play ${10 - totalGames} more ${10 - totalGames === 1 ? 'game' : 'games'} to reveal the expected win rates.`
@@ -522,7 +522,7 @@ const MontyHallGame = () => {
                 {!canShowExplanation ? (
                   <>
                     <Lock className="w-4 h-4" />
-                    <span className="text-sm text-slate-500 dark:text-slate-400 ml-2">
+                    <span className="text-slate-500 dark:text-slate-400 ml-2">
                       Play {10 - totalGames} more {10 - totalGames === 1 ? 'game' : 'games'} to unlock
                     </span>
                   </>

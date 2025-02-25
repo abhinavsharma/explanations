@@ -550,6 +550,103 @@ const FittsLawDemo = () => {
     );
   };
 
+  const renderTimeDistanceGraph = () => {
+    const hasEnoughData = results.length >= 1;
+
+    if (!hasEnoughData) {
+      return (
+        <div className="mt-6">
+          <p className="text-gray-600 dark:text-gray-400">Complete more trials to see your results</p>
+        </div>
+      );
+    }
+
+    return (
+      <div className="mt-6">
+        <h3 className="text-xl font-bold text-left text-gray-900 dark:text-gray-100">Time vs Distance</h3>
+        <div className="h-64 w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <ScatterChart
+              margin={{ top: 20, right: 20, bottom: 20, left: 40 }}
+              className="dark:text-gray-100"
+            >
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--grid-color, #666)" />
+              <XAxis 
+                type="number" 
+                dataKey="distance" 
+                name="Distance" 
+                label={{ value: 'Distance', position: 'bottom', fill: 'var(--text-color, #333)' }}
+                domain={[0, 'dataMax + 50']}
+                stroke="var(--text-color, #333)"
+              />
+              <YAxis 
+                type="number" 
+                dataKey="time" 
+                name="Movement Time" 
+                label={{ value: 'Movement Time (ms)', angle: -90, position: 'left', fill: 'var(--text-color, #333)' }}
+                domain={[0, 'dataMax + 200']}
+                stroke="var(--text-color, #333)"
+              />
+              <Tooltip 
+                contentStyle={{
+                  backgroundColor: 'var(--tooltip-bg, #fff)',
+                  border: '1px solid var(--border-color, #ccc)',
+                  color: 'var(--text-color, #333)'
+                }}
+                formatter={(value: number, name) => {
+                  return name === 'time' 
+                    ? [Math.round(value) + ' ms', 'Movement Time'] 
+                    : [Math.round(value) + ' px', 'Distance'];
+                }}
+              />
+              <Scatter 
+                name="Movement Time" 
+                data={results} 
+                fill="var(--scatter-color, #3498db)" 
+              />
+              <Legend 
+                layout="horizontal" 
+                verticalAlign="top" 
+                align="center" 
+                wrapperStyle={{ paddingLeft: 30 }}
+              />
+            </ScatterChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    );
+  };
+
+  const renderDataTable = () => {
+    if (results.length === 0) return null;
+
+    return (
+      <div className="mt-6">
+        <h3 className="text-xl font-bold text-left text-gray-900 dark:text-gray-100">Data Points</h3>
+        <table className="min-w-full bg-white dark:bg-gray-800">
+          <thead>
+            <tr>
+              <th className="py-2 px-4 border-b">Trial</th>
+              <th className="py-2 px-4 border-b">Distance</th>
+              <th className="py-2 px-4 border-b">Size</th>
+              <th className="py-2 px-4 border-b">Time (ms)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {results.map((result, index) => (
+              <tr key={index} className="hover:bg-gray-100 dark:hover:bg-gray-700">
+                <td className="py-2 px-4 border-b">{result.trial}</td>
+                <td className="py-2 px-4 border-b">{result.distance.toFixed(2)}</td>
+                <td className="py-2 px-4 border-b">{result.size}</td>
+                <td className="py-2 px-4 border-b">{result.time.toFixed(2)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
   const renderFittsLawInfo = () => {
     const analysis = calculateFittsLaw();
     const modelParams = analysis.regression || { a: 0, b: 0 };
@@ -595,10 +692,12 @@ const FittsLawDemo = () => {
         
         <div className="w-full">
           {renderResultGraph()}
+          {renderTimeDistanceGraph()}
+          {renderDataTable()}
         </div>
       </div>
       
-      {renderFittsLawInfo()}
+      
     </div>
   );
 };

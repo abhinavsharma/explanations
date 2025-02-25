@@ -1,6 +1,8 @@
 import { ArtifactStatus } from '@/components/artifact-wrapper';
 import React, { useState, useEffect, useRef } from 'react';
 import { ScatterChart, Scatter, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { TooltipProps } from 'recharts';
+import { ValueType, NameType } from 'recharts/types/component/DefaultTooltipContent';
 
 interface System1Category {
   name: string;
@@ -444,18 +446,16 @@ const HicksLawDemo = () => {
   }, []);
   
   // Custom tooltip component
-  const CustomTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length) {
-      const data = payload[0].payload;
-      return (
-        <div className="bg-white p-2 border border-gray-300 rounded shadow-sm">
-          <p><strong>Options:</strong> {data.options}</p>
-          <p><strong>Time:</strong> {data.time ? data.time.toFixed(2) : data.y.toFixed(2)} seconds</p>
-          {data.choice && <p><strong>Selected:</strong> {data.choice} ({data.category})</p>}
-        </div>
-      );
-    }
-    return null;
+  const CustomTooltip = ({ active, payload }: TooltipProps<ValueType, NameType>) => {
+    if (!active || !payload || !payload[0]) return null;
+    const data = payload[0].payload;
+    return (
+      <div className="bg-white p-2 border border-gray-300 rounded shadow-sm">
+        <p><strong>Options:</strong> {data.options}</p>
+        <p><strong>Time:</strong> {data.time ? data.time.toFixed(2) : data.y.toFixed(2)} seconds</p>
+        {data.choice && <p><strong>Selected:</strong> {data.choice} ({data.category})</p>}
+      </div>
+    );
   };
   
   // Render the component

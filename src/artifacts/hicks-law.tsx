@@ -62,6 +62,11 @@ const getHicksLawLineWithData = (data) => {
   };import React, { useState, useEffect, useRef } from 'react';
 import { ScatterChart, Scatter, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 
+interface Category {
+  name: string;
+  emojis: string[];
+}
+
 const HicksLawDemo = () => {
   // States for the app
   const [started, setStarted] = useState(false);
@@ -72,7 +77,7 @@ const HicksLawDemo = () => {
     return savedData ? JSON.parse(savedData) : [];
   });
   const [startTime, setStartTime] = useState(null);
-  const [category, setCategory] = useState({});
+  const [category, setCategory] = useState<Category>({ name: '', emojis: [] });
   const [bestFitLine, setBestFitLine] = useState([]);
   
   // Save data to localStorage whenever it changes

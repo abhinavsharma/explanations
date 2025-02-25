@@ -311,7 +311,7 @@ const FittsLawDemo = () => {
       width: `${trial.startSize}px`,
       height: `${trial.startSize}px`,
       borderRadius: '50%',
-      position: 'absolute',
+      position: 'absolute' as const,
       left: `${trial.startX - trial.startSize/2}px`,
       top: `${trial.startY - trial.startSize/2}px`,
       backgroundColor: isHovering ? '#f1c40f' : '#3498db',
@@ -358,7 +358,7 @@ const FittsLawDemo = () => {
       width: `${trial.size}px`,
       height: `${trial.size}px`,
       borderRadius: '50%',
-      position: 'absolute',
+      position: 'absolute' as const,
       left: `${trial.targetX - trial.size/2}px`,
       top: `${trial.targetY - trial.size/2}px`,
       border: targetReached ? '2px solid #27ae60' : '2px solid #e74c3c',
@@ -515,7 +515,7 @@ const FittsLawDemo = () => {
                   border: '1px solid var(--border-color, #ccc)',
                   color: 'var(--text-color, #333)'
                 }}
-                formatter={(value, name) => {
+                formatter={(value: number, name) => {
                   return name === 'predictedTime' 
                     ? [Math.round(value) + ' ms', 'Predicted Time'] 
                     : [Math.round(value) + ' ms', 'Your Time'];

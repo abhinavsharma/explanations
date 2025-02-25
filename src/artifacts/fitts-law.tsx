@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { ArtifactStatus } from '@/components/artifact-wrapper';
+
+export const artifactStatus = ArtifactStatus.PUBLISHED;
 
 const LOCAL_STORAGE_KEY = 'fitts-law-results';
 
@@ -404,10 +407,12 @@ const FittsLawDemo = () => {
       className="w-full h-96 bg-gray-100 dark:bg-gray-800 rounded relative overflow-hidden"
       onMouseMove={handleMouseMove}
       style={{ 
-        width: '600px', 
+        width: '100%', 
+        maxWidth: '800px',
         height: '400px',
         border: '3px solid var(--border-color, #34495e)',
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+        margin: '0 auto'
       }}
     >
       {renderStartPosition()}
@@ -434,7 +439,6 @@ const FittsLawDemo = () => {
             <p className="text-xl font-bold text-gray-900 dark:text-gray-100">
               {statusText}
             </p>
-            <p className="text-gray-700 dark:text-gray-300">Trial {results.length + 1}</p>
           </div>
           <button
             onClick={() => resetTest(true)}
@@ -443,9 +447,6 @@ const FittsLawDemo = () => {
             Reset Data
           </button>
         </div>
-        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-          Your progress is automatically saved in your browser's local storage.
-        </p>
       </div>
     );
   };
@@ -557,22 +558,13 @@ const FittsLawDemo = () => {
       <div className="mt-8 p-4 bg-gray-100 dark:bg-gray-800 rounded">
         <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">About Fitts' Law</h3>
         <p className="mb-2 text-gray-700 dark:text-gray-300">
-          Fitts' Law describes how the time to acquire a target depends on the ratio between 
-          the distance to the target and the size of the target.
-        </p>
-        <p className="mb-2 text-gray-700 dark:text-gray-300">
-          In its simplest interpretation, Fitts' Law suggests that targets that are:
-        </p>
-        <ul className="list-disc pl-6 mb-3 text-gray-700 dark:text-gray-300">
-          <li><strong>Further away</strong> take longer to reach</li>
-          <li><strong>Smaller in size</strong> take longer to acquire</li>
-        </ul>
-        <p className="mb-2 text-gray-700 dark:text-gray-300">
-          The formal equation is:
+          Fitts' Law is a claim in human-computer interaction that predicts how long it takes to move to and select a target. The equation is given by:
         </p>
         <div className="p-3 bg-white dark:bg-gray-700 rounded mb-1 font-mono text-center text-gray-900 dark:text-gray-100">
           Time = a + b × log₂(Distance/Size + 1)
         </div>
+
+        <div>Try this interactive demo to see how target size and distance affect movement time. </div>
         {results.length >= 2 && (
           <div className="p-2 mb-3 text-center text-sm text-gray-700 dark:text-gray-300">
             Your model parameters: a = {modelParams.a.toFixed(1)}ms, b = {modelParams.b.toFixed(1)}ms/bit
@@ -587,16 +579,21 @@ const FittsLawDemo = () => {
   };
 
   return (
-    <div className="p-4 max-w-3xl">
-      <h2 className="text-2xl font-bold mb-4 text-left text-gray-900 dark:text-gray-100">Interactive Fitts' Law Demonstration</h2>
+    <div className="w-full p-4">
+      <h2 className="text-2xl font-bold mb-4 text-left text-gray-900 dark:text-gray-100">Fitts' Law</h2>
       
-      <div className="flex flex-col gap-6">
-        <div>
+      <p className="mb-6 text-gray-700 dark:text-gray-300">
+        Fitts' Law is a fundamental principle in human-computer interaction that predicts how long it takes to move to and select a target. Try this interactive demo to see how target size and distance affect movement time. The formal equation is given by:
+        Time = a + b × log₂(Distance/Size + 1)
+      </p>
+
+      <div className="flex flex-col gap-6 w-full">
+        <div className="w-full">
           {renderTrialStatus()}
           {renderTestArea()}
         </div>
         
-        <div>
+        <div className="w-full">
           {renderResultGraph()}
         </div>
       </div>

@@ -6,22 +6,22 @@ export const publishDate = "2026-03-16";
 import React, { useState, useEffect, useRef } from "react";
 
 const JHANA_DATA = [
-  { num: 1, name: "First Jhāna", pali: "paṭhama-jhāna", primary: "Pīti (rapture)", born: "Withdrawal from hindrances", factors: ["Vitakka","Vicāra","Pīti","Sukha","Ekaggatā"], simile: "Bathman kneading soap powder with water — saturated, moisture-laden, permeated within and without", body: "Body dissolves into luminous pīti cloud", color: "#E76F51", refinement: 1, fabrication: 7 },
-  { num: 2, name: "Second Jhāna", pali: "dutiya-jhāna", primary: "Sukha (happiness)", born: "Samādhi (composure)", factors: ["Pīti","Sukha","Ekaggatā"], simile: "A lake fed by underground spring — cool water welling up from within, suffusing the whole lake", body: "Body becomes happiness", color: "#c9a84c", refinement: 2, fabrication: 6 },
-  { num: 3, name: "Third Jhāna", pali: "tatiya-jhāna", primary: "Sukha without pīti", born: "Fading of pīti", factors: ["Sukha","Ekaggatā"], simile: "Lotuses immersed in water, permeated from root to tip with cool water, flourishing without standing up", body: "Body becomes exquisite peace", color: "#2D6A4F", refinement: 3, fabrication: 5 },
-  { num: 4, name: "Fourth Jhāna", pali: "catuttha-jhāna", primary: "Luminous stillness", born: "Abandoning happiness & pain", factors: ["Upekkhā","Ekaggatā"], simile: "A person wrapped from head to foot in white cloth — no part untouched by pure, bright awareness", body: "Pure bright awareness pervades body", color: "#457B9D", refinement: 4, fabrication: 4 },
-  { num: 5, name: "Infinite Space", pali: "ākāsānañcāyatana", primary: "Boundless space", born: "Transcending form perceptions", factors: [], simile: "—", body: "No body, no solidity — just space", color: "#6B4C8A", refinement: 5, fabrication: 3 },
-  { num: 6, name: "Infinite Consciousness", pali: "viññāṇañcāyatana", primary: "Boundless consciousness", born: "Transcending infinite space", factors: [], simile: "—", body: "Everything is awareness", color: "#3D348B", refinement: 6, fabrication: 2 },
-  { num: 7, name: "Nothingness", pali: "ākiñcaññāyatana", primary: "Nothing", born: "Transcending infinite consciousness", factors: [], simile: "—", body: "Nothing, without container", color: "#1B4965", refinement: 7, fabrication: 1 },
+  { num: 1, name: "First Jhāna", pali: "paṭhama-jhāna", primary: "Pīti (rapture)", born: "Withdrawal from hindrances", factors: ["Vitakka","Vicāra","Pīti","Sukha","Ekaggatā"], simile: "A skilled bathman kneading bath powder into a soft lump — saturated, moisture-laden, permeated within and without, yet not dripping", body: "Body becomes pīti", color: "#E76F51", refinement: 1, fabrication: 7 },
+  { num: 2, name: "Second Jhāna", pali: "dutiya-jhāna", primary: "Sukha (happiness)", born: "Samādhi (composure)", factors: ["Pīti","Sukha","Ekaggatā"], simile: "A lake fed by a spring, water welling up from within — no inflow from any direction — suffusing the whole lake with cool water", body: "Body becomes happiness", color: "#c9a84c", refinement: 2, fabrication: 6 },
+  { num: 3, name: "Third Jhāna", pali: "tatiya-jhāna", primary: "Peacefulness (sukha without pīti)", born: "Fading of pīti", factors: ["Sukha","Ekaggatā"], simile: "Lotuses born and growing in water, immersed and flourishing without standing up, permeated from roots to tips with cool water", body: "Body becomes peacefulness", color: "#2D6A4F", refinement: 3, fabrication: 5 },
+  { num: 4, name: "Fourth Jhāna", pali: "catuttha-jhāna", primary: "Luminous stillness", born: "Abandoning pleasure & pain", factors: ["Upekkhā","Ekaggatā"], simile: "A person sitting wrapped from head to foot in white cloth — no part of the body untouched by pure, bright awareness", body: "Pure bright awareness pervades body", color: "#457B9D", refinement: 4, fabrication: 4 },
+  { num: 5, name: "Infinite Space", pali: "ākāsānañcāyatana", primary: "Boundless space", born: "Transcending perceptions of materiality", factors: [], simile: "—", body: "No body, no solidity — just space", color: "#6B4C8A", refinement: 5, fabrication: 3 },
+  { num: 6, name: "Infinite Consciousness", pali: "viññāṇañcāyatana", primary: "Boundless consciousness", born: "Transcending infinite space", factors: [], simile: "—", body: "Consciousness knowing itself", color: "#3D348B", refinement: 6, fabrication: 2 },
+  { num: 7, name: "Nothingness", pali: "ākiñcaññāyatana", primary: "Nothingness", born: "Transcending infinite consciousness", factors: [], simile: "—", body: "Nothingness, without container", color: "#1B4965", refinement: 7, fabrication: 1 },
   { num: 8, name: "Neither Perception Nor Non-Perception", pali: "nevasaññānāsaññāyatana", primary: "Limit of perception", born: "Transcending nothingness", factors: [], simile: "—", body: "Unspeakably subtle", color: "#264653", refinement: 8, fabrication: 0.3 },
 ];
 
 const HINDRANCE_DATA = [
   { name: "Sloth & Torpor", icon: "◕", antidotes: ["Long breath (energizes)","Emphasize in-breath","More pegs (counting, repeated phrases)","Bright white light filling body","Expand awareness to room-size","Open eyes, brighten attention"], subtle: "Sinking — just slightly less bright, less sharp" },
-  { name: "Restlessness", icon: "↯", antidotes: ["Long, soothing breath","Expand awareness very wide","Allow & welcome restless sensations","Sweeping attention through body","Find a soothing breath-point on body","Insight: see restlessness as not-self"], subtle: "Drifting — slightly more tendency to follow thoughts" },
-  { name: "Sensual Desire", icon: "◉", antidotes: ["Focus on the energy, not the image","Open to arousal in energy body space","Ride it — it's close to pīti","Filter out image, keep energy","Transform into pure vitality"], subtle: "Subtle pull toward pleasant sense contacts" },
-  { name: "Ill-will / Aversion", icon: "×", antidotes: ["Switch to mettā practice","Notice how aversion feels in YOUR body","Open wider — include sounds, expand","Try directly 'turning down' aversion","Exchanging self and other practice","THE KILLER at subtle levels"], subtle: "Micro-negativity: 'not quite good enough', 'yesterday was better'" },
-  { name: "Doubt", icon: "?", antidotes: ["Formulate clear questions","Deal with questions OUTSIDE meditation","Promise the mind: 'I'll address this later'","Ask a teacher","Remember past successes"], subtle: "Semi-conscious uncertainty undermining commitment" },
+  { name: "Restlessness", icon: "↯", antidotes: ["Long, soothing breath","Expand awareness very wide","Allow & welcome restless sensations","Sweeping attention through body","Find a soothing breath-point on body"], subtle: "Drifting — slightly more tendency to follow thoughts" },
+  { name: "Sensual Desire", icon: "◉", antidotes: ["Focus on the energy, not the image","Open to arousal in energy body space","Ride it — it's close to pīti","Filter out image, keep energy","Shape it into more pure energy"], subtle: "Subtle pull toward pleasant sense contacts" },
+  { name: "Ill-will / Aversion", icon: "×", antidotes: ["Switch to mettā practice","Notice how aversion feels in YOUR body","Open wider — include sounds, expand","Try directly 'turning down' aversion","Exchanging self and other practice"], subtle: "Micro-negativity: 'not quite good enough', 'yesterday was better'" },
+  { name: "Doubt", icon: "?", antidotes: ["Formulate clear questions","Deal with questions OUTSIDE meditation","Promise the mind: 'I'll address this later'","Ask a teacher"], subtle: "Paralysing shuttling back and forth, undermining commitment" },
 ];
 
 const SASSIE = [
@@ -29,8 +29,8 @@ const SASSIE = [
   { letter: "A", word: "Absorption", type: "infinite", desc: "Get more inside it. Direction, not destination.", color: "#457B9D" },
   { letter: "S", word: "Sustain quality", type: "infinite", desc: "Fewer gaps in pīti/sukha. More continuous.", color: "#457B9D" },
   { letter: "S", word: "Sustain attention", type: "infinite", desc: "Mind stays steadier. Less micro-drifting.", color: "#457B9D" },
-  { letter: "I", word: "Intensity", type: "irrelevant", desc: "DOESN'T MATTER. Just needs to be pleasant.", color: "#9B2226" },
-  { letter: "E", word: "Enjoyment", type: "primary", desc: "THE MOST IMPORTANT. Maximize enjoyment.", color: "#c9a84c" },
+  { letter: "I", word: "Intensity", type: "modulate", desc: "Dial up or down. Play with it, not a goal.", color: "#c9a84c" },
+  { letter: "E", word: "Enjoyment", type: "primary", desc: "Seek the pleasure. Let yourself enjoy it.", color: "#c9a84c" },
 ];
 
 const NAV = [
@@ -70,6 +70,7 @@ function Table({headers,rows,T}){return <div style={{overflowX:"auto",margin:"8p
 // ═══ SVG DIAGRAMS ═══
 
 function SpectrumDiagram({T}){
+  const bodyLabels=["Body=pīti","Body=sukha","Body=peace","Body=stillness","No body","Awareness","Nothingness","Beyond"];
   return <div style={{margin:"16px 0",overflowX:"auto"}}><svg viewBox="0 0 620 260" style={{width:"100%",maxWidth:620,fontFamily:"'IBM Plex Mono',monospace"}}>
     <text x={310} y={16} textAnchor="middle" fontSize={8} fill={T.muted} letterSpacing="0.1em">THE SPECTRUM OF FABRICATION & REFINEMENT</text>
     <line x1={35} y1={210} x2={600} y2={210} stroke={T.border}/>
@@ -79,12 +80,12 @@ function SpectrumDiagram({T}){
     {JHANA_DATA.map((j,i)=>{const x=42+i*70;const h=25+(8-i)*18;return <g key={i}>
       <rect x={x} y={210-h} width={56} height={h} rx={2} fill={j.color} opacity={0.55}/>
       <text x={x+28} y={210-h-5} textAnchor="middle" fontSize={9} fill={T.text} fontWeight={600}>{j.num}</text>
-      <text x={x+28} y={210-h/2+3} textAnchor="middle" fontSize={6} fill="#fff" opacity={0.9}>{j.primary.split("(")[0].trim().substring(0,10)}</text>
+      <text x={x+28} y={210-h/2+3} textAnchor="middle" fontSize={6} fill="#fff" opacity={0.9}>{j.primary.split("(")[0].trim().substring(0,12)}</text>
     </g>})}
     <line x1={322} y1={28} x2={322} y2={208} stroke={T.border} strokeDasharray="3,3"/>
     <text x={178} y={38} textAnchor="middle" fontSize={7} fill={T.muted}>FORM JHĀNAS</text>
     <text x={460} y={38} textAnchor="middle" fontSize={7} fill={T.muted}>FORMLESS JHĀNAS</text>
-    {["Body=pīti","Body=sukha","Body=peace","Body=stillness","No body","All=awareness","Nothing","Beyond"].map((t,i)=><text key={i} x={70+i*70} y={55+i*6} fontSize={6} fill={T.teal}>{t}</text>)}
+    {bodyLabels.map((t,i)=><text key={i} x={70+i*70} y={55+i*6} fontSize={6} fill={T.teal} textAnchor="middle">{t}</text>)}
   </svg></div>;
 }
 
@@ -112,9 +113,9 @@ function FlowDiagram({T}){
 
 function ThirdLevelsDiagram({T}){
   return <div style={{margin:"16px 0",overflowX:"auto"}}><svg viewBox="0 0 460 160" style={{width:"100%",maxWidth:460,fontFamily:"'IBM Plex Mono',monospace"}}>
-    {[{y:5,l:"Level 3",d:"Realm of peace — vast, otherworldly space",c:"#2D6A4F",w:420},
+    {[{y:5,l:"Level 3",d:"A realm of peacefulness — vast, pervaded by peace",c:"#2D6A4F",w:420},
       {y:50,l:"Level 2",d:"'My' peacefulness — intimate, warm, tender",c:"#457B9D",w:310},
-      {y:95,l:"Level 1",d:"Contentment — satisfaction, thirst slaked",c:"#8B6914",w:200}
+      {y:95,l:"Level 1",d:"Contentment — satisfaction, fulfilment",c:"#8B6914",w:200}
     ].map((v,i)=><g key={i}><rect x={15} y={v.y} width={v.w} height={36} rx={3} fill={v.c} opacity={0.12} stroke={v.c}/>
       <text x={25} y={v.y+15} fontSize={8} fill={v.c} fontWeight={600}>{v.l}</text>
       <text x={25} y={v.y+28} fontSize={7} fill={T.muted}>{v.d}</text></g>)}
@@ -126,17 +127,18 @@ function ThirdLevelsDiagram({T}){
 
 function SassieVisual({T}){
   return <div style={{margin:"16px 0",overflowX:"auto"}}><svg viewBox="0 0 590 170" style={{width:"100%",maxWidth:590,fontFamily:"'IBM Plex Mono',monospace"}}>
-    {SASSIE.map((s,i)=>{const x=5+i*97;const tag=s.type==="finite"?"DONE ONCE":s.type==="irrelevant"?"IRRELEVANT":s.type==="primary"?"KEY":"INFINITE →";
+    {SASSIE.map((s,i)=>{const x=5+i*97;const tag=s.type==="finite"?"DONE ONCE":s.type==="modulate"?"PLAY WITH":s.type==="primary"?"KEY":"INFINITE →";
+    const words=s.desc.split(" ");const mid=Math.ceil(words.length/2);const line1=words.slice(0,mid).join(" ");const line2=words.slice(mid).join(" ");
     return <g key={i}><rect x={x} y={5} width={90} height={120} rx={3} fill={T.card} stroke={s.color} strokeWidth={1.5}/>
       <text x={x+45} y={35} textAnchor="middle" fontSize={26} fill={s.color} fontWeight={600}>{s.letter}</text>
       <text x={x+45} y={50} textAnchor="middle" fontSize={7} fill={T.text} fontWeight={500}>{s.word}</text>
       <rect x={x+10} y={58} width={70} height={12} rx={2} fill={s.color} opacity={0.15}/>
       <text x={x+45} y={67} textAnchor="middle" fontSize={6} fill={s.color} fontWeight={600}>{tag}</text>
-      <text x={x+45} y={86} textAnchor="middle" fontSize={6} fill={T.muted}>{s.desc.substring(0,38)}</text>
-      <text x={x+45} y={95} textAnchor="middle" fontSize={6} fill={T.muted}>{s.desc.substring(38,76)}</text>
+      <text x={x+45} y={86} textAnchor="middle" fontSize={6} fill={T.muted}>{line1}</text>
+      <text x={x+45} y={95} textAnchor="middle" fontSize={6} fill={T.muted}>{line2}</text>
     </g>})}
-    <text x={295} y={145} textAnchor="middle" fontSize={8} fill={T.accent} fontWeight={500}>Don't just sit there — do something!</text>
-    <text x={295} y={158} textAnchor="middle" fontSize={7} fill={T.muted}>S·A·S·S = the work | I = off the hook | E = the point</text>
+    <text x={295} y={145} textAnchor="middle" fontSize={8} fill={T.accent} fontWeight={500}>When a hindrance arises, do not sit there — do something about it.</text>
+    <text x={295} y={158} textAnchor="middle" fontSize={7} fill={T.muted}>S·A·S·S = the work | I = play with | E = the point</text>
   </svg></div>;
 }
 
@@ -196,22 +198,22 @@ function MapSection({T}){return <><h2 style={{fontSize:22,fontWeight:300,margin:
   <MetaGrid items={[["Source","Gaia House 2019"],["Teacher","Rob Burbea"],["Approach","Perception-based"],["Key","Fabrication"],["Jhānas","All eight"],["Core","Sensitivity + play"]]} T={T}/>
   <SpectrumDiagram T={T}/>
   <Quote T={T} source="The Buddha, SN 12:23">Jhāna depends on happiness.</Quote>
-  <H3 T={T}>Five Supports for Base Happiness</H3>
-  <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(90px,1fr))",gap:5}}>{["Appreciation","Gratitude","Beauty","Connection","Openness"].map((s,i)=><div key={i} style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:3,padding:"8px 6px",textAlign:"center",fontSize:11,color:T.text}}>{s}</div>)}</div>
-  <Warn T={T}>We do not want brittle jhānas. Openness of heart easily outweighs focus or concentration for jhāna practice.</Warn></>;}
+  <H3 T={T}>Six Supports for Base Happiness</H3>
+  <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(90px,1fr))",gap:5}}>{["Appreciation","Gratitude","Beauty","Connection","Openness","Muditā"].map((s,i)=><div key={i} style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:3,padding:"8px 6px",textAlign:"center",fontSize:11,color:T.text}}>{s}</div>)}</div>
+  <Warn T={T}>We do not want brittle jhānas, brittle samādhi. Openheartedness easily outweighs, easily out-trumps focus or concentration for jhāna practice.</Warn></>;}
 
 function FoundationsSection({T}){return <><h2 style={{fontSize:22,fontWeight:300,margin:"0 0 6px"}}>Foundations</h2>
   <H3 T={T}>Energy Body — Two Defining Qualities</H3>
-  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6,margin:"8px 0"}}>{[["INTEGRATION","The space feels like one whole — not separate parts","#2D6A4F"],["HOMOGENEITY","Awareness inhabits the space equally — IS the space","#457B9D"]].map(([t,d,c],i)=><div key={i} style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:3,padding:10}}><M style={{fontSize:9,color:c}}>{t}</M><div style={{fontSize:12,lineHeight:1.5,color:T.text,marginTop:4}}>{d}</div></div>)}</div>
+  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6,margin:"8px 0"}}>{[["INTEGRATION","The space feels like one whole — not separate parts","#2D6A4F"],["HOMOGENEITY","Awareness inhabits the whole space equally, homogenously","#457B9D"]].map(([t,d,c],i)=><div key={i} style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:3,padding:10}}><M style={{fontSize:9,color:c}}>{t}</M><div style={{fontSize:12,lineHeight:1.5,color:T.text,marginTop:4}}>{d}</div></div>)}</div>
   <H3 T={T}>Three Aspects of the Whole-Body Breath</H3>
   <Table T={T} headers={["Aspect","Notice","Guidance"]} rows={[["Expansion","Whole space expands/contracts with breath","Not just ribcage — entire energy body"],["Energization","In-breath energizes; out-breath relaxes","Feel throughout the whole space"],["Currents","Streams radiating from points","If you don't notice them, imagine them"]]}/>
   <H3 T={T}>The Master Principles</H3>
-  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:5}}>{[["Sensitivity","Notice subtle qualities"],["Responsiveness","Adjust to what's needed NOW"],["Willingness","Experiment. Opposite of inertia"]].map(([t,d],i)=><div key={i} style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:3,padding:"8px 6px",textAlign:"center"}}><div style={{fontWeight:500,fontSize:12,color:T.text}}>{t}</div><div style={{fontSize:10,color:T.muted,marginTop:3}}>{d}</div></div>)}</div>
-  <Quote T={T} source="Rob Burbea">Like improvising music or making love — sensitive, responsive, willing to try things differently.</Quote></>;}
+  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:5}}>{[["Sensitivity","Notice subtle qualities"],["Responsiveness","Adjust to what's needed NOW"],["Willingness","Experiment and play. Opposite of inertia"]].map(([t,d],i)=><div key={i} style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:3,padding:"8px 6px",textAlign:"center"}}><div style={{fontWeight:500,fontSize:12,color:T.text}}>{t}</div><div style={{fontSize:10,color:T.muted,marginTop:3}}>{d}</div></div>)}</div>
+  <Quote T={T} source="Rob Burbea">Sensitivity, responsiveness, and willingness to experiment and play.</Quote></>;}
 
 function AccessSection({T}){return <><h2 style={{fontSize:22,fontWeight:300,margin:"0 0 6px"}}>Accessing Concentration</h2>
   <H3 T={T}>Quality Over Quantity — Three Dimensions</H3>
-  <Table T={T} headers={["Dimension","Principle","Analogy"]} rows={[["Subtlety","Object subtle → attention matches down","Tasting exquisite food: delicate poise"],["Directionality","Probing vs. Receiving — constant play","Riding a bicycle: lean left, lean right"],["Intensity","Bright, energized, not squeezing","Listening for faint sound: poise, not squint"]]}/>
+  <Table T={T} headers={["Dimension","Principle","Analogy"]} rows={[["Subtlety","Object subtle → attention matches down","Quality of attention gets correspondingly subtle"],["Directionality","Probing vs. Receiving — constant play","Riding a bicycle: lean left, lean right"],["Intensity","Dial up or down the energy of attention","Like a lamp: more energy, really present, really alive"]]}/>
   <H3 T={T}>Flowchart: Base Practice → Jhāna</H3>
   <FlowDiagram T={T}/>
   <H3 T={T}>Two Approaches Compared</H3>
@@ -224,45 +226,46 @@ function JhanasSection({T}){
     <div style={{display:"flex",gap:3,flexWrap:"wrap",margin:"10px 0"}}>{JHANA_DATA.map((jj,i)=><button key={i} onClick={()=>setSel(i)} style={{background:sel===i?jj.color+"22":"transparent",border:`1px solid ${sel===i?jj.color:T.border}`,borderRadius:3,padding:"4px 10px",cursor:"pointer",fontFamily:"'IBM Plex Mono',monospace",fontSize:11,color:sel===i?T.text:T.muted}}>{jj.num}</button>)}</div>
     <MetaGrid items={[["Name",j.name],["Pāli",j.pali],["Primary",j.primary],["Born of",j.born],["Factors",j.factors.length||"—"],["Body",j.body.substring(0,28)]]} T={T}/>
     {j.simile!=="—"&&<Quote T={T} source="The Buddha">{j.simile}</Quote>}
-    {sel===0&&<><H3 T={T}>Five Factors</H3><Table T={T} headers={["Factor","Role"]} rows={[["Vitakka-vicāra","Creative investigative thinking. Like a jazz musician."],["Ekaggatā","'One thing prominent' — pīti dominates. NOT one spatial point."],["Pīti","PRIMARY. Pleasant physical sensations, non-sensual source."],["Sukha","Present but secondary. Consciousness captivated by pīti."]]}/><Warn T={T}>Pīti too intense? Open MORE. Surrender. Let it flow up and out. Contraction IS the problem.</Warn></>}
+    {sel===0&&<><H3 T={T}>Five Factors</H3><Table T={T} headers={["Factor","Role"]} rows={[["Vitakka-vicāra","Three possible readings: initial/sustained application, thinking, or directed/evaluative thinking. 'Forget about it!' — don't worry about the term."],["Ekaggatā","'One thing prominent' — pīti dominates. NOT one spatial point."],["Pīti","PRIMARY. Pleasant physical sensations, non-sensual source."],["Sukha","Present but secondary. Consciousness captivated by pīti."]]}/><Warn T={T}>Work with pīti using two modes: probing (arrow into centre) and receiving (surrendering, sunbathing). Alternate between them — this is the bathman kneading.</Warn></>}
     {sel===1&&<><H3 T={T}>Tricks: First → Second</H3><Code T={T}>{`(1) Drop a question: "What emotion am I feeling?"
 (2) Whisper "happiness" into the citta
 (3) Imagine pīti fountain — shoots up, falls as sukha
 (4) Let saturation ripen the mango naturally
 
-"Don't paint an unripe mango." — Ajaan Geoff`}</Code><p style={{fontSize:13,lineHeight:1.7,color:T.text}}>Most significant aspect: NOT quieting of thought. It's the <strong>happiness</strong>. Bathing in it transforms the being.</p></>}
+"Don't take a green, unripe mango and paint it yellow-red,
+and then call that a ripe mango." — Ajaan Geoff`}</Code><p style={{fontSize:13,lineHeight:1.7,color:T.text}}>Most significant aspect: NOT quieting of thought. It's the <strong>happiness</strong>. Bathing in it transforms the being.</p></>}
     {sel===2&&<ThirdLevelsDiagram T={T}/>}
-    {sel>=4&&<Warn T={T}>Attachment to view is the deepest danger. "Awareness is ultimate." The jhāna map IS the remedy — going beyond reveals each state as fabricated.</Warn>}
+    {sel>=4&&<Warn T={T}>Beware taking any state as "the ultimate reality" — e.g. "infinite consciousness is my true Self." These are deeper truths, but still provisional. The sequential map itself is the remedy: going beyond reveals each previous state as fabricated.</Warn>}
     <H3 T={T}>Quick Reference Table</H3>
     <div style={{overflowX:"auto"}}><table style={{width:"100%",minWidth:480,borderCollapse:"collapse",fontSize:11}}><thead><tr>{["#","Primary Nimitta","Born Of","Body Becomes"].map(h=><th key={h} style={{textAlign:"left",padding:"4px 6px",borderBottom:`1px solid ${T.border}`,fontFamily:"'IBM Plex Mono',monospace",fontSize:7,textTransform:"uppercase",color:T.muted}}>{h}</th>)}</tr></thead><tbody>{JHANA_DATA.map((jj,i)=><tr key={i} onClick={()=>setSel(i)} style={{background:i===sel?T.card:"transparent",cursor:"pointer"}}><td style={{padding:"4px 6px",borderBottom:`1px solid ${T.border}`,color:jj.color,fontWeight:600,fontFamily:"'IBM Plex Mono',monospace"}}>{jj.num}</td><td style={{padding:"4px 6px",borderBottom:`1px solid ${T.border}`,color:T.text}}>{jj.primary}</td><td style={{padding:"4px 6px",borderBottom:`1px solid ${T.border}`,color:T.muted,fontSize:10}}>{jj.born}</td><td style={{padding:"4px 6px",borderBottom:`1px solid ${T.border}`,color:T.muted,fontSize:10}}>{jj.body}</td></tr>)}</tbody></table></div></>;}
 
 function HindrancesSection({T}){
   const [sel,setSel]=useState(null);
   return <><h2 style={{fontSize:22,fontWeight:300,margin:"0 0 6px"}}>Hindrances: The Hidden Treasure</h2>
-    <p style={{fontSize:14,lineHeight:1.7,color:T.text,margin:"0 0 10px"}}>The hindrances ARE jhāna practice — the dark, rich underbelly delivering its own gold.</p>
-    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6,margin:"10px 0"}}>{[["Don't believe them","Stories fabricated by the poison itself","#9B2226"],["Don't take them personally","Arising means nothing about your capability","#6B4C8A"]].map(([t,d,c],i)=><div key={i} style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:3,padding:10}}><M style={{fontSize:9,color:c}}>WISDOM #{i+1}</M><div style={{fontSize:13,fontWeight:500,color:T.text,marginTop:3}}>{t}</div><div style={{fontSize:11,color:T.muted,marginTop:3}}>{d}</div></div>)}</div>
+    <p style={{fontSize:14,lineHeight:1.7,color:T.text,margin:"0 0 10px"}}>The hindrances are like gold dust or gold ore — really unpleasant, but something precious if you find the right relationship.</p>
+    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6,margin:"10px 0"}}>{[["Don't believe the stories they spin","Believe less and less the perceptions the hindrances generate","#9B2226"],["Don't take them personally","Arising means nothing about your capability","#6B4C8A"]].map(([t,d,c],i)=><div key={i} style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:3,padding:10}}><M style={{fontSize:9,color:c}}>WISDOM #{i+1}</M><div style={{fontSize:13,fontWeight:500,color:T.text,marginTop:3}}>{t}</div><div style={{fontSize:11,color:T.muted,marginTop:3}}>{d}</div></div>)}</div>
     <H3 T={T}>Antidotes Reference</H3>
     {HINDRANCE_DATA.map((h,i)=><div key={i} style={{marginBottom:4}}>
       <button onClick={()=>setSel(sel===i?null:i)} style={{width:"100%",display:"flex",alignItems:"center",justifyContent:"space-between",padding:"7px 10px",background:sel===i?T.surface:T.card,border:`1px solid ${T.border}`,borderRadius:sel===i?"3px 3px 0 0":3,cursor:"pointer",color:T.text,fontSize:13,fontFamily:"'IBM Plex Sans',sans-serif"}}><span><M style={{marginRight:6,fontSize:12,color:T.muted}}>{h.icon}</M>{h.name}</span><M style={{fontSize:10,color:T.muted,transform:sel===i?"rotate(45deg)":"none",transition:"transform 0.15s"}}>+</M></button>
       {sel===i&&<div style={{padding:"8px 10px",background:T.card,borderRadius:"0 0 3px 3px",border:`1px solid ${T.border}`,borderTop:"none"}}>{h.antidotes.map((a,j)=><div key={j} style={{display:"flex",gap:6,marginBottom:3,fontSize:11,color:T.muted}}><M style={{color:T.accent,fontSize:9}}>→</M>{a}</div>)}<div style={{marginTop:6,padding:"5px 8px",background:"rgba(155,34,38,0.05)",borderRadius:3,fontSize:10,color:T.muted}}><strong style={{color:T.text}}>Subtle:</strong> {h.subtle}</div></div>}
     </div>)}
-    <Warn T={T}>Aversion is the killer at subtle levels. It colours every perception, every memory. Watch for it like a hawk.</Warn></>;}
+    <Warn T={T}>Subtle aversion is a really deep, base-level defilement. It colours perception — "not quite good enough," "yesterday was better." Watch for it especially as samādhi deepens.</Warn></>;}
 
 function SassieSection({T}){return <><h2 style={{fontSize:22,fontWeight:300,margin:"0 0 6px"}}>SASSIE & Mastery</h2>
-  <p style={{fontSize:14,lineHeight:1.7,color:T.text,margin:"0 0 4px"}}>What to do inside a jhāna — and what not to worry about.</p>
+  <p style={{fontSize:14,lineHeight:1.7,color:T.text,margin:"0 0 4px"}}>What to do inside a jhāna. SASSIE is a synthesized mnemonic from the retreat's scattered teachings on these dimensions — not Burbea's own acronym.</p>
   <SassieVisual T={T}/>
   <H3 T={T}>SASSIE Detail</H3>
   <Table T={T} headers={["","Factor","Nature","Relationship"]} rows={SASSIE.map(s=>[s.letter,s.word,s.type.toUpperCase(),s.desc])}/>
   <H3 T={T}>Mastery Checklist</H3>
   <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:5}}>{["Access at will by subtle intention","Sustain for extended periods","Access in any posture","Navigate to any known jhāna","Modulate within sub-levels","Walk around in jhānic quality","Begin sittings directly","Leapfrog: skip levels"].map((m,i)=><div key={i} style={{display:"flex",gap:6,alignItems:"flex-start",background:T.card,border:`1px solid ${T.border}`,borderRadius:3,padding:"6px 8px"}}><M style={{fontSize:9,color:T.accent,marginTop:1}}>☐</M><span style={{fontSize:11,color:T.text,lineHeight:1.3}}>{m}</span></div>)}</div>
   <H3 T={T}>Effort Spectrum Lab</H3><EffortLab T={T}/>
-  <Quote T={T} source="Rob Burbea">If you come and say "I got to the eighth jhāna in three weeks" — what a shame. There's no way you'd have gotten the mastery.</Quote></>;}
+  <Quote T={T} source="Rob Burbea">Timetables of achievement are suffering. Mastery means discerning the different territories and sub-territories, and marinating in them.</Quote></>;}
 
 function MeditationsSection({T}){
   const meds=[
     {t:"Counting Within the Breath",d:"20–30m",l:"Foundation",steps:["Posture: poise between alertness and softness","Whole-body awareness — slightly larger than physical body","Longest comfortable breath: slow, smooth, subtle","Count within: in 1→9, turn, out 9→1","Hold 4 objects: breath + body + hearing + optionally seeing numbers","Shorten to 6, then 3. Brighten where attention dims","Return to 6→9. Release count, keep whole-body awareness"],n:"More pegs for attention. Can reach edge of first jhāna."},
-    {t:"Energy Body + Breath",d:"30–45m",l:"Foundation",steps:["Settle posture. Feel openness AND uprightness","Re-expand awareness (it shrinks 1000 times)","Longest breath. Notice expansion/contraction of whole space","Energization (in) / relaxation (out) throughout field","Breath at different entry points: solar plexus, heart, crown...","Key: what breath gives the nicest feeling in this space?","Don't default. Experiment endlessly"],n:"Sensitivity + responsiveness + willingness."},
-    {t:"Working with Pīti",d:"45–90m",l:"Intermediate",steps:["Base practice until pīti (steady 2-3 min, definitely pleasant)","Spread: expand awareness — pīti fills like gas in balloon","MODE 1 PROBING: Arrow → bull's-eye. Penetrate, nuzzle","MODE 2 SUNBATHING: Open, receive, surrender, soak","Alternate modes — this IS the bathman kneading soap","Too intense? Open MORE. Counterintuitive","Find the pleasure. How much can you ENJOY?"],n:"Don't underestimate how much we prevent ourselves from enjoying."},
+    {t:"Energy Body + Breath",d:"30–45m",l:"Foundation",steps:["Settle posture. Feel openness AND uprightness","Re-expand awareness (it shrinks countless times — not a problem)","Longest breath. Notice expansion/contraction of whole space","Energization (in) / relaxation (out) throughout field","Breath at different entry points: solar plexus, heart, crown...","Key: what breath gives the nicest feeling in this space?","Don't default. Experiment endlessly"],n:"Sensitivity + responsiveness + willingness."},
+    {t:"Working with Pīti",d:"45–90m",l:"Intermediate",steps:["Base practice until pīti (sustains more than a few minutes, definitely pleasant)","Spread: suffuse, saturate, drench, steep the whole body with pīti","MODE 1 PROBING: Arrow → bull's-eye. Penetrate, nuzzle into it","MODE 2 SUNBATHING: Open, receive, surrender, soak — 'Ohhhh, yeahhhh'","Alternate modes — this IS the bathman kneading soap","Where's the enjoyment? Am I letting myself enjoy it?","Find the pleasure. How much can you ENJOY?"],n:"Don't underestimate how much we prevent ourselves from enjoying."},
     {t:"Mettā for Jhāna",d:"30–45m",l:"Foundation",steps:["Whole-body awareness as background","Easy category. Phrases. Which catches a thermal?","Repeat resonant phrase. Ride the thermal","Adjust volume (loud→whisper) and density","When pīti/sukha arises: let well-being become primary","Mettā flavors it. Pīti becomes mettā. Radiating out"],n:"Mettā for jhāna ≠ mettā for cultivating mettā."},
     {t:"Walking in Jhāna",d:"20–45m",l:"Advanced",steps:["Stand at path end. Summon quality. Stand as long as needed","When stable: walk. What pace sustains the quality?","Focus on jhānic quality — NOT feet","Lost? Stop, stand, re-establish, resume"],n:"Need substantial sitting familiarity first."},
   ];
@@ -278,7 +281,7 @@ function InsightSection({T}){return <><h2 style={{fontSize:22,fontWeight:300,mar
   <div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:3,padding:12,margin:"8px 0"}}>
     <div style={{fontSize:13,lineHeight:1.7,color:T.text}}>Jhānas = spectrum of <strong>decreasing fabrication</strong>:</div>
     <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:4,margin:"8px 0"}}>{["↓ Fabrication of dukkha","↓ Fabrication of self","↓ Fabrication of body","↓ Fabrication of perception"].map((f,i)=><M key={i} style={{fontSize:10,color:T.accent}}>{f}</M>)}</div>
-    <div style={{fontSize:11,color:T.muted}}>Pīti = less fabricated body than normal. Sukha = even less. Space = body fabrication ceases.</div>
+    <div style={{fontSize:11,color:T.muted}}>Pīti = less fabricated body than normal. Sukha = even less. Through the jhānas, detailed sense of body form gradually dissolves.</div>
   </div>
   <H3 T={T}>Dependent Arising of Perception</H3>
   <p style={{fontSize:13,lineHeight:1.7,color:T.text}}>After leaving a jhāna, the world appears imbued with that quality. The deepest teaching: <strong>the world depends on how we look</strong>.</p>

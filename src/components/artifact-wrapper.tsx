@@ -33,41 +33,26 @@ export default function ArtifactWrapper({ children, status = ArtifactStatus.UNLI
   const showBanner = status !== ArtifactStatus.PUBLISHED;
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-background transition-colors duration-300 p-4">
-      <div className="w-full max-w-4xl relative">
-        <div className="absolute -top-12 left-0 right-0 flex items-center justify-between">
-          <Link to="/">
-            <Button variant="ghost" size="sm" className="gap-2 flex items-center">
-              <Home className="w-4 h-4" />
-              <span className="font-['IBM_Plex_Mono']">Home</span>
-            </Button>
-          </Link>
-          {publishDate && (
-            <span className="text-xs text-muted-foreground font-['IBM_Plex_Mono'] pr-1">
-              {formatDate(publishDate)}
-            </span>
-          )}
-        </div>
-        {hasCard ? (
-          <>
-            {showBanner && (
-              <div className="w-full bg-yellow-50 dark:bg-yellow-900/30 border-y border-yellow-200 dark:border-yellow-900/50 px-4 py-2 text-yellow-800 dark:text-yellow-200 mb-4">
-                🚧 Work in Progress {status === ArtifactStatus.UNLISTED && '(Unlisted)'}
-              </div>
-            )}
-            {children}
-          </>
-        ) : (
-          <Card>
-            {showBanner && (
-              <div className="w-full bg-yellow-50 dark:bg-yellow-900/30 border-y border-yellow-200 dark:border-yellow-900/50 px-4 py-2 text-yellow-800 dark:text-yellow-200 text-sm">
-                🚧 Work in Progress {status === ArtifactStatus.UNLISTED && '(Unlisted)'}
-              </div>
-            )}
-            {children}
-          </Card>
+    <div className="min-h-screen bg-background transition-colors duration-300">
+      <div className="flex items-center justify-between px-3 py-1 border-b border-border">
+        <Link to="/">
+          <Button variant="ghost" size="sm" className="gap-2 flex items-center">
+            <Home className="w-4 h-4" />
+            <span className="font-['IBM_Plex_Mono']">Home</span>
+          </Button>
+        </Link>
+        {publishDate && (
+          <span className="text-xs text-muted-foreground font-['IBM_Plex_Mono'] pr-1">
+            {formatDate(publishDate)}
+          </span>
         )}
       </div>
+      {showBanner && (
+        <div className="w-full bg-yellow-50 dark:bg-yellow-900/30 border-b border-yellow-200 dark:border-yellow-900/50 px-4 py-2 text-yellow-800 dark:text-yellow-200 text-sm">
+          🚧 Work in Progress {status === ArtifactStatus.UNLISTED && '(Unlisted)'}
+        </div>
+      )}
+      {hasCard ? children : <Card className="m-4">{children}</Card>}
     </div>
   );
 } 

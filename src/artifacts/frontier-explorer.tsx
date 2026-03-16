@@ -432,7 +432,7 @@ const D = ({ children, label }) => (
   </svg>
 );
 
-const Box = ({ x, y, w, h, text, sub, fill, stroke, textSize }) => (
+const Box = ({ x, y, w, h, text, sub, fill, stroke, textSize }: { x?: any, y?: any, w?: any, h?: any, text?: any, sub?: any, fill?: any, stroke?: any, textSize?: any }) => (
   <g>
     <rect x={x} y={y} width={w} height={h} rx={6} fill={fill || "var(--clr-bg-2)"} stroke={stroke || "var(--clr-border)"} strokeWidth="1.5"/>
     <text x={x + w/2} y={y + (sub ? h/2 - 4 : h/2 + 4)} textAnchor="middle" fill="var(--clr-text)" fontSize={textSize || 11} fontFamily="var(--mono)">{text}</text>
@@ -440,7 +440,7 @@ const Box = ({ x, y, w, h, text, sub, fill, stroke, textSize }) => (
   </g>
 );
 
-const Arrow = ({ x1, y1, x2, y2, dashed }) => (
+const Arrow = ({ x1, y1, x2, y2, dashed }: { x1?: any, y1?: any, x2?: any, y2?: any, dashed?: any }) => (
   <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--clr-accent)" strokeWidth="1.5" markerEnd="url(#a)" strokeDasharray={dashed ? "4,3" : undefined}/>
 );
 

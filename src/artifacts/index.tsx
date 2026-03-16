@@ -22,8 +22,8 @@ const ArtifactsIndex = () => {
     });
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300 px-8 py-12">
-      <h1 className="text-3xl mb-8 text-gray-900 dark:text-white">
+    <div className="min-h-screen bg-background transition-colors duration-300 px-8 py-12">
+      <h1 className="text-3xl mb-8 text-foreground">
         Interactive Stuff
       </h1>
       <ul className="max-w-2xl space-y-3">
@@ -31,7 +31,7 @@ const ArtifactsIndex = () => {
           <li key={artifact.path}>
             <Link 
               to={artifact.path}
-              className="block font-['IBM_Plex_Mono'] text-lg text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
+              className="block font-['IBM_Plex_Mono'] text-lg text-foreground hover:text-muted-foreground transition-colors"
             >
               {artifact.path
                 .replace('/', '')

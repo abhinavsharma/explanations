@@ -27,7 +27,7 @@ export default function ArtifactWrapper({ children, status = ArtifactStatus.UNLI
   const showBanner = status !== ArtifactStatus.PUBLISHED;
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300 p-4">
+    <div className="flex items-center justify-center min-h-screen bg-background transition-colors duration-300 p-4">
       <div className="w-full max-w-4xl relative">
         <Link to="/" className="absolute -top-12 left-0">
           <Button variant="ghost" size="sm" className="gap-2 flex items-center">

@@ -32,7 +32,7 @@ export default function ArtifactWrapper({ children, status = ArtifactStatus.UNLI
         <Link to="/" className="absolute -top-12 left-0">
           <Button variant="ghost" size="sm" className="gap-2 flex items-center">
             <Home className="w-4 h-4" />
-            <span className="font-['Whizbang']" style={{ marginTop: '12px' }}>Home</span>
+            <span className="font-['IBM_Plex_Mono']">Home</span>
           </Button>
         </Link>
         {hasCard ? (

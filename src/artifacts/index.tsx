@@ -31,7 +31,7 @@ const ArtifactsIndex = () => {
           <li key={artifact.path}>
             <Link 
               to={artifact.path}
-              className="block font-['Computer_Modern'] text-lg text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
+              className="block font-['IBM_Plex_Mono'] text-lg text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
             >
               {artifact.path
                 .replace('/', '')

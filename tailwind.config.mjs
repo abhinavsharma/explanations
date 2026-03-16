@@ -24,8 +24,8 @@ export default {
         base: '1.125rem', // 18px
       },
       fontFamily: {
-        sans: ['Whizband', 'sans'],
-        serif: ['Computer Modern', 'serif'],
+        sans: ['IBM Plex Sans', 'sans-serif'],
+        mono: ['IBM Plex Mono', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -102,7 +102,7 @@ const COLORS = [
   
   return (
     <div className="h-[1200px] w-full">
-    <Card>
+    <Card className="max-w-4xl mx-auto my-4">
       <CardHeader>
         <CardTitle>The Normal Distribution Emerges</CardTitle>
         <div className="mt-4 space-y-4">

@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Home } from 'lucide-react';
-import React from 'react';
 
 export enum ArtifactStatus {
   UNLISTED = 'unlisted',
@@ -22,14 +20,6 @@ function formatDate(iso: string) {
 }
 
 export default function ArtifactWrapper({ children, status = ArtifactStatus.UNLISTED, publishDate }: ArtifactWrapperProps) {
-  // If the child is already a Card component, we just need to wrap it with our container
-  // Otherwise, we need to wrap it with a Card
-  const childrenArray = React.Children.toArray(children);
-  const hasCard = childrenArray.some(child => 
-    React.isValidElement(child) && 
-    child.type === Card
-  );
-
   const showBanner = status !== ArtifactStatus.PUBLISHED;
 
   return (
@@ -52,7 +42,7 @@ export default function ArtifactWrapper({ children, status = ArtifactStatus.UNLI
           🚧 Work in Progress {status === ArtifactStatus.UNLISTED && '(Unlisted)'}
         </div>
       )}
-      {hasCard ? children : <Card className="m-4">{children}</Card>}
+      {children}
     </div>
   );
 } 

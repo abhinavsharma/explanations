@@ -341,7 +341,7 @@ const ChatgptStats = () => {
   }, [conversations]);
 
   return (
-    <div className="w-full max-w-6xl space-y-6">
+    <div className="w-full max-w-6xl mx-auto space-y-6 p-4">
       <Card className="border-0 shadow-none">
         <CardHeader>
           <CardTitle>Analyze your ChatGPT usage, 100% locally</CardTitle>

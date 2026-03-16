@@ -365,7 +365,7 @@ const MontyHallGame = () => {
   }, [isAutoPlaying, gameState, autoPlayStrategy, autoPlayRounds, selectedDoor, revealedDoor]);
 
   return (
-    <Card>
+    <Card className="max-w-3xl mx-auto my-4">
       <CardHeader>
         <CardTitle>The Monty Hall Game</CardTitle>
         <div className="mt-4 text-slate-600 dark:text-slate-400">

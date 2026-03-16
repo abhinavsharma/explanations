@@ -61,7 +61,7 @@ const CrossEntropyExplorer = () => {
   const totalCrossEntropy = crossEntropyData.reduce((sum, d) => sum + d.contribution, 0);
 
   return (
-    <Card className="w-full max-w-4xl">
+    <Card className="w-full max-w-4xl mx-auto my-4">
       <CardHeader>
         <CardTitle>Understanding Cross-Entropy Loss</CardTitle>
       </CardHeader>

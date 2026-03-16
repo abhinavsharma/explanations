@@ -58,7 +58,7 @@ const KLDivergenceComponentsExplorer = () => {
   const totalKL = klData.reduce((sum, d) => sum + d.contribution, 0);
 
   return (
-    <Card className="w-full max-w-4xl">
+    <Card className="w-full max-w-4xl mx-auto my-4">
       <CardHeader>
         <CardTitle>Understanding KL Divergence Components</CardTitle>
       </CardHeader>

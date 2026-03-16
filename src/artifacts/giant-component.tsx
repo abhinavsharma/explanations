@@ -218,7 +218,7 @@ const VillageNetwork = () => {
   const allNodes = getAllNodePositions();
 
   return (
-    <div className="w-full max-w-6xl space-y-6">
+    <div className="w-full max-w-6xl mx-auto space-y-6 p-4">
       <Card>
         <CardHeader>
           <CardTitle>Why everyone knows everyone in a village</CardTitle>

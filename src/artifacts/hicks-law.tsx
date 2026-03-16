@@ -1,6 +1,8 @@
 import { ArtifactStatus } from '@/components/artifact-wrapper';
 
-export const artifactStatus = ArtifactStatus.PUBLISHED;// Create stand-alone line data for the model curve with explicit data argument
+export const artifactStatus = ArtifactStatus.PUBLISHED;
+export const publishDate = "2025-02-25";
+// Create stand-alone line data for the model curve with explicit data argument
 const getHicksLawLineWithData = (data) => {
     if (!data || data.length < 2) {
       console.log("Not enough data points for curve");

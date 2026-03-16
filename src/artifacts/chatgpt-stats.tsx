@@ -8,6 +8,7 @@ import ConversationsGroupedTable from '@/components/conversations-grouped-table'
 import { ArtifactStatus } from '@/components/artifact-wrapper';
 
 export const artifactStatus = ArtifactStatus.UNPUBLISHED;
+export const publishDate = "2025-02-18";
 
 interface ChatGPTMessage {
   id: string;

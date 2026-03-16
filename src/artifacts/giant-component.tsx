@@ -7,6 +7,7 @@ import { Play, Square } from "lucide-react";
 import { ArtifactStatus } from '@/components/artifact-wrapper';
 
 export const artifactStatus = ArtifactStatus.PUBLISHED;
+export const publishDate = "2025-02-17";
 
 const VillageNetwork = () => {
   const villagerNames = [

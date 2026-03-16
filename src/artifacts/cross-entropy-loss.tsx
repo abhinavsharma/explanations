@@ -4,6 +4,7 @@ import { LineChart, Line, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, Responsi
 import { ArtifactStatus } from '@/components/artifact-wrapper';
 
 export const artifactStatus = ArtifactStatus.UNPUBLISHED;
+export const publishDate = "2025-02-20";
 const CrossEntropyExplorer = () => {
   // True distribution (one-hot by default)
   const [trueDistribution, setTrueDistribution] = useState([1, 0, 0]);

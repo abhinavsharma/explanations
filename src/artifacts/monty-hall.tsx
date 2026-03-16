@@ -8,6 +8,7 @@ import { useTheme } from '../components/theme-provider';
 import { ArtifactStatus } from '@/components/artifact-wrapper';
 
 export const artifactStatus = ArtifactStatus.PUBLISHED;
+export const publishDate = "2025-02-15";
 
 const MontyHallGame = () => {
   // Game state

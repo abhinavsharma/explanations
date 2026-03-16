@@ -5,6 +5,7 @@ import { Play, Pause, RotateCcw } from 'lucide-react';
 import { ArtifactStatus } from '@/components/artifact-wrapper';
 
 export const artifactStatus = ArtifactStatus.PUBLISHED;
+export const publishDate = "2025-02-14";
 
 const GaltonTable = () => {
   const LEVELS = 12;  // Number of decision levels

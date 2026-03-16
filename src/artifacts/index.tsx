@@ -17,8 +17,15 @@ const ArtifactsIndex = () => {
       const mod = module as any;
       return {
         path: `/${name}`,
-        status: mod.artifactStatus as ArtifactStatus
+        status: mod.artifactStatus as ArtifactStatus,
+        publishDate: mod.publishDate as string | undefined,
       };
+    })
+    .sort((a, b) => {
+      if (!a.publishDate && !b.publishDate) return 0;
+      if (!a.publishDate) return 1;
+      if (!b.publishDate) return -1;
+      return b.publishDate.localeCompare(a.publishDate);
     });
 
   return (
@@ -29,15 +36,22 @@ const ArtifactsIndex = () => {
       <ul className="max-w-2xl space-y-3">
         {artifacts.map((artifact) => (
           <li key={artifact.path}>
-            <Link 
+            <Link
               to={artifact.path}
-              className="block font-['IBM_Plex_Mono'] text-lg text-foreground hover:text-muted-foreground transition-colors"
+              className="flex items-baseline justify-between gap-4 group"
             >
-              {artifact.path
-                .replace('/', '')
-                .split('-')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' ')}
+              <span className="font-['IBM_Plex_Mono'] text-lg text-foreground group-hover:text-muted-foreground transition-colors">
+                {artifact.path
+                  .replace('/', '')
+                  .split('-')
+                  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(' ')}
+              </span>
+              {artifact.publishDate && (
+                <span className="font-['IBM_Plex_Mono'] text-xs text-muted-foreground whitespace-nowrap group-hover:text-muted-foreground transition-colors">
+                  {new Date(artifact.publishDate + 'T12:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                </span>
+              )}
             </Link>
           </li>
         ))}

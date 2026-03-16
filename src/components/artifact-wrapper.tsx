@@ -13,9 +13,15 @@ export enum ArtifactStatus {
 interface ArtifactWrapperProps {
   children: React.ReactNode;
   status?: ArtifactStatus;
+  publishDate?: string;
 }
 
-export default function ArtifactWrapper({ children, status = ArtifactStatus.UNLISTED }: ArtifactWrapperProps) {
+function formatDate(iso: string) {
+  const [y, m, d] = iso.split('-').map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+export default function ArtifactWrapper({ children, status = ArtifactStatus.UNLISTED, publishDate }: ArtifactWrapperProps) {
   // If the child is already a Card component, we just need to wrap it with our container
   // Otherwise, we need to wrap it with a Card
   const childrenArray = React.Children.toArray(children);
@@ -29,12 +35,19 @@ export default function ArtifactWrapper({ children, status = ArtifactStatus.UNLI
   return (
     <div className="flex items-center justify-center min-h-screen bg-background transition-colors duration-300 p-4">
       <div className="w-full max-w-4xl relative">
-        <Link to="/" className="absolute -top-12 left-0">
-          <Button variant="ghost" size="sm" className="gap-2 flex items-center">
-            <Home className="w-4 h-4" />
-            <span className="font-['IBM_Plex_Mono']">Home</span>
-          </Button>
-        </Link>
+        <div className="absolute -top-12 left-0 right-0 flex items-center justify-between">
+          <Link to="/">
+            <Button variant="ghost" size="sm" className="gap-2 flex items-center">
+              <Home className="w-4 h-4" />
+              <span className="font-['IBM_Plex_Mono']">Home</span>
+            </Button>
+          </Link>
+          {publishDate && (
+            <span className="text-xs text-muted-foreground font-['IBM_Plex_Mono'] pr-1">
+              {formatDate(publishDate)}
+            </span>
+          )}
+        </div>
         {hasCard ? (
           <>
             {showBanner && (

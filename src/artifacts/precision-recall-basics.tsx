@@ -1,3 +1,4 @@
+export const publishDate = "2025-02-17";
 import React, { useState, useMemo } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Slider } from '@/components/ui/slider';

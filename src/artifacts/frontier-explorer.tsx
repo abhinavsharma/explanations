@@ -1,6 +1,7 @@
 import { ArtifactStatus } from '@/components/artifact-wrapper';
 
 export const artifactStatus = ArtifactStatus.UNLISTED;
+export const publishDate = "2026-03-16";
 
 import { useState, useRef, useEffect } from "react";
 

@@ -2,6 +2,7 @@ import { ArtifactStatus } from '@/components/artifact-wrapper';
 import { useState, useRef, useEffect } from "react";
 
 export const artifactStatus = ArtifactStatus.UNLISTED;
+export const publishDate = "2026-03-16";
 
 /*
   Each row is a component of the stack.

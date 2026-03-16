@@ -4,6 +4,7 @@ import { LineChart, Line, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, Responsi
 import { ArtifactStatus } from '@/components/artifact-wrapper';
 
 export const artifactStatus = ArtifactStatus.UNPUBLISHED;
+export const publishDate = "2025-02-20";
 
 const KLDivergenceComponentsExplorer = () => {
   const [distributionP, setDistributionP] = useState([0.3, 0.4, 0.3]);

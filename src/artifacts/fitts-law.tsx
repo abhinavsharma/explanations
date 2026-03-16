@@ -3,6 +3,7 @@ import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Re
 import { ArtifactStatus } from '@/components/artifact-wrapper';
 
 export const artifactStatus = ArtifactStatus.PUBLISHED;
+export const publishDate = "2025-02-25";
 
 const LOCAL_STORAGE_KEY = 'fitts-law-results';
 

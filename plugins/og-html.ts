@@ -41,9 +41,11 @@ export default function ogHtml(): Plugin {
     <meta property="og:title" content="${escapeHtml(title)}" />
     <meta property="og:description" content="${escapeHtml(subtitle)}" />
     <meta property="og:url" content="${url}" />
+    <meta property="og:image" content="${ogImageUrl}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta name="twitter:description" content="${escapeHtml(subtitle)}" />
+    <meta name="twitter:image" content="${ogImageUrl}" />
     ${date ? `<meta property="article:published_time" content="${date}" />` : ''}
     <title>${escapeHtml(title)}</title>`;
 

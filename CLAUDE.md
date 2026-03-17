@@ -90,15 +90,31 @@ The intelligence-commoditization post is the reference style. Key patterns:
 - Cards: `cardBg` background, 1px border, 8px radius
 - Callouts: neutral `cardBg` background, subtle left border
 
-## OG preview pages
+## Open Graph previews
 
-For each blog post, create a matching `/og/[slug].tsx` that renders a 1200x630 card with:
-- Left side: title + subtitle in the post's style
-- Right side: static version of the first diagram/visual
-- Hard-coded light-mode colors (OG images are always light)
-- `artifactStatus = ArtifactStatus.HIDDEN`
+Every published blog post needs an OG preview page for social sharing. The preview is based on the **first interactive diagram or visual** in the blog post, rendered as a static card.
 
-The build plugin at `plugins/og-html.ts` generates per-route HTML with OG meta tags at build time.
+### How it works
+
+1. **Build plugin** (`plugins/og-html.ts`): At build time, scans `src/artifacts/blog-post/` and generates per-route HTML files (`dist/blog-post/[slug]/index.html`) with OG meta tags baked in — `og:title`, `og:description`, `og:url`, `og:image`, `twitter:card`, `twitter:image`, `article:published_time`. These tags are extracted from the blog post's `title`, `subtitle`, and `publishDate` exports via regex.
+
+2. **OG preview pages** (`src/artifacts/og/[slug].tsx`): Each blog post has a matching OG card page that renders a static 1200x630 card. Layout is always: left side = title + subtitle, right side = simplified static version of the post's first diagram/chart/visual. These pages are `HIDDEN` status (accessible via direct URL, not listed anywhere).
+
+3. **Dynamic meta tags**: `layout.tsx` also sets OG meta tags via `useEffect` for SPA navigation (covers Slack, Discord, iMessage which render JS).
+
+### When adding a new blog post
+
+After creating the blog post file, also create its OG preview:
+
+1. Create `src/artifacts/og/[slug].tsx`
+2. Set `artifactStatus = ArtifactStatus.HIDDEN`
+3. Render a 1200x630 card with:
+   - Hard-coded light-mode colors (`#FAFAF7` background, `#1a1a1a` text)
+   - Left: post title (Newsreader serif) + subtitle (JetBrains Mono)
+   - Right: static version of the first diagram/visual from the post — simplify to remove interactivity, hover states, and animation
+4. The build plugin automatically picks up `og:image` pointing to `https://explanations.app/og/[slug].html`
+
+Note: `og:image` currently points to the HTML preview pages. Most social platforms need raster images (PNG/JPEG). For full support, screenshots of the `/og/[slug]` pages would need to be generated and hosted as static assets.
 
 ## Build & deploy
 

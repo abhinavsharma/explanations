@@ -194,7 +194,7 @@ function EffortLab({T}){
 // ═══ SECTIONS ═══
 
 function MapSection({T}){return <><h2 style={{fontSize:22,fontWeight:300,margin:"0 0 6px"}}>The Jhāna Map</h2>
-  <p style={{fontSize:14,lineHeight:1.7,color:T.text,margin:"0 0 10px"}}>Grounded in Rob Burbea's 2019 jhāna retreat at Gaia House. The orientation: jhānas as <em>perception attainments</em> — training malleability of perception, not just concentration.</p>
+  <p style={{fontSize:14,lineHeight:1.7,color:T.text,margin:"0 0 10px"}}>Grounded in Rob Burbea's 2019 jhāna retreat at Gaia House. The orientation: jhānas as <em>perception attainments</em> — training malleability of perception, not just concentration. <a href="/2019_1217PractisingtheJhanas.pdf" target="_blank" rel="noopener noreferrer" style={{color:T.accent,textDecoration:"underline",fontSize:12}}>Full retreat transcript (PDF)</a></p>
   <MetaGrid items={[["Source","Gaia House 2019"],["Teacher","Rob Burbea"],["Approach","Perception-based"],["Key","Fabrication"],["Jhānas","All eight"],["Core","Sensitivity + play"]]} T={T}/>
   <SpectrumDiagram T={T}/>
   <Quote T={T} source="The Buddha, SN 12:23">Jhāna depends on happiness.</Quote>

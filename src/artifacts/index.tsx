@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link } from "react-router-dom";
 import { ArtifactStatus } from '@/components/artifact-wrapper';
 
-const artifactModules = import.meta.glob('./*.tsx', { eager: true });
+const artifactModules = import.meta.glob(['./*.tsx', './**/*.tsx'], { eager: true });
 
 const ArtifactsIndex = () => {
   const artifacts = Object.entries(artifactModules)
@@ -10,7 +10,7 @@ const ArtifactsIndex = () => {
       if (path.includes('index')) return false;
       const mod = module as any;
       // Only show components that are either unpublished or published
-      return mod.artifactStatus && mod.artifactStatus !== ArtifactStatus.UNLISTED;
+      return mod.artifactStatus && mod.artifactStatus !== ArtifactStatus.UNLISTED && mod.artifactStatus !== ArtifactStatus.HIDDEN;
     })
     .map(([path, module]) => {
       const name = path.replace('./', '').replace('.tsx', '');

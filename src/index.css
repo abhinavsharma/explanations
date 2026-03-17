@@ -1,5 +1,5 @@
 /* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
 
 /* Load Computer Modern fonts */
 @font-face {
@@ -115,4 +115,57 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'IBM Plex Mono', monospace;
   }
+}
+
+/* Blog post artifact type — seamless background */
+.blog-post-outer,
+[data-artifact-type="blog-post"] {
+  background: #FAFAF7;
+}
+
+.dark .blog-post-outer,
+.dark [data-artifact-type="blog-post"] {
+  background: #141413;
+}
+
+[data-artifact-type="blog-post"] h1,
+[data-artifact-type="blog-post"] h2,
+[data-artifact-type="blog-post"] h3,
+[data-artifact-type="blog-post"] h4,
+[data-artifact-type="blog-post"] h5,
+[data-artifact-type="blog-post"] h6 {
+  font-family: 'Newsreader', Georgia, serif;
+}
+
+/* Blog post nav bar */
+.blog-post-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(250, 250, 247, 0.85);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.dark .blog-post-nav {
+  background: rgba(20, 20, 19, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.blog-post-nav-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 6px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.blog-post-date {
+  color: #999;
+}
+
+.dark .blog-post-date {
+  color: #706c66;
 }

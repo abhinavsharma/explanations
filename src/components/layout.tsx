@@ -3,9 +3,10 @@ import { useLocation } from 'react-router-dom';
 import { ThemeProvider } from './theme-provider';
 import { ThemeToggle } from './theme-toggle';
 import ArtifactWrapper, { ArtifactStatus } from './artifact-wrapper';
+import type { ArtifactType } from './artifact-wrapper';
 
-// Import all artifact modules - use relative path from this file to artifacts
-const artifactModules = import.meta.glob('/src/artifacts/*.tsx', { eager: true });
+// Import all artifact modules including subdirectories
+const artifactModules = import.meta.glob('/src/artifacts/**/*.tsx', { eager: true });
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -21,15 +22,22 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return entry ? (entry[1] as any) : null;
   };
 
+  const getArtifactType = (): ArtifactType => {
+    const path = location.pathname;
+    if (path.startsWith('/blog-post/')) return 'blog-post';
+    return 'general';
+  };
+
   const mod = getModule();
   const status = mod?.artifactStatus || ArtifactStatus.UNLISTED;
   const publishDate = mod?.publishDate as string | undefined;
+  const artifactType = getArtifactType();
 
   return (
     <ThemeProvider defaultTheme="light">
-      <div className="min-h-screen bg-background transition-colors duration-300">
+      <div className={`min-h-screen transition-colors duration-300 ${artifactType === 'blog-post' ? 'blog-post-outer' : 'bg-background'}`}>
         {isArtifactRoute ? (
-          <ArtifactWrapper status={status} publishDate={publishDate}>{children}</ArtifactWrapper>
+          <ArtifactWrapper status={status} artifactType={artifactType} publishDate={publishDate}>{children}</ArtifactWrapper>
         ) : (
           children
         )}

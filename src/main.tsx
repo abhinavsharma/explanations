@@ -5,8 +5,18 @@ import routes from 'virtual:generated-pages-react';
 import Layout from './components/layout';
 import './index.css';
 
+function flattenRoutes(routes: any[], prefix = ''): any[] {
+  return routes.flatMap((route: any) => {
+    const path = prefix ? `${prefix}/${route.path || ''}`.replace(/\/+/g, '/') : (route.path || '');
+    if (route.children) {
+      return flattenRoutes(route.children, path);
+    }
+    return [{ ...route, path }];
+  });
+}
+
 const router = createBrowserRouter(
-  routes.map((route) => ({
+  flattenRoutes(routes).map((route) => ({
     ...route,
     element: <Layout>{route.element}</Layout>,
   })), {

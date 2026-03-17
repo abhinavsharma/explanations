@@ -2,7 +2,7 @@ import { ArtifactStatus } from "@/components/artifact-wrapper";
 
 export const artifactStatus = ArtifactStatus.PUBLISHED;
 export const publishDate = "2025-08-15";
-export const title = "The Data Flywheel Is About Users, Not Usage";
+export const title = "The data flywheel is about users, not usage";
 export const subtitle =
   "The AI company with the best model won't be the one with the most users.";
 

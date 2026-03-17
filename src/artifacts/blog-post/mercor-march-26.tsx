@@ -2,7 +2,7 @@ import { ArtifactStatus } from "@/components/artifact-wrapper";
 
 export const artifactStatus = ArtifactStatus.PUBLISHED;
 export const publishDate = "2026-03-16";
-export const title = "Mercor's Hiring Page Is an Accidental Roadmap for AI";
+export const title = "Mercor's hiring page is an accidental roadmap for AI";
 export const subtitle =
   "What Mercor's job listings reveal about what models can't do yet";
 

@@ -1,7 +1,7 @@
 import { ArtifactStatus } from "@/components/artifact-wrapper";
 
 export const artifactStatus = ArtifactStatus.PUBLISHED;
-export const publishDate = "2026-03-16";
+export const publishDate = "2025-12-27";
 export const title = '"Intelligence will commoditize" is a useless claim';
 export const subtitle = "It's not wrong. It's just not saying anything.";
 

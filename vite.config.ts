@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 import Pages from 'vite-plugin-pages';
+import ogHtml from './plugins/og-html';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,8 +10,9 @@ export default defineConfig({
     react(),
     Pages({
       dirs: [{ dir: 'src/artifacts', baseRoute: '' }],
-      extensions: ['jsx', 'tsx'],   
+      extensions: ['jsx', 'tsx'],
     }),
+    ogHtml(),
   ],
   resolve: {
     alias: {

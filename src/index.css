@@ -169,3 +169,118 @@
 .dark .blog-post-date {
   color: #706c66;
 }
+
+/* ── Index / homepage ── */
+.index-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  min-height: 100vh;
+  font-family: 'Newsreader', Georgia, serif;
+  line-height: 1.7;
+}
+
+.index-header {
+  margin-bottom: 48px;
+}
+
+.index-site-title {
+  font-family: 'Newsreader', Georgia, serif !important;
+  font-size: 28px;
+  font-weight: 400;
+  font-style: italic;
+  margin: 0;
+}
+
+.index-section {
+  margin-bottom: 48px;
+}
+
+.index-section-title {
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace !important;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: hsl(var(--muted-foreground));
+  margin: 0 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+.index-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Blog post items */
+.index-blog-item {
+  margin-bottom: 20px;
+}
+
+.index-blog-link {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-decoration: none;
+  padding: 16px 18px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.index-blog-link:hover {
+  background: hsl(var(--muted));
+}
+
+.index-blog-title {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 20px;
+  font-weight: 500;
+  font-style: italic;
+  color: hsl(var(--foreground));
+  line-height: 1.3;
+}
+
+.index-blog-subtitle {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 15px;
+  color: hsl(var(--muted-foreground));
+  line-height: 1.5;
+}
+
+.index-blog-date {
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: hsl(var(--muted-foreground));
+  margin-top: 4px;
+}
+
+/* Interactive items */
+.index-interactive-link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  text-decoration: none;
+  padding: 8px 0;
+  transition: opacity 0.15s;
+}
+
+.index-interactive-link:hover {
+  opacity: 0.6;
+}
+
+.index-interactive-title {
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+  font-size: 15px;
+  color: hsl(var(--foreground));
+}
+
+.index-interactive-date {
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: hsl(var(--muted-foreground));
+  white-space: nowrap;
+  flex-shrink: 0;
+}

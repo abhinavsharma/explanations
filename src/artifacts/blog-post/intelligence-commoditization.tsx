@@ -1,7 +1,9 @@
 import { ArtifactStatus } from "@/components/artifact-wrapper";
 
-export const artifactStatus = ArtifactStatus.HIDDEN;
+export const artifactStatus = ArtifactStatus.PUBLISHED;
 export const publishDate = "2026-03-16";
+export const title = '"Intelligence will commoditize" is a useless claim';
+export const subtitle = "It's not wrong. It's just not saying anything.";
 
 import { useState, useRef, useEffect, createContext, useContext } from "react";
 
@@ -1194,9 +1196,9 @@ function QuadCard({ qKey, title, text }) {
   return (
     <div
       style={{
-        borderLeft: `3px solid ${c}`,
+        borderLeft: `3px solid ${c}40`,
         padding: "12px 16px",
-        background: c + t.quadTint,
+        background: t.cardBg,
         transition: "all 0.3s",
       }}
     >
@@ -1205,7 +1207,7 @@ function QuadCard({ qKey, title, text }) {
           fontFamily: MONO,
           fontSize: 12,
           fontWeight: 600,
-          color: c,
+          color: t.textSecondary,
           marginBottom: 6,
         }}
       >
@@ -1219,13 +1221,12 @@ function QuadCard({ qKey, title, text }) {
 }
 
 function Callout({ accentKey, title, children }) {
-  const { t, qc } = useTheme();
-  const c = accentKey ? qc[accentKey] : t.textSecondary;
+  const { t } = useTheme();
   return (
     <div
       style={{
-        borderLeft: `3px solid ${c}`,
-        background: c + t.calloutBg,
+        borderLeft: `3px solid ${t.border}`,
+        background: t.cardBg,
         padding: "20px 22px",
         margin: "28px 0",
         borderRadius: "0 8px 8px 0",
@@ -1238,7 +1239,7 @@ function Callout({ accentKey, title, children }) {
             fontFamily: MONO,
             fontSize: 12,
             fontWeight: 600,
-            color: c,
+            color: t.textSecondary,
             margin: "0 0 8px",
             textTransform: "uppercase",
             letterSpacing: "0.05em",

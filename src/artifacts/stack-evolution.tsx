@@ -1,7 +1,7 @@
 import { ArtifactStatus } from '@/components/artifact-wrapper';
 import { useState, useRef, useEffect } from "react";
 
-export const artifactStatus = ArtifactStatus.UNLISTED;
+export const artifactStatus = ArtifactStatus.PUBLISHED;
 export const publishDate = "2026-03-16";
 
 /*
@@ -319,10 +319,10 @@ const ROWS = [
 
 const STATE_COLORS = [
   { bg: "transparent", border: "transparent", text: "var(--muted)", label: "Not yet" },
-  { bg: "#3a6e3a18", border: "#3a6e3a40", text: "#5a9a5a", label: "Stable" },
-  { bg: "#7B9EA818", border: "#7B9EA840", text: "#7B9EA8", label: "Iterating" },
-  { bg: "#E76F5125", border: "#E76F5160", text: "#E76F51", label: "Major change" },
-  { bg: "#9B222635", border: "#9B222680", text: "#ff6b6b", label: "Paradigm shift" },
+  { bg: "var(--stable-bg)", border: "var(--stable-border)", text: "var(--muted)", label: "Stable" },
+  { bg: "var(--iter-bg)", border: "var(--iter-border)", text: "var(--iter-text)", label: "Iterating" },
+  { bg: "var(--major-bg)", border: "var(--major-border)", text: "var(--major-text)", label: "Major change" },
+  { bg: "var(--shift-bg)", border: "var(--shift-border)", text: "var(--shift-text)", label: "Paradigm shift" },
 ];
 
 export default function StackEvolution() {
@@ -354,6 +354,18 @@ export default function StackEvolution() {
           --muted: #6b6b75;
           --border: #c0bdb5;
           --accent: #2D5F6B;
+          /* State colors: stable fades into bg, shifts are bold */
+          --stable-bg: transparent;
+          --stable-border: transparent;
+          --iter-bg: #7B9EA80c;
+          --iter-border: #7B9EA825;
+          --iter-text: #7B9EA8;
+          --major-bg: #D4700030;
+          --major-border: #D4700070;
+          --major-text: #B85C00;
+          --shift-bg: #C0283050;
+          --shift-border: #C02830a0;
+          --shift-text: #B02020;
         }
         .dark {
           --bg: #08080a;
@@ -363,6 +375,17 @@ export default function StackEvolution() {
           --muted: #6b6b78;
           --border: #252530;
           --accent: #7B9EA8;
+          --stable-bg: transparent;
+          --stable-border: transparent;
+          --iter-bg: #7B9EA808;
+          --iter-border: #7B9EA820;
+          --iter-text: #7B9EA8;
+          --major-bg: #E8852030;
+          --major-border: #E8852060;
+          --major-text: #E89040;
+          --shift-bg: #E0404050;
+          --shift-border: #E04040a0;
+          --shift-text: #FF6B6B;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -457,7 +480,7 @@ export default function StackEvolution() {
       <div style={{ padding: "14px 20px", borderBottom: `1px solid var(--border)`, flexShrink: 0 }}>
         <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 10 }}>
           <span style={{ fontSize: 16, fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 600, color: "var(--text)" }}>
-            The LLM Stack: What Changed vs. What Didn't
+            AI Stack Evolution 2022–26
           </span>
           <span style={{ fontSize: 10, color: "var(--muted)" }}>
             Late 2022 (ChatGPT) → Early 2026 (Opus 4.6 era)

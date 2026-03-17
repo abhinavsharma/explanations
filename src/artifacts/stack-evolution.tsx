@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 
 export const artifactStatus = ArtifactStatus.PUBLISHED;
 export const publishDate = "2026-03-16";
+export const title = "AI Stack Evolution 2023–26";
 
 /*
   Each row is a component of the stack.
@@ -480,7 +481,7 @@ export default function StackEvolution() {
       <div style={{ padding: "14px 20px", borderBottom: `1px solid var(--border)`, flexShrink: 0 }}>
         <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 10 }}>
           <span style={{ fontSize: 16, fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 600, color: "var(--text)" }}>
-            AI Stack Evolution 2022–26
+            AI Stack Evolution 2023–26
           </span>
           <span style={{ fontSize: 10, color: "var(--muted)" }}>
             Late 2022 (ChatGPT) → Early 2026 (Opus 4.6 era)

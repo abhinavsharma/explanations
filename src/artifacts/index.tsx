@@ -101,7 +101,7 @@ const ArtifactsIndex = () => {
               <li key={a.path}>
                 <Link to={a.path} className="index-interactive-link">
                   <span className="index-interactive-title">
-                    {formatTitle(a.path)}
+                    {a.title || formatTitle(a.path)}
                   </span>
                   {a.publishDate && (
                     <span className="index-interactive-date">{formatDate(a.publishDate)}</span>

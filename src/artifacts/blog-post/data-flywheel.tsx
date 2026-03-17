@@ -1,7 +1,7 @@
 import { ArtifactStatus } from "@/components/artifact-wrapper";
 
 export const artifactStatus = ArtifactStatus.PUBLISHED;
-export const publishDate = "2026-03-16";
+export const publishDate = "2025-08-15";
 export const title = "The Data Flywheel Is About Users, Not Usage";
 export const subtitle =
   "The AI company with the best model won't be the one with the most users.";
@@ -19,21 +19,35 @@ const CONTENT = {
     "The company with the best model won't be the one with the most users. It'll be the one whose users are the most creative, intelligent, and diverse.",
 
   intro:
-    "The conventional wisdom is that AI dominance is a numbers game — most users, most data, best model. This gets the causal chain wrong. The data flywheel that actually improves a model isn't driven by raw volume. It's driven by the creativity, intelligence, and diversity of the people using it — because those people generate a great distribution of prompts and provide \"expert\" feedback on the answers.",
+    "The conventional wisdom is that AI dominance is a numbers game — most users, most data, best model. This gets the causal chain wrong. The data flywheel that actually improves a model isn't driven by raw volume. It's driven by the creativity, intelligence, and diversity of the people using it — because those people generate the best distribution of prompts and provide \"expert\" feedback on the answers.",
 
-  pillar1: {
-    heading: "Two inputs that matter",
-    preamble:
-      "Answers are cheap. Every large model shares roughly the same world knowledge from pretraining — given a question, any of them can reason through a response. The scarce inputs are elsewhere:",
-    callout1:
-      "1. A great distribution of questions — broad, diverse, covering the full landscape of what people actually need to know. Not a million copies of the same homework problem, but the long tail of hard, novel, domain-specific queries that map the frontier of human curiosity.",
-    callout2:
-      '2. "Expert" feedback on answers — and the quotes matter. Some answers are objectively right or wrong — an engineer knows when code doesn\'t compile. But other answers are matters of taste: does this prose resonate? Does this design feel right? Is this the kind of explanation that lands with this audience? The world of "experts" splits into those who judge correctness and those who judge resonance. A foundation model needs both — it needs the vocabulary to be preconditioned toward many different tastes, and those tastes are often easier to express as products and preferences than to describe in words.',
+  introAfterFlywheel:
+    'The flywheel isn\'t more users → better model. It\'s "expert" users → diverse questions + taste-and-correctness feedback → better model → attracts more "expert" users. The winner in AI won\'t be the company with the most users. It will be the company with the most interesting users. To understand why, we need to look at what a prompt actually is.',
+
+  recomposition: {
+    heading: "Questions are compositional",
+    intro:
+      "A prompt is a question with a best-known answer. But questions aren't atomic — they decompose into smaller sub-questions, and a model that can answer the sub-questions can recombine them to answer novel questions no one has ever explicitly asked:",
+    prompt:
+      "Sub-questions you've already answered → Novel question becomes obvious",
+    atoms: [
+      "How does gluten develop in dough?",
+      "What makes a sauce emulsify?",
+      "How does altitude affect boiling point?",
+      "Why does acid change protein texture?",
+      "How does fat carry flavor?",
+    ],
+    novelQuestion:
+      '"Why does my pasta sauce break when I cook at high altitude and add lemon juice at the wrong time?"',
+    explanation:
+      "No one ever asked this exact question — but if you can already answer each sub-question on the left, the answer assembles itself.",
+    afterText:
+      "This means the information value of a prompt depends entirely on the sub-questions it contains. A complex question from a domain expert decomposes into many novel sub-questions the model hasn't seen. A simple question from a casual user decomposes into sub-questions that are already saturated in the training data.",
   },
 
   decomposer: {
     intro:
-      "Every complex question decomposes into a set of smaller questions underneath it. Click below to see the difference:",
+      "Click below to see the difference in practice:",
     prompt: "Click a question to see its sub-questions",
     questions: [
       {
@@ -76,23 +90,14 @@ const CONTENT = {
       "The first question breaks into seven distinct sub-questions, each a real thing someone needs to understand independently. The second breaks into three — and they're already saturated in every model's training data. Same interaction, vastly different information value.",
   },
 
-  recomposition: {
-    heading: "Decompose, then recompose",
-    intro:
-      "Collect answers to enough diverse sub-questions and recomposition becomes trivial — you can answer novel questions no one has ever explicitly asked, because the answer is just a recombination of sub-questions you've already solved:",
-    prompt:
-      "Sub-questions you've already answered → Novel question becomes obvious",
-    atoms: [
-      "How does gluten develop in dough?",
-      "What makes a sauce emulsify?",
-      "How does altitude affect boiling point?",
-      "Why does acid change protein texture?",
-      "How does fat carry flavor?",
-    ],
-    novelQuestion:
-      '"Why does my pasta sauce break when I cook at high altitude and add lemon juice at the wrong time?"',
-    explanation:
-      "No one ever asked this exact question — but if you can already answer each sub-question on the left, the answer assembles itself.",
+  pillar1: {
+    heading: "Two inputs that matter",
+    preamble:
+      "Answers are cheap. Every large model shares roughly the same world knowledge from pretraining — given a question, any of them can reason through a response. The scarce inputs are elsewhere:",
+    callout1:
+      "1. A great distribution of questions — broad, diverse, covering the full landscape of what people actually need to know. Not a million copies of the same homework problem, but the long tail of hard, novel, domain-specific queries that map the frontier of human curiosity.",
+    callout2:
+      '2. "Expert" feedback on answers — and the quotes matter. Some answers are objectively right or wrong — an engineer knows when code doesn\'t compile. But other answers are matters of taste: does this prose resonate? Does this design feel right? Is this the kind of explanation that lands with this audience? The world of "experts" splits into those who judge correctness and those who judge resonance. A foundation model needs both — it needs the vocabulary to be preconditioned toward many different tastes, and those tastes are often easier to express as products and preferences than to describe in words.',
   },
 
   distribution: {
@@ -108,15 +113,30 @@ const CONTENT = {
   },
 
   flywheel: {
-    heading: "The flywheel",
     nodes: [
       { label: "ATTRACT", text: "Expert users" },
       { label: "COLLECT", text: "Diverse questions" },
       { label: "EVALUATE", text: "Expert feedback" },
       { label: "IMPROVE", text: "Better model" },
     ],
-    conclusion:
-      'The flywheel isn\'t more users → better model. It\'s "expert" users → diverse questions + taste-and-correctness feedback → better model → attracts more "expert" users. The winner in AI won\'t be the company with the most users. It will be the company with the most interesting users.',
+  },
+
+  defense: {
+    heading: "Defending the flywheel",
+    paragraphs: [
+      "If the flywheel runs on prompt distribution, then the strategic imperative is clear: you must own the application layer, and you must prevent anyone else from extracting your prompt distribution through the model itself.",
+      "This is exactly what we're seeing. Anthropic has been increasingly aggressive against distillation — restricting how Claude's outputs can be used to train competing models, limiting API access patterns that look like systematic extraction, and blocking Chinese AI labs from using Claude to bootstrap their own systems. OpenAI has pursued similar restrictions. These aren't arbitrary policies. They're direct consequences of understanding where the moat actually lives.",
+      "The logic extends further: if your prompt distribution is your competitive advantage, you can't afford to let it leak through any channel. This is why the frontier labs are racing to own the application layer — building their own consumer products, IDE integrations, and enterprise platforms rather than being API-only companies. Every interaction that happens on someone else's platform is a prompt you don't collect and feedback you don't receive.",
+    ],
+  },
+
+  openQuestion: {
+    heading: "The open question",
+    paragraphs: [
+      "But this creates a tension. If the volume of users doesn't matter and the quality and diversity of users matter far more, then the flywheel depends on attracting and retaining exactly the kind of people who are least likely to accept lock-in.",
+      "The most creative, technically sophisticated, and intellectually diverse users — the ones whose prompts are worth the most — are precisely the people who value independence, interoperability, and control over their tools. They're the ones who run their own infrastructure, who switch between tools freely, who resist walled gardens on principle. They're the ones who will leave if they feel captured.",
+      "So the uncomfortable question for every frontier lab is: can you build a flywheel that depends on the best users without eventually driving them away by locking them in? Or does defending the flywheel inevitably poison it?",
+    ],
   },
 
   footer: "Draft — work in progress",
@@ -181,10 +201,12 @@ const styles: Record<string, any> = {
     lineHeight: 1.5,
   },
   h2: {
-    fontFamily: "var(--serif)",
-    fontWeight: 500,
-    fontSize: "1.5rem",
-    letterSpacing: "-0.01em",
+    fontFamily: "var(--mono)",
+    fontWeight: 600,
+    fontSize: "0.875rem",
+    textTransform: "uppercase",
+    letterSpacing: "0.06em",
+    color: "var(--textSecondary)",
     marginTop: "3rem",
     marginBottom: "1rem",
     lineHeight: 1.3,
@@ -721,6 +743,7 @@ export default function DataFlywheelPost() {
           <h1 style={styles.h1}>{CONTENT.title}</h1>
           <p style={styles.subtitle}>{CONTENT.subtitle}</p>
 
+          {/* Intro + flywheel upfront */}
           <p style={styles.p}>
             {CONTENT.intro.split('"expert"').map((part, i, arr) =>
               i < arr.length - 1 ? (
@@ -734,6 +757,32 @@ export default function DataFlywheelPost() {
             )}
           </p>
 
+          <FlywheelDiagram />
+
+          <p style={styles.p}>
+            {CONTENT.introAfterFlywheel.split('"expert"').map((part, i, arr) =>
+              i < arr.length - 1 ? (
+                <span key={i}>
+                  {part}
+                  <strong>"expert"</strong>
+                </span>
+              ) : (
+                <span key={i}>{part}</span>
+              ),
+            )}
+          </p>
+
+          {/* Questions are compositional */}
+          <h2 style={styles.h2}>{CONTENT.recomposition.heading}</h2>
+          <p style={styles.p}>{CONTENT.recomposition.intro}</p>
+          <RecompositionDiagram />
+          <p style={styles.p}>{CONTENT.recomposition.afterText}</p>
+
+          <p style={styles.p}>{CONTENT.decomposer.intro}</p>
+          <QuestionDecomposer />
+          <p style={styles.p}>{CONTENT.decomposer.afterText}</p>
+
+          {/* Two inputs that matter */}
           <h2 style={styles.h2}>{CONTENT.pillar1.heading}</h2>
           <p style={styles.p}>{CONTENT.pillar1.preamble}</p>
 
@@ -755,35 +804,23 @@ export default function DataFlywheelPost() {
             </p>
           </div>
 
-          <p style={styles.p}>{CONTENT.decomposer.intro}</p>
-          <QuestionDecomposer />
-          <p style={styles.p}>{CONTENT.decomposer.afterText}</p>
-
-          <h2 style={styles.h2}>{CONTENT.recomposition.heading}</h2>
-          <p style={styles.p}>{CONTENT.recomposition.intro}</p>
-          <RecompositionDiagram />
-
+          {/* Volume ≠ distribution */}
           <h2 style={styles.h2}>{CONTENT.distribution.heading}</h2>
           <p style={styles.p}>{CONTENT.distribution.intro}</p>
           <DistributionChart />
           <p style={styles.p}>{CONTENT.distribution.afterText}</p>
 
-          <h2 style={styles.h2}>{CONTENT.flywheel.heading}</h2>
-          <FlywheelDiagram />
-          <p style={styles.p}>
-            {CONTENT.flywheel.conclusion
-              .split('"expert"')
-              .map((part, i, arr) =>
-                i < arr.length - 1 ? (
-                  <span key={i}>
-                    {part}
-                    <strong>"expert"</strong>
-                  </span>
-                ) : (
-                  <span key={i}>{part}</span>
-                ),
-              )}
-          </p>
+          {/* Defending the flywheel */}
+          <h2 style={styles.h2}>{CONTENT.defense.heading}</h2>
+          {CONTENT.defense.paragraphs.map((p, i) => (
+            <p key={i} style={styles.p}>{p}</p>
+          ))}
+
+          {/* The open question */}
+          <h2 style={styles.h2}>{CONTENT.openQuestion.heading}</h2>
+          {CONTENT.openQuestion.paragraphs.map((p, i) => (
+            <p key={i} style={styles.p}>{p}</p>
+          ))}
 
           <div style={styles.footer}>
             <p>{CONTENT.footer}</p>

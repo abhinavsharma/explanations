@@ -35,7 +35,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const getArtifactType = (): ArtifactType => {
     const path = location.pathname;
-    if (path.startsWith('/blog-post/')) return 'blog-post';
+    if (path.startsWith('/blog/')) return 'blog-post';
     return 'general';
   };
 

@@ -12,7 +12,7 @@ function formatDate(iso: string) {
 function formatTitle(path: string) {
   return path
     .replace(/^\//, '')
-    .replace(/^blog-post\//, '')
+    .replace(/^blog\//, '')
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
@@ -39,7 +39,7 @@ function getArtifacts(): ArtifactEntry[] {
         publishDate: mod.publishDate as string | undefined,
         title: mod.title as string | undefined,
         subtitle: mod.subtitle as string | undefined,
-        isBlogPost: name.startsWith('blog-post/'),
+        isBlogPost: name.startsWith('blog/'),
       };
     })
     .sort((a, b) => {

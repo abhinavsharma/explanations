@@ -13,7 +13,7 @@ export default function ogHtml(): Plugin {
     closeBundle() {
       const distDir = path.resolve('dist');
       const indexHtml = fs.readFileSync(path.join(distDir, 'index.html'), 'utf-8');
-      const blogPostDir = path.resolve('src/artifacts/blog-post');
+      const blogPostDir = path.resolve('src/artifacts/blog');
 
       if (!fs.existsSync(blogPostDir)) return;
 
@@ -33,7 +33,7 @@ export default function ogHtml(): Plugin {
         const title = titleMatch?.[1] || slug.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join(' ');
         const subtitle = subtitleMatch?.[1] || '';
         const date = dateMatch?.[1] || '';
-        const url = `https://explanations.app/blog-post/${slug}`;
+        const url = `https://explanations.app/blog/${slug}`;
         const ogImageUrl = `https://explanations.app/og/${slug}.html`;
 
         const ogTags = `
@@ -54,8 +54,8 @@ export default function ogHtml(): Plugin {
           ogTags
         );
 
-        // Write to dist/blog-post/[slug]/index.html
-        const outDir = path.join(distDir, 'blog-post', slug);
+        // Write to dist/blog/[slug]/index.html
+        const outDir = path.join(distDir, 'blog', slug);
         fs.mkdirSync(outDir, { recursive: true });
         fs.writeFileSync(path.join(outDir, 'index.html'), modifiedHtml);
       }

@@ -137,11 +137,9 @@
 [data-artifact-type="blog-post"] h4,
 [data-artifact-type="blog-post"] h5,
 [data-artifact-type="blog-post"] h6 {
-  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
-  font-size: 14px;
+  font-family: 'Newsreader', Georgia, serif;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  line-height: 1.25;
 }
 
 /* Blog post nav bar */

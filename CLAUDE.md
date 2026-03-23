@@ -72,7 +72,7 @@ When the user drops a `.jsx` file and says to add it as a blog post:
 5. **Remove `background` and `minHeight: "100vh"`** from the post's root container — the wrapper handles this
 6. **Typography**: Blog post headings use these defaults from CSS (artifacts can override inline):
    - `h1`: Newsreader serif (for article titles)
-   - `h2`–`h6`: JetBrains Mono, 14px, uppercase, 600 weight, 0.06em tracking
+   - `h2`–`h6`: Newsreader serif, 600 weight, line-height 1.25
 7. **Fix TypeScript issues**: Add `as const` to inline `textTransform: "uppercase"`, type style objects as `Record<string, any>`, add `React.CSSProperties` return types to style functions
 8. **Fonts**: The site globally imports Newsreader and JetBrains Mono. If the artifact imports these via its own `<style>` tag, that's fine (duplicates are harmless).
 

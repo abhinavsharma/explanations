@@ -1,6 +1,6 @@
 import { ArtifactStatus } from '@/components/artifact-wrapper';
 
-export const artifactStatus = ArtifactStatus.UNLISTED;
+export const artifactStatus = ArtifactStatus.PUBLISHED;
 export const publishDate = "2026-03-22";
 export const title = "Coding Is What Intelligence Does";
 export const subtitle = "Both sides of the AI debate are confused about the same thing.";
